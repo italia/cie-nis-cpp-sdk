@@ -4,7 +4,9 @@
 #include <string>
 #include <cstring>
 #include <thread>
+//extern "C"{
 #include <winscard.h>
+//}
 
 #include "requests.h"
 
@@ -91,7 +93,7 @@ int main(int argc, _TCHAR* argv[])
 		std::cout << "NIS: " << std::string {(char *)response.data()} << std::endl;
 		SCardFreeMemory(Context, ReaderList);
 		SCardDisconnect(Card, SCARD_RESET_CARD);
-		free(ReaderList);
+		//free(ReaderList);
 		std::this_thread::sleep_for(std::chrono::milliseconds {5000});
 	}
 	return 0;
