@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+//extern "C"{
 #include <winscard.h>
+//}
 #include <ios>
 #include "requests.h"
 
