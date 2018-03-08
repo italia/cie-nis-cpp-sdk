@@ -7,25 +7,16 @@
 #include <ios>
 #include "requests.h"
 
-bool Requests::send_apdu(const SCARDHANDLE &card,
+bool Requests::send_apdu(const Token &card,
 		const std::vector<BYTE> &apdu, std::vector<BYTE> &response)
 {
-	DWORD resp_len {RESPONSE_SIZE};
-	SCardTransmit(card, SCARD_PCI_T1, apdu.data(), apdu.size(),
-			NULL, response.data(), &resp_len);
-	// verifica che la Status Word sia 9000 (OK)
-	std::cout << "Il byte di verifica della risposta della carta e': 0x";
-	std::cout << std::hex
-		<< (unsigned int) (unsigned char) response[resp_len -2]
-		<< std::endl;
-	if (response[resp_len - 2] != 0x90 || response[resp_len - 1] != 0x00) {
-		std::cerr << "Errore nella lettura della risposta\n";
-		return false;
-	}
-	return true;
+	if(card.transmit(apdu, response) == TOK_RESULT_OK)
+		return true;
+
+	return false;
 }
 
-bool Requests::select_df_ias(const SCARDHANDLE &card, std::vector<BYTE> &response)
+bool Requests::select_df_ias(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> selectIAS {0x00, // CLA
 		0xa4, // INS = SELECT FILE
@@ -43,7 +34,7 @@ bool Requests::select_df_ias(const SCARDHANDLE &card, std::vector<BYTE> &respons
 	return true;
 }
 
-bool Requests::select_cie_df(const SCARDHANDLE &card, std::vector<BYTE> &response)
+bool Requests::select_cie_df(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> selectCIE {0x00, // CLA
 		0xa4, // INS = SELECT FILE
@@ -59,7 +50,7 @@ bool Requests::select_cie_df(const SCARDHANDLE &card, std::vector<BYTE> &respons
 	} 
 	return true;
 }
-bool Requests::read_nis(const SCARDHANDLE &card, std::vector<BYTE> &response)
+bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> readNIS = {0x00, // CLA
 		0xb0, // INS = READ BINARY
@@ -88,10 +79,10 @@ bool Requests::create_apdu(std::vector<BYTE> &apdu)
 		apdu.push_back((BYTE) std::stoi(tmp));
 	std::cout << apdu_string << '\n';
 	std::cout << "Invio dell'APDU personalizzata..." << '\n';
-	return 1;
+	return true;
 }
 
-bool Requests::start_interactive_session(const SCARDHANDLE &card)
+bool Requests::start_interactive_session(const Token &card)
 {
 	std::vector<BYTE> apdu {};
 	std::vector<BYTE> response {};
