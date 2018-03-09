@@ -16,11 +16,10 @@ namespace nis::interface
 		unordered_map<string,Token*> tokenList;
 	public:
 		virtual ~Reader() = 0;
-		virtual ReaderResult obtainReaderList() = 0;
+		virtual ReaderResult enumerateReaderList() = 0;
+		virtual vector<string> getReaderList() = 0;
 		Token *getToken(const string &name) { unordered_map<string,Token*>::const_iterator tok = tokenList.find(name); if(tok != tokenList.end()) return tok->second; else return nullptr; }
 	};
-
-	Reader::~Reader() {} //pure virtual destructors must be defined	
 }
 
 #endif

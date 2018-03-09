@@ -34,7 +34,7 @@ bool Requests::select_df_ias(const Token &card, std::vector<BYTE> &response)
 	return true;
 }
 
-bool Requests::select_cie_df(const Token &card, std::vector<BYTE> &response)
+bool Requests::select_df_cie(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> selectCIE {0x00, // CLA
 		0xa4, // INS = SELECT FILE

@@ -2,6 +2,7 @@
 #define TOKEN_GUARD
 
 #include <vector>
+#include <winscard.h>
 #include "nis_types.h"
 
 namespace nis::interface
@@ -14,8 +15,6 @@ namespace nis::interface
 		virtual TokResult disconnect() = 0;
 		virtual TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response) const = 0;
 	};
-
-	Token::~Token() {} //pure virtual destructors must be defined	
 }
 
 #endif

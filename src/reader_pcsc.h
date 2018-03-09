@@ -17,10 +17,13 @@ namespace nis
 			SCARDCONTEXT context;
 			char *readerList;
 			void freeTokenList();
+			bool hasContextFlag;
 		public:
 			ReaderPCSC();
 			~ReaderPCSC();
-			ReaderResult obtainReaderList();
+			ReaderResult enumerateReaderList();
+			vector<string> getReaderList();
+			bool hasContext() {return hasContextFlag;}
 		};
 	}
 }
