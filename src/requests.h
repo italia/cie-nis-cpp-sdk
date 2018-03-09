@@ -28,7 +28,7 @@ bool select_df_ias(const Token &card, std::vector<BYTE> &response);
  * The response is stored in the response vector.
  * In case of a successful reply, true is returned, false otherwise.
  */
-bool select_cie_df(const Token &card, std::vector<BYTE> &response);
+bool select_df_cie(const Token &card, std::vector<BYTE> &response);
 
 /*
  * Sends a request to read NIS from the specified SCARDHANDLE.

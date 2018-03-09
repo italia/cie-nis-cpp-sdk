@@ -8,9 +8,9 @@
 
 using namespace nis::implementation;
 
-ReaderPCSC::ReaderPCSC()
+ReaderPCSC::ReaderPCSC() : readerList{nullptr}
 {
-	SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context);
+	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS);
 }
 
 ReaderPCSC::~ReaderPCSC()
@@ -18,7 +18,8 @@ ReaderPCSC::~ReaderPCSC()
 	if(readerList) 
 		SCardFreeMemory(context, readerList); 
 
-	SCardReleaseContext(context);
+	if(hasContextFlag)
+		SCardReleaseContext(context);
 	freeTokenList();
 }
 
@@ -28,7 +29,21 @@ void ReaderPCSC::freeTokenList()
 		delete it->second;
 }
 
-ReaderResult ReaderPCSC::obtainReaderList()
+vector<string> ReaderPCSC::getReaderList()
+{
+	vector<string> v;
+
+	char* reader = readerList;
+	while (reader[0]) {
+		string name{reader};
+		v.push_back(name);
+		reader += strlen(reader) + 1;
+	}
+
+	return v;
+}
+
+ReaderResult ReaderPCSC::enumerateReaderList()
 {
 	freeTokenList();
 	tokenList.clear();

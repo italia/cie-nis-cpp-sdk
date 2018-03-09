@@ -7,9 +7,9 @@
 extern "C"
 {
 	int NIS_Init(uint32_t backendBitfield);
-	int NIS_ReaderList(char **readers);
+	int NIS_ReaderList(char **readers, size_t *len);
 	NISHandle NIS_GetHandle(char *readerName);
-	int NIS_ReadNis(NISHandle handle, char *const nisData, uint16_t lenData, nis_callback_t callback);
+	int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callback_t callback);
 	int NIS_ConfigHandle(NISHandle handle, uint32_t config);
 	int NIS_Deinit(uint32_t backendBitfield);
 	int NIS_Reset(NISHandle handle);

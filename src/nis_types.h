@@ -1,6 +1,9 @@
 #ifndef NIS_TYPES
 #define NIS_TYPES
 
+#include <stddef.h>
+#include <stdint.h>
+
 typedef void *NISHandle;
 typedef void (*nis_callback_t)(char *const nisData, uint16_t lenData);
 
@@ -16,6 +19,6 @@ enum ReaderResult {
 		READER_RESULT_GENERIC_ERROR 
 };
 
-enum { NIS_BACKEND_NONE = 0, NIS_BACKEND_PCSC = 1 };
+enum BackendType { NIS_BACKEND_NONE = 0, NIS_BACKEND_PCSC = 1, NIS_BACKEND_ALL = (NIS_BACKEND_PCSC/* | NIS_BACKEND._...*/) };
 
 #endif
