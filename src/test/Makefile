@@ -1,7 +1,7 @@
 all: tests
 tests: test-nis
 
-LINK_FLAGS = -L../../$(LIBDIR) -l$(LIBNAME) $(LDFLAGS) 
+LINK_FLAGS = -L../../$(LIBDIR) -l$(LIBNAME) $(LDFLAGS)
 CFLAGS += -I..
 	
 #test-interactive:

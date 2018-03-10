@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <thread>
 #include "nis.h"
 
 #define _TCHAR char
@@ -10,6 +11,11 @@ void deinit(void)
 {
 	//deinit all subsystems
 	NIS_Deinit(NIS_BACKEND_ALL);
+}
+
+void callback(char *const nisData, size_t lenData)
+{
+	std::cout << "NIS: " << std::string{nisData} << std::endl;
 }
 
 int main(int argc, _TCHAR* argv[])
@@ -58,11 +64,17 @@ int main(int argc, _TCHAR* argv[])
 
 	//read the NIS
 	char nisData[300];
-	if(NIS_ReadNis(handle, nisData, sizeof(nisData), nullptr)) {
+	if(NIS_ReadNis(handle, nisData, sizeof(nisData), callback)) {
 		std::cerr << "Could not read the NIS from token" << std::endl;
 		exit(-5);
 	}
-	else std::cout << "NIS: " << std::string{nisData} << std::endl;
+	else {
+		//wait while the callback read the NIS at regular interval
+		for(int i = 0; i < 10; ++i)
+			std::this_thread::sleep_for(std::chrono::milliseconds {1000});
+
+		NIS_StopPoll(handle);
+	}
 
 	return 0;
 }

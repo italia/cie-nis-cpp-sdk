@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 typedef void *NISHandle;
-typedef void (*nis_callback_t)(char *const nisData, uint16_t lenData);
+typedef void (*nis_callback_t)(char *const nisData, size_t lenData);
 
 enum TokResult { 
 		TOK_RESULT_OK, 
