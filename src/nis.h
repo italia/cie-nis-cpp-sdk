@@ -13,6 +13,7 @@ extern "C"
 	int NIS_ConfigHandle(NISHandle handle, uint32_t config);
 	int NIS_Deinit(uint32_t backendBitfield);
 	int NIS_Reset(NISHandle handle);
+	int NIS_StopPoll(NISHandle handle);
 }
 
 #endif

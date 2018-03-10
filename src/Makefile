@@ -1,8 +1,14 @@
+ifeq ($(PLATFORM),posix)
+	VPATH = arch/posix
+endif
+
 all: $(LIBNAME) tests
 tests: $(LIBNAME)
 	$(MAKE) -C test
 
-OBJS = requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o
+CFLAGS += -I$(VPATH)
+
+OBJS = requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o thread.o
 	
 .cpp.o:
 	$(CXX) -fPIC $(CFLAGS) -c $<

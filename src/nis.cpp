@@ -9,9 +9,12 @@
 #include "token.h"
 #include "token_pcsc.h"
 #include "requests.h"
+#include <thread>
+#include "thread.h"
 
 using namespace nis::interface;
 using namespace nis::implementation;
+using namespace nis::helper;
 
 class NISManager
 {
@@ -121,20 +124,57 @@ NISHandle NIS_GetHandle(char *readerName)
 	return nullptr;
 }
 
+//temporary! What follows must be converted to thread-safe data and code
+static struct PollContainer { 
+	nis_callback_t callback;
+	NISThread th;	
+	bool exitPoll;
+	NISHandle pollHandle;
+	char *pollData;
+	size_t pollSize;
+} pollCntr;
+static void *pollNis(void *data)
+{
+	PollContainer* cntr = (PollContainer*)data;
+
+	while(!pollCntr.exitPoll) {
+		if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, cntr->pollSize, nullptr)) 
+			cntr->callback(cntr->pollData, cntr->pollSize);
+		std::this_thread::sleep_for(std::chrono::milliseconds {1000});
+	}
+}
+//----------------------------------------------------------
+
 int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callback_t callback)
 {
-	std::vector<BYTE> response(RESPONSE_SIZE);
+	if(callback) {
+		pollCntr.pollHandle = handle;
+		pollCntr.callback = callback;
+		pollCntr.exitPoll = false;
+		pollCntr.pollData = nisData;
+		pollCntr.pollSize = lenData;
+		return NIS_CreateThread(&pollCntr.th, pollNis, &pollCntr);
+	}
+	else {
+		std::vector<BYTE> response(RESPONSE_SIZE);
 
-	if(Requests::select_df_ias(*((Token*)handle), response)) {
-		if(Requests::select_df_cie(*((Token*)handle), response)) {
+		if(Requests::select_df_ias(*((Token*)handle), response)) {
+			if(Requests::select_df_cie(*((Token*)handle), response)) {
 				if(Requests::read_nis(*((Token*)handle), response)) {
 					memcpy(nisData, response.data(), min(response.size(), lenData));
 					return 0;
 				}
+			}
 		}
 	}
 
 	return -1;
+}
+
+int NIS_StopPoll(NISHandle handle)
+{
+	pollCntr.exitPoll = true;
+	NIS_JoinThread(&pollCntr.th);
 }
 
 int NIS_ConfigHandle(NISHandle handle, uint32_t config)
