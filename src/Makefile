@@ -1,27 +1,18 @@
-all: objs tests
-tests: objs
+all: $(LIBNAME) tests
+tests: $(LIBNAME)
 	$(MAKE) -C test
 
-objs: requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o
+OBJS = requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o
 	
-requests.o:
-	$(CXX) $(CFLAGS) -c requests.cpp
+.cpp.o:
+	$(CXX) -fPIC $(CFLAGS) -c $<
 
-nis.o:
-	$(CXX) $(CFLAGS) -c nis.cpp
-
-token.o:
-	$(CXX) $(CFLAGS) -c token.cpp
-
-reader.o:
-	$(CXX) $(CFLAGS) -c reader.cpp
-
-token_pcsc.o:
-	$(CXX) $(CFLAGS) -c token_pcsc.cpp
-
-reader_pcsc.o:
-	$(CXX) $(CFLAGS) -c reader_pcsc.cpp
+$(LIBNAME):$(OBJS)
+	$(CXX) -shared -fPIC $(LDFLAGS) -Wl,-soname,lib$@.so.$(MAJOR_VERSION) -o ../$(LIBDIR)/lib$@.so.$(MAJOR_VERSION).$(MINOR_VERSION).$(PATCHLEVEL) $(OBJS)
+	ln -sf ../$(LIBDIR)/lib$@.so.$(MAJOR_VERSION).$(MINOR_VERSION).$(PATCHLEVEL) ../$(LIBDIR)/lib$@.so.$(MAJOR_VERSION)
+	ln -sf ../$(LIBDIR)/lib$@.so.$(MAJOR_VERSION).$(MINOR_VERSION).$(PATCHLEVEL) ../$(LIBDIR)/lib$@.so
 
 clean:
 	rm -f *.o
+	rm -f ../$(LIBDIR)/*.so*
 	$(MAKE) -C test clean
