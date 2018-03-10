@@ -8,7 +8,7 @@ BINDIR = bin
 LIBDIR = lib
 
 CXX = g++
-CFLAGS = -std=c++11 -g -I/usr/local/include/PCSC 
+CFLAGS = -std=c++11 -g -I/usr/local/include/PCSC -I/usr/include/PCSC
 LDFLAGS = -L/usr/local/lib -lpcsclite
 MKDIR = mkdir -p
 
