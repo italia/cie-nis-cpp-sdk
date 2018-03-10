@@ -1,0 +1,15 @@
+language: cpp
+dist: trusty
+
+compiler:
+- gcc
+
+os:
+- linux
+
+addons:
+  apt:
+    packages:
+    - libpcsclite-dev
+
+script: make
