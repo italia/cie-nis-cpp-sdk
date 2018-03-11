@@ -2,17 +2,21 @@ MAJOR_VERSION = 1
 MINOR_VERSION = 0
 PATCHLEVEL = 1
 LIBNAME = cienis
+PLATFORM = posix
 
 SRCDIR = src
 BINDIR = bin
 LIBDIR = lib
 
+MKDIR = mkdir -p
 CXX = g++
 CFLAGS = -std=c++11 -g -I/usr/local/include/PCSC -I/usr/include/PCSC
 LDFLAGS = -L/usr/local/lib -lpcsclite
-MKDIR = mkdir -p
+ifeq ($(PLATFORM),posix)
+	LDFLAGS += -lpthread
+endif
 
-export BINDIR LIBDIR CFLAGS LDFLAGS LIBNAME MAJOR_VERSION MINOR_VERSION PATCHLEVEL
+export BINDIR LIBDIR CFLAGS LDFLAGS LIBNAME MAJOR_VERSION MINOR_VERSION PATCHLEVEL PLATFORM
 
 all:
 	$(MKDIR) $(LIBDIR) $(BINDIR)
