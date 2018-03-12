@@ -1,3 +1,9 @@
+/** @file example-nis.cpp
+ *  @brief Test example to read the NIS using the cie-nis-cpp-sdk library.
+ * 
+ *  This example initialize all implemented backends, enumerate the connected readers, let the user choose a reader and then try to read the NIS from the inserted token. The read is done via background polling and callback method. On exit, all initialized backends are freed.
+ */
+
 #include <vector>
 #include <string>
 #include <cstring>
