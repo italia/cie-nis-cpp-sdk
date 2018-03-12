@@ -1141,7 +1141,7 @@ HTML_FILE_EXTENSION    = .html
 
 # The HTML_HEADER tag can be used to specify a user-defined HTML header file for
 # each generated HTML page. If the tag is left blank doxygen will generate a
-# standard header.
+# standard header. 
 #
 # To get valid HTML the header file that includes any scripts and style sheets
 # that doxygen needs, which is dependent on the configuration options used (e.g.
