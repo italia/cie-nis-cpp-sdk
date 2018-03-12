@@ -1,6 +1,17 @@
 language: cpp
 dist: trusty
 
+# Blacklist
+branches:
+  except:
+  - gh-pages
+
+env:
+  global:
+  - GH_REPO_NAME: cie-nis-cpp-sdk
+  - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile.Travis
+  - GH_REPO_REF: github.com/italia/cie-nis-cpp-sdk.git
+
 compiler:
 - gcc
 
@@ -21,5 +32,16 @@ addons:
   apt:
     packages:
     - libpcsclite-dev
+    - doxygen
+    - doxygen-doc
+    - doxygen-latex
+    - doxygen-gui
+    - graphviz
 
 script: make
+
+# Generate and deploy documentation
+after_success:
+  - cd $TRAVIS_BUILD_DIR
+  - chmod +x generateDocumentationAndDeploy.sh
+  - ./generateDocumentationAndDeploy.sh
