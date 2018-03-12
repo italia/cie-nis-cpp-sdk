@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <functional>
 #include <cstring>
 #include <algorithm>
 #include "reader.h"
@@ -26,7 +27,7 @@ public:
 	}
 private:
 	NISManager() {}
-	unordered_map<BackendType,Reader*> backends;
+	unordered_map<BackendType,Reader*,std::hash<int>> backends;
 	vector<string> readers;
 	char *idList;
 public:
@@ -42,7 +43,7 @@ public:
 		} 
 		return backend; 
 	}
-	const unordered_map<BackendType,Reader*> &getBackends() { return backends; };
+	const unordered_map<BackendType,Reader*,std::hash<int>> &getBackends() { return backends; };
 	vector<string> &getReaders() { return readers; }
 	char* getIdentifiersList() { return idList; }
 	void deleteIdentifiersList() { if(idList) delete[] idList; }
