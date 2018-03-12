@@ -9,14 +9,14 @@ BINDIR = bin
 LIBDIR = lib
 
 MKDIR = mkdir -p
-CXX = g++
+CXX = g++-4.9
 CFLAGS = -std=c++11 -g -I/usr/local/include/PCSC -I/usr/include/PCSC
 LDFLAGS = -L/usr/local/lib -lpcsclite
 ifeq ($(PLATFORM),posix)
 	LDFLAGS += -lpthread
 endif
 
-export BINDIR LIBDIR CFLAGS LDFLAGS LIBNAME MAJOR_VERSION MINOR_VERSION PATCHLEVEL PLATFORM
+export CXX BINDIR LIBDIR CFLAGS LDFLAGS LIBNAME MAJOR_VERSION MINOR_VERSION PATCHLEVEL PLATFORM
 
 all:
 	$(MKDIR) $(LIBDIR) $(BINDIR)
