@@ -9,7 +9,7 @@ BINDIR = bin
 LIBDIR = lib
 
 MKDIR = mkdir -p
-CXX = g++-4.9
+CXX = g++
 CFLAGS = -std=c++11 -g -I/usr/local/include/PCSC -I/usr/include/PCSC
 LDFLAGS = -L/usr/local/lib -lpcsclite
 ifeq ($(PLATFORM),posix)
