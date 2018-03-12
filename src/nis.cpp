@@ -1,3 +1,9 @@
+/** @file nis.cpp
+ *  @brief Main facilities
+ *
+ *  This file contains the most important core functions of the entire NIS sdk. Just include @e nis.h in your source code to use this API.
+ */
+
 #include "nis.h"
 
 #include <unordered_map>
@@ -50,6 +56,12 @@ public:
 	char* allocateIdentifiersList(size_t len) { deleteIdentifiersList(); idList = new char[len]; return idList; }
 };
 
+/** 
+ * Initialize the NIS sdk backends.
+ * @param[in] backendBitfield Bitfield representing the backends to be initialized, taken from ::BackendType
+ * @see 
+ * @return 0 on success, negative on error
+ */
 int NIS_Init(uint32_t backendBitfield)
 {
 	int ret = 0;
@@ -68,6 +80,12 @@ int NIS_Init(uint32_t backendBitfield)
 	return ret;
 }
 
+/** 
+ * Obtain the connected reader list.
+ * @param[out] readers if the value @e len points to is 0 then @e readers will be automatically allocated (and automatically freed on deinit, so no user intervention is required). If not, readers must point to a pointer to a valid array allocated by the caller who is the owner of that array
+ * @param[in,out] len could point to a value of 0 for auto-allocation, or to the size of @e readers array when it's provided by the user
+ * @return 0 on success, negative on error. If negative, the abs value stands for the number of backends for which it was not possible to get the reader list
+ */
 int NIS_ReaderList(char **readers, size_t *len)
 {
 	int ret = 0;
@@ -113,6 +131,11 @@ int NIS_ReaderList(char **readers, size_t *len)
 	return ret;
 }
 
+/** 
+ * Obtain the handler of a specific reader.
+ * @param[in] readerName a string  representing the name of the reader. A list of readers name can be obtain invoking ::NIS_ReaderList()
+ * @return 0 on success, negative on error.
+ */
 NISHandle NIS_GetHandle(char *readerName)
 {
 	for(auto &backend : NISManager::getInstance().getBackends())
@@ -146,6 +169,14 @@ static void *pollNis(void *data)
 }
 //----------------------------------------------------------
 
+/** 
+ * Read the NIS from the specified token.
+ * @param[in] handle the handler of the reader previously obtained calling ::NIS_GetHandle()
+ * @param[out] nisData array in which to store the NIS read back from the token
+ * @param[in] lenData the size of the @e nisData array
+ * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS @sa ::nis_callback_t
+ * @return 0 on success, negative on error.
+ */
 int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callback_t callback)
 {
 	if(callback) {
@@ -172,10 +203,15 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callb
 	return -1;
 }
 
+/** 
+ * Stop the polling on a specified reader started invoking ::NIS_ReadNis() with a callback function.
+ * @param[in] handle the handler of the reader previously obtained calling ::NIS_GetHandle()
+ * @return 0 on success, negative on error.
+ */
 int NIS_StopPoll(NISHandle handle)
 {
 	pollCntr.exitPoll = true;
-	NIS_JoinThread(&pollCntr.th);
+	return NIS_JoinThread(&pollCntr.th);
 }
 
 int NIS_ConfigHandle(NISHandle handle, uint32_t config)
@@ -183,6 +219,12 @@ int NIS_ConfigHandle(NISHandle handle, uint32_t config)
 	return 0;
 }
 
+/** 
+ * Deinitialize the NIS sdk backends. Frees all related data, so handlers obtained through ::NIS_GetHandle() or the reader list allocated by ::NIS_ReaderList() are not valid anymore.
+ * @param[in] backendBitfield Bitfield representing the backends to be deinitialized, taken from ::BackendType
+ * @see 
+ * @return 0 on success, negative on error
+ */
 int NIS_Deinit(uint32_t backendBitfield)
 {
 	if(backendBitfield & NIS_BACKEND_PCSC) {
