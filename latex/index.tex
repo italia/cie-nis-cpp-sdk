@@ -1,0 +1,23 @@
+\hypertarget{index_sec-intro}{}\section{Introduction}\label{index_sec-intro}
+This S\-D\-K exports an A\-P\-I to read the N\-I\-S from a C\-I\-E, in the form of a shared object library.\hypertarget{index_sec-build-install}{}\section{Build and install}\label{index_sec-build-install}
+Just type\-:
+
+{\itshape make \&\& make doc}
+
+This results in {\itshape libcienis.\-so} in {\itshape }./lib, some test executables in {\itshape }./bin and documented A\-P\-I in ./doc.\hypertarget{index_sec-usage}{}\section{Usage}\label{index_sec-usage}
+Just include {\itshape \hyperlink{nis_8h_source}{nis.\-h}} in your source and link against {\itshape -\/lcienis}. You can see an example here\-: \hyperlink{example-nis_8cpp}{example-\/nis.\-cpp}.\hypertarget{index_sec-api}{}\section{A\-P\-I}\label{index_sec-api}
+You can find the interface to this library here\-: \hyperlink{nis_8cpp}{nis.\-cpp}.\hypertarget{index_sec-internals}{}\section{Internals}\label{index_sec-internals}
+This library has been designed with the following requirements\-:
+\begin{DoxyItemize}
+\item highly abstracted to decouple the various backends (P\-C\-S\-C/\-C\-T-\/\-A\-P\-I/proprietary interface), token protocols and high-\/level apdu commands
+\item modern event-\/driven model
+\item plain-\/\-C interface to the outside world, to accomodate for the difference in C++ A\-B\-I
+\item highly portable among Operating Systems. All platform dependent code is isolated
+\end{DoxyItemize}\hypertarget{index_subsec-hierarchy}{}\subsection{Hierarchy}\label{index_subsec-hierarchy}
+The abstraction model is implemented through two main classes\-: Reader and Token. The former represents an actual reader class or protocol (usually called a 'backend' throughout the source code, e.\-g. P\-C\-S\-C) while the latter stands for a specific token or card. These are abstract classes so implementors need to subclass them.
+
+To implement a new backend/reader (e.\-g. for P\-C\-S\-C/\-C\-T-\/\-A\-P\-I/custom protocol) one must extend the Reader class. A reference implementation is given for P\-C\-S\-C in the class Reader\-P\-C\-S\-C. A Reader subclass must implement the facilities to initialize/allocatei/grab context for the backend system it represents (usually in the constructor), to deinitialize/free/release context it in the destructor, and to enumerate all the readers connected to this backend. This S\-D\-K maintains a flat list of all the readers connected to the various initialized backends (see \hyperlink{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}{N\-I\-S\-\_\-\-Init()}) and each reader can be addressed based on its name (obtained through Reader\-::get\-Reader\-List()).
+
+To implement a new token for a specific protocol (e.\-g. for P\-C\-S\-C/\-C\-T-\/\-A\-P\-I/custom protocol) one must extend the Token class. A reference implementation is given for P\-C\-S\-C in the class Token\-P\-C\-S\-C. A Token subclass must implement the card functionalities such as connect/disconnect and transmission/reception of apdus. Usually for each specific subclass of Reader, a corresponding subclass of Token is required. The rationale behind this is to decouple the high level functionalities of init/enumeration from the lower per-\/token level functions such as card connect, disconnect and apdu tx/rx.
+
+The Request namespace is a collection of functions that provide higher-\/level facilities, such as reading the N\-I\-S, selecting D\-F as well as lower ones such as sending generic apdus. The decoupling of the high-\/level protocol from the specific backend protocol is guaranteed by passing a base Token parameter to which the function should operate. 

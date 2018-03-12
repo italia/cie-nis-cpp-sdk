@@ -1,0 +1,115 @@
+\hypertarget{nis__types_8h}{\section{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis\-\_\-types.h File Reference}
+\label{nis__types_8h}\index{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis\-\_\-types.\-h@{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis\-\_\-types.\-h}}
+}
+
+
+N\-I\-S main header.  
+
+
+{\ttfamily \#include $<$stddef.\-h$>$}\\*
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+Include dependency graph for nis\-\_\-types.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{nis__types_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{nis__types_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle}
+\item 
+typedef void($\ast$ \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} )(char $\ast$const nis\-Data, size\-\_\-t len\-Data)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} \{ \hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38af9c5076bc320f77c8fd8447b6892a3b5}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}, 
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aae636b718cda8835c66f85fad114362f}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D}, 
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aca5238f4ea23a248dd5d87056e3e255a}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R}, 
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38a8a7520e6e1ee16f45acc460ef0343e2a}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}
+ \}
+\item 
+enum \hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} \{ \hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daad9ba1cfa36627a40172f3b3099b3ef2b}{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}, 
+\hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daafa0ff930e804f9dd92eef289af2eeb0a}{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}
+ \}
+\item 
+enum \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594}{Backend\-Type} \{ \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594a3ff60978c4e7dc38834c0e3758abbeab}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E} = 0, 
+\hyperlink{nis__types_8h_acee299fbb7d897867808250049524594a4090533bbae04dfb2aaae88b5ae40dff}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C} = 1, 
+\hyperlink{nis__types_8h_acee299fbb7d897867808250049524594ade11439a1cdb2e67e753e02b5fb3baaf}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L} = (N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C)
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+N\-I\-S main header. Contains the return types and main types for N\-I\-S core functions. 
+
+\subsection{Typedef Documentation}
+\hypertarget{nis__types_8h_a01a69b218db702baa14290be05ef112d}{\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!nis\-\_\-callback\-\_\-t@{nis\-\_\-callback\-\_\-t}}
+\index{nis\-\_\-callback\-\_\-t@{nis\-\_\-callback\-\_\-t}!nis_types.h@{nis\-\_\-types.\-h}}
+\subsubsection[{nis\-\_\-callback\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ nis\-\_\-callback\-\_\-t)(char $\ast$const nis\-Data, size\-\_\-t len\-Data)}}\label{nis__types_8h_a01a69b218db702baa14290be05ef112d}
+Function pointer to a callback to be called when the N\-I\-S is being read from a token 
+\begin{DoxyParams}{Parameters}
+{\em nis\-Data} & pointer to the array that contains the N\-I\-S \\
+\hline
+{\em len\-Data} & size of {\itshape nis\-Data} \\
+\hline
+\end{DoxyParams}
+\hypertarget{nis__types_8h_aeda8757494329f27e534f367b067eda3}{\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!N\-I\-S\-Handle@{N\-I\-S\-Handle}}
+\index{N\-I\-S\-Handle@{N\-I\-S\-Handle}!nis_types.h@{nis\-\_\-types.\-h}}
+\subsubsection[{N\-I\-S\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef void$\ast$ {\bf N\-I\-S\-Handle}}}\label{nis__types_8h_aeda8757494329f27e534f367b067eda3}
+An handler to refer to a specific instance of a token 
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{nis__types_8h_acee299fbb7d897867808250049524594}{\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!Backend\-Type@{Backend\-Type}}
+\index{Backend\-Type@{Backend\-Type}!nis_types.h@{nis\-\_\-types.\-h}}
+\subsubsection[{Backend\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Backend\-Type}}}\label{nis__types_8h_acee299fbb7d897867808250049524594}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E}}\item[{\em 
+\hypertarget{nis__types_8h_acee299fbb7d897867808250049524594a3ff60978c4e7dc38834c0e3758abbeab}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-N\-O\-N\-E}\label{nis__types_8h_acee299fbb7d897867808250049524594a3ff60978c4e7dc38834c0e3758abbeab}
+}]No backend selected \index{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C}}\item[{\em 
+\hypertarget{nis__types_8h_acee299fbb7d897867808250049524594a4090533bbae04dfb2aaae88b5ae40dff}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-P\-C\-S\-C}\label{nis__types_8h_acee299fbb7d897867808250049524594a4090533bbae04dfb2aaae88b5ae40dff}
+}]P\-C\-S\-C backend \index{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L@{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L}}\item[{\em 
+\hypertarget{nis__types_8h_acee299fbb7d897867808250049524594ade11439a1cdb2e67e753e02b5fb3baaf}{N\-I\-S\-\_\-\-B\-A\-C\-K\-E\-N\-D\-\_\-\-A\-L\-L}\label{nis__types_8h_acee299fbb7d897867808250049524594ade11439a1cdb2e67e753e02b5fb3baaf}
+}]All available backends \end{description}
+\end{Desc}
+\hypertarget{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!Reader\-Result@{Reader\-Result}}
+\index{Reader\-Result@{Reader\-Result}!nis_types.h@{nis\-\_\-types.\-h}}
+\subsubsection[{Reader\-Result}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Reader\-Result}}}\label{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K@{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K@{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}}\item[{\em 
+\hypertarget{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daad9ba1cfa36627a40172f3b3099b3ef2b}{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}\label{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daad9ba1cfa36627a40172f3b3099b3ef2b}
+}]Success \index{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R@{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R@{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}}\item[{\em 
+\hypertarget{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daafa0ff930e804f9dd92eef289af2eeb0a}{R\-E\-A\-D\-E\-R\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}\label{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8daafa0ff930e804f9dd92eef289af2eeb0a}
+}]Some error has occurred \end{description}
+\end{Desc}
+\hypertarget{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!Tok\-Result@{Tok\-Result}}
+\index{Tok\-Result@{Tok\-Result}!nis_types.h@{nis\-\_\-types.\-h}}
+\subsubsection[{Tok\-Result}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Tok\-Result}}}\label{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}}\item[{\em 
+\hypertarget{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38af9c5076bc320f77c8fd8447b6892a3b5}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-O\-K}\label{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38af9c5076bc320f77c8fd8447b6892a3b5}
+}]Success \index{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D}}\item[{\em 
+\hypertarget{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aae636b718cda8835c66f85fad114362f}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-N\-O\-T\-\_\-\-C\-O\-N\-N\-E\-C\-T\-E\-D}\label{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aae636b718cda8835c66f85fad114362f}
+}]No card connected \index{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R}}\item[{\em 
+\hypertarget{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aca5238f4ea23a248dd5d87056e3e255a}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-R\-E\-A\-D\-\_\-\-E\-R\-R\-O\-R}\label{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38aca5238f4ea23a248dd5d87056e3e255a}
+}]Cannot read from the card \index{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}!nis\-\_\-types.\-h@{nis\-\_\-types.\-h}}\index{nis\-\_\-types.\-h@{nis\-\_\-types.\-h}!T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R@{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}}\item[{\em 
+\hypertarget{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38a8a7520e6e1ee16f45acc460ef0343e2a}{T\-O\-K\-\_\-\-R\-E\-S\-U\-L\-T\-\_\-\-G\-E\-N\-E\-R\-I\-C\-\_\-\-E\-R\-R\-O\-R}\label{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38a8a7520e6e1ee16f45acc460ef0343e2a}
+}]Some error has occurred \end{description}
+\end{Desc}

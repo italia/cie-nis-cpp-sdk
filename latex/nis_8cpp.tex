@@ -1,0 +1,174 @@
+\hypertarget{nis_8cpp}{\section{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis.cpp File Reference}
+\label{nis_8cpp}\index{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis.\-cpp@{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/nis.\-cpp}}
+}
+
+
+Main facilities.  
+
+
+{\ttfamily \#include \char`\"{}nis.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}reader.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}reader\-\_\-pcsc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}token.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}token\-\_\-pcsc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}requests.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include \char`\"{}thread.\-h\char`\"{}}\\*
+Include dependency graph for nis.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{nis_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classNISManager}{N\-I\-S\-Manager}
+\item 
+struct {\bfseries Poll\-Container}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}{N\-I\-S\-\_\-\-Init} (uint32\-\_\-t backend\-Bitfield)
+\item 
+int \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader\-List} (char $\ast$$\ast$readers, size\-\_\-t $\ast$len)
+\item 
+\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle} (char $\ast$reader\-Name)
+\item 
+int \hyperlink{nis_8cpp_aa55304d35c0751becaac861383096194}{N\-I\-S\-\_\-\-Read\-Nis} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, char $\ast$const nis\-Data, size\-\_\-t len\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback)
+\item 
+int \hyperlink{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}{N\-I\-S\-\_\-\-Stop\-Poll} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle)
+\item 
+\hypertarget{nis_8cpp_a1f9621bef29cd4cb4c7af129a78cdea4}{int {\bfseries N\-I\-S\-\_\-\-Config\-Handle} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, uint32\-\_\-t config)}\label{nis_8cpp_a1f9621bef29cd4cb4c7af129a78cdea4}
+
+\item 
+int \hyperlink{nis_8cpp_a1a5442dc5745e4bdde47ff3002f48dca}{N\-I\-S\-\_\-\-Deinit} (uint32\-\_\-t backend\-Bitfield)
+\item 
+\hypertarget{nis_8cpp_a745181048a1c748d3c662c03a54d0d8c}{int {\bfseries N\-I\-S\-\_\-\-Reset} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle)}\label{nis_8cpp_a745181048a1c748d3c662c03a54d0d8c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main facilities. This file contains the most important core functions of the entire N\-I\-S sdk. Just include {\itshape \hyperlink{nis_8h_source}{nis.\-h}} in your source code to use this A\-P\-I. 
+
+\subsection{Function Documentation}
+\hypertarget{nis_8cpp_a1a5442dc5745e4bdde47ff3002f48dca}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Deinit@{N\-I\-S\-\_\-\-Deinit}}
+\index{N\-I\-S\-\_\-\-Deinit@{N\-I\-S\-\_\-\-Deinit}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Deinit}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Deinit (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{backend\-Bitfield}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_a1a5442dc5745e4bdde47ff3002f48dca}
+Deinitialize the N\-I\-S sdk backends. Frees all related data, so handlers obtained through \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} or the reader list allocated by \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader\-List()} are not valid anymore. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em backend\-Bitfield} & Bitfield representing the backends to be deinitialized, taken from \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594}{Backend\-Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error 
+\end{DoxyReturn}
+\hypertarget{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Get\-Handle@{N\-I\-S\-\_\-\-Get\-Handle}}
+\index{N\-I\-S\-\_\-\-Get\-Handle@{N\-I\-S\-\_\-\-Get\-Handle}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Get\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\-I\-S\-Handle} N\-I\-S\-\_\-\-Get\-Handle (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{reader\-Name}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}
+Obtain the handler of a specific reader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reader\-Name} & a string representing the name of the reader. A list of readers name can be obtain invoking \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader\-List()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error. 
+\end{DoxyReturn}
+\hypertarget{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Init@{N\-I\-S\-\_\-\-Init}}
+\index{N\-I\-S\-\_\-\-Init@{N\-I\-S\-\_\-\-Init}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{backend\-Bitfield}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}
+Initialize the N\-I\-S sdk backends. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em backend\-Bitfield} & Bitfield representing the backends to be initialized, taken from \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594}{Backend\-Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error 
+\end{DoxyReturn}
+\hypertarget{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Reader\-List@{N\-I\-S\-\_\-\-Reader\-List}}
+\index{N\-I\-S\-\_\-\-Reader\-List@{N\-I\-S\-\_\-\-Reader\-List}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Reader\-List}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Reader\-List (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{readers, }
+\item[{size\-\_\-t $\ast$}]{len}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}
+Obtain the connected reader list. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em readers} & if the value {\itshape len} points to is 0 then {\itshape readers} will be automatically allocated (and automatically freed on deinit, so no user intervention is required). If not, readers must point to a pointer to a valid array allocated by the caller who is the owner of that array \\
+\hline
+\mbox{\tt in,out}  & {\em len} & could point to a value of 0 for auto-\/allocation, or to the size of {\itshape readers} array when it's provided by the user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error. If negative, the abs value stands for the number of backends for which it was not possible to get the reader list 
+\end{DoxyReturn}
+\hypertarget{nis_8cpp_aa55304d35c0751becaac861383096194}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}}
+\index{N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Read\-Nis}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Read\-Nis (
+\begin{DoxyParamCaption}
+\item[{{\bf N\-I\-S\-Handle}}]{handle, }
+\item[{char $\ast$const}]{nis\-Data, }
+\item[{size\-\_\-t}]{len\-Data, }
+\item[{{\bf nis\-\_\-callback\-\_\-t}}]{callback}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_aa55304d35c0751becaac861383096194}
+Read the N\-I\-S from the specified token. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
+\hline
+\mbox{\tt out}  & {\em nis\-Data} & array in which to store the N\-I\-S read back from the token \\
+\hline
+\mbox{\tt in}  & {\em len\-Data} & the size of the {\itshape nis\-Data} array \\
+\hline
+\mbox{\tt in}  & {\em callback} & if {\itshape N\-U\-L\-L} the call is blocking and the N\-I\-S is copied inside {\itshape nis\-Data} upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read N\-I\-S \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error. 
+\end{DoxyReturn}
+\hypertarget{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}}
+\index{N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}!nis.cpp@{nis.\-cpp}}
+\subsubsection[{N\-I\-S\-\_\-\-Stop\-Poll}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Stop\-Poll (
+\begin{DoxyParamCaption}
+\item[{{\bf N\-I\-S\-Handle}}]{handle}
+\end{DoxyParamCaption}
+)}}\label{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}
+Stop the polling on a specified reader started invoking \hyperlink{nis_8cpp_aa55304d35c0751becaac861383096194}{N\-I\-S\-\_\-\-Read\-Nis()} with a callback function. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error. 
+\end{DoxyReturn}
