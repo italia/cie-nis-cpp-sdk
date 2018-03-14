@@ -16,7 +16,6 @@ namespace nis
 		private:
 			SCARDCONTEXT context;
 			char *readerList;
-			void freeTokenList();
 			bool hasContextFlag;
 		public:
 			ReaderPCSC();
