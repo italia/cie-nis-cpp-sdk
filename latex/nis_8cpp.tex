@@ -43,7 +43,7 @@ int \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader
 \item 
 \hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle} (char $\ast$reader\-Name)
 \item 
-int \hyperlink{nis_8cpp_aa55304d35c0751becaac861383096194}{N\-I\-S\-\_\-\-Read\-Nis} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, char $\ast$const nis\-Data, size\-\_\-t len\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback)
+int \hyperlink{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{N\-I\-S\-\_\-\-Read\-Nis} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback)
 \item 
 int \hyperlink{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}{N\-I\-S\-\_\-\-Stop\-Poll} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle)
 \item 
@@ -130,16 +130,15 @@ Obtain the connected reader list.
 \begin{DoxyReturn}{Returns}
 0 on success, negative on error. If negative, the abs value stands for the number of backends for which it was not possible to get the reader list 
 \end{DoxyReturn}
-\hypertarget{nis_8cpp_aa55304d35c0751becaac861383096194}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}}
+\hypertarget{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}}
 \index{N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}!nis.cpp@{nis.\-cpp}}
 \subsubsection[{N\-I\-S\-\_\-\-Read\-Nis}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Read\-Nis (
 \begin{DoxyParamCaption}
 \item[{{\bf N\-I\-S\-Handle}}]{handle, }
 \item[{char $\ast$const}]{nis\-Data, }
-\item[{size\-\_\-t}]{len\-Data, }
 \item[{{\bf nis\-\_\-callback\-\_\-t}}]{callback}
 \end{DoxyParamCaption}
-)}}\label{nis_8cpp_aa55304d35c0751becaac861383096194}
+)}}\label{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}
 Read the N\-I\-S from the specified token. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
@@ -164,7 +163,7 @@ Read the N\-I\-S from the specified token.
 \item[{{\bf N\-I\-S\-Handle}}]{handle}
 \end{DoxyParamCaption}
 )}}\label{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}
-Stop the polling on a specified reader started invoking \hyperlink{nis_8cpp_aa55304d35c0751becaac861383096194}{N\-I\-S\-\_\-\-Read\-Nis()} with a callback function. 
+Stop the polling on a specified reader started invoking \hyperlink{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{N\-I\-S\-\_\-\-Read\-Nis()} with a callback function. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
 \hline

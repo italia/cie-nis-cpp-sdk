@@ -97,17 +97,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af191b49bf25bbf9bfd2cb5bd9cd9c434"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classNISManager.html">NISManager</a> &amp;)=delete</td></tr>
 <tr class="separator:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f9aae95eed46cd8cdea72bbdb526960"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f9aae95eed46cd8cdea72bbdb526960"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> *backend)</td></tr>
-<tr class="separator:a0f9aae95eed46cd8cdea72bbdb526960"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06be1bb52580b9af3466b0094da7fd03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06be1bb52580b9af3466b0094da7fd03"></a>
-<a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>removeBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype)</td></tr>
-<tr class="separator:a06be1bb52580b9af3466b0094da7fd03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa844d08a0c89c8143380d9f55abb7e56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa844d08a0c89c8143380d9f55abb7e56"></a>
+<tr class="memitem:a16f0f685a40a858762febd50f158b0ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16f0f685a40a858762febd50f158b0ab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt; backend)</td></tr>
+<tr class="separator:a16f0f685a40a858762febd50f158b0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ff32a0e450569a8091fb5373874d7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1ff32a0e450569a8091fb5373874d7e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>removeBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype)</td></tr>
+<tr class="separator:ae1ff32a0e450569a8091fb5373874d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cad1a44e5ca799fc820c40fecd5cbf2"></a>
 const unordered_map<br class="typebreak"/>
-&lt; <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>, <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> <br class="typebreak"/>
-*, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackends</b> ()</td></tr>
-<tr class="separator:aa844d08a0c89c8143380d9f55abb7e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+&lt; <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>, shared_ptr<br class="typebreak"/>
+&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackends</b> ()</td></tr>
+<tr class="separator:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27a3db14eb804948d4031f115d3f6234"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27a3db14eb804948d4031f115d3f6234"></a>
 vector&lt; string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getReaders</b> ()</td></tr>
 <tr class="separator:a27a3db14eb804948d4031f115d3f6234"><td class="memSeparator" colspan="2">&#160;</td></tr>

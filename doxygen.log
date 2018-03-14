@@ -80,36 +80,38 @@ Computing nesting relations for classes...
 Building example list...
 Searching for enumerations...
 Searching for documented type/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: Compound nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:152: warning: Compound PollContainer is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:11: warning: Compound nis::interface::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:148: warning: Compound PollContainer is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:12: warning: Compound nis::interface::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:27: warning: Compound NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:15: warning: Compound nis::implementation::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:14: warning: Compound nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:21: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:30: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:37: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:217: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:242: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Member ReaderResult (enumeration) of file nis_types.h is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Member BackendType (enumeration) of file nis_types.h is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:214: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:237: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:169: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:34: warning: Member ReaderResult (enumeration) of file nis_types.h is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:41: warning: Member BackendType (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:14: warning: Member _TCHAR (macro definition) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:16: warning: Member deinit(void) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:22: warning: Member callback(char *const nisData, size_t lenData) (function) of file example-nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:27: warning: Member main(int argc, _TCHAR *argv[]) (function) of file example-nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:28: warning: Member main(int argc, _TCHAR *argv[]) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:40: warning: Member NISManager(const NISManager &)=delete (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:41: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:42: warning: Member addBackend(BackendType backtype, Reader *backend) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:42: warning: Member addBackend(BackendType backtype, shared_ptr< Reader > backend) (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:43: warning: Member removeBackend(BackendType backtype) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:52: warning: Member getBackends() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:53: warning: Member getReaders() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:54: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:55: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:56: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:49: warning: Member getBackends() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:50: warning: Member getReaders() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:51: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:52: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:53: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:29: warning: Member getInstance() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:24: warning: Member enumerateReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:25: warning: Member getReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:26: warning: Member hasContext() (function) of class nis::implementation::ReaderPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:23: warning: Member enumerateReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:24: warning: Member getReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:25: warning: Member hasContext() (function) of class nis::implementation::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:21: warning: Member getToken(const string &name) (function) of class nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:16: warning: Member tokenList (variable) of class nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:24: warning: Member TokenPCSC(const string &identifier, SCARDCONTEXT context) (function) of class nis::implementation::TokenPCSC is not documented.
@@ -120,9 +122,9 @@ Searching for documented type/home/travis/build/italia/cie-nis-cpp-sdk/src/token
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:20: warning: Member getReaderList()=0 (function) of class nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:21: warning: Member getToken(const string &name) (function) of class nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:16: warning: Member tokenList (variable) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:14: warning: Member connect()=0 (function) of class nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:15: warning: Member disconnect()=0 (function) of class nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:16: warning: Member transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0 (function) of class nis::interface::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:15: warning: Member connect()=0 (function) of class nis::interface::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:16: warning: Member disconnect()=0 (function) of class nis::interface::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:17: warning: Member transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0 (function) of class nis::interface::Token is not documented.
 defs...
 Searching for members imported via using declarations...
 Searching for included using directives...
@@ -264,5 +266,5 @@ Patching output file 20/23
 Patching output file 21/23
 Patching output file 22/23
 Patching output file 23/23
-lookup cache used 127/65536 hits=590 misses=137
+lookup cache used 126/65536 hits=574 misses=136
 finished...

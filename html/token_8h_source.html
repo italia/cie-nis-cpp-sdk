@@ -91,26 +91,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define TOKEN_GUARD</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;winscard.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nis__types_8h.html">nis_types.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>nis {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">namespace </span>interface {</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classnis_1_1interface_1_1Token.html">   10</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classnis_1_1interface_1_1Token.html">Token</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="classnis_1_1interface_1_1Token.html">Token</a>() = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> connect() = 0;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> disconnect() = 0;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> transmit(<span class="keyword">const</span> std::vector&lt;BYTE&gt; &amp;apdu, std::vector&lt;BYTE&gt; &amp;response) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    }</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="nis__types_8h_html_a6ef53483e8ce2f8bc58bd1f75b3d0b38"><div class="ttname"><a href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a></div><div class="ttdeci">TokResult</div><div class="ttdef"><b>Definition:</b> nis_types.h:23</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;winscard.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nis__types_8h.html">nis_types.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>nis {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">namespace </span>interface {</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classnis_1_1interface_1_1Token.html">   11</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classnis_1_1interface_1_1Token.html">Token</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="classnis_1_1interface_1_1Token.html">Token</a>() = 0;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> connect() = 0;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> disconnect() = 0;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a> transmit(<span class="keyword">const</span> std::vector&lt;BYTE&gt; &amp;apdu, std::vector&lt;BYTE&gt; &amp;response) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        };</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="nis__types_8h_html_a6ef53483e8ce2f8bc58bd1f75b3d0b38"><div class="ttname"><a href="nis__types_8h.html#a6ef53483e8ce2f8bc58bd1f75b3d0b38">TokResult</a></div><div class="ttdeci">TokResult</div><div class="ttdef"><b>Definition:</b> nis_types.h:25</div></div>
 <div class="ttc" id="nis__types_8h_html"><div class="ttname"><a href="nis__types_8h.html">nis_types.h</a></div><div class="ttdoc">NIS main header. </div></div>
-<div class="ttc" id="classnis_1_1interface_1_1Token_html"><div class="ttname"><a href="classnis_1_1interface_1_1Token.html">nis::interface::Token</a></div><div class="ttdef"><b>Definition:</b> token.h:10</div></div>
+<div class="ttc" id="classnis_1_1interface_1_1Token_html"><div class="ttname"><a href="classnis_1_1interface_1_1Token.html">nis::interface::Token</a></div><div class="ttdef"><b>Definition:</b> token.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

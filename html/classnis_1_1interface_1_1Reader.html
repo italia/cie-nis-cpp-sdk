@@ -108,15 +108,16 @@ virtual <a class="el" href="nis__types_8h.html#a484156f5b8cf43396c5bbe77226fa8da
 <tr class="memitem:a65d1522165b9660c1c1be260af28cbd0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65d1522165b9660c1c1be260af28cbd0"></a>
 virtual vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getReaderList</b> ()=0</td></tr>
 <tr class="separator:a65d1522165b9660c1c1be260af28cbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38a4cbeb0699bbbd88198905a2274c5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38a4cbeb0699bbbd88198905a2274c5a"></a>
-<a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getToken</b> (const string &amp;name)</td></tr>
-<tr class="separator:a38a4cbeb0699bbbd88198905a2274c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8132b33c794255154b626887af4a8795"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8132b33c794255154b626887af4a8795"></a>
+shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getToken</b> (const string &amp;name)</td></tr>
+<tr class="separator:a8132b33c794255154b626887af4a8795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0254ae695f91bd951524e337b4896a06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0254ae695f91bd951524e337b4896a06"></a>
-unordered_map&lt; string, <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tokenList</b></td></tr>
-<tr class="separator:a0254ae695f91bd951524e337b4896a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d9beab85b111103582f3297fac667b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42d9beab85b111103582f3297fac667b"></a>
+unordered_map&lt; string, <br class="typebreak"/>
+shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tokenList</b></td></tr>
+<tr class="separator:a42d9beab85b111103582f3297fac667b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/italia/cie-nis-cpp-sdk/src/<a class="el" href="reader_8h_source.html">reader.h</a></li>
