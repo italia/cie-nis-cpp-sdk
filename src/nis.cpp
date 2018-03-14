@@ -158,7 +158,7 @@ static void *pollNis(void *data)
 	PollContainer* cntr = (PollContainer*)data;
 
 	while(!pollCntr.exitPoll) {
-		if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, cntr->pollSize, nullptr)) 
+		if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, nullptr)) 
 			cntr->callback(cntr->pollData, cntr->pollSize);
 		std::this_thread::sleep_for(std::chrono::milliseconds {1000});
 	}
@@ -173,8 +173,9 @@ static void *pollNis(void *data)
  * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS @sa ::nis_callback_t
  * @return 0 on success, negative on error.
  */
-int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callback_t callback)
+int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback)
 {
+	const size_t lenData = NIS_LENGTH;
 	if(callback) {
 		pollCntr.pollHandle = handle;
 		pollCntr.callback = callback;
@@ -184,7 +185,7 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callb
 		return NIS_CreateThread(&pollCntr.th, pollNis, &pollCntr);
 	}
 	else {
-		std::vector<BYTE> response(RESPONSE_SIZE);
+		std::vector<BYTE> response(lenData);
 
 		if(Requests::select_df_ias(*((Token*)handle), response)) {
 			if(Requests::select_df_cie(*((Token*)handle), response)) {
