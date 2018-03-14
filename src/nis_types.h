@@ -10,6 +10,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define NIS_LENGTH	12
+
 /** An handler to refer to a specific instance of a token */
 typedef void *NISHandle;
 /** Function pointer to a callback to be called when the NIS is being read from a token

@@ -21,6 +21,7 @@ void deinit(void)
 
 void callback(char *const nisData, size_t lenData)
 {
+	nisData[NIS_LENGTH] = '\0';
 	std::cout << "NIS: " << std::string{nisData} << std::endl;
 }
 
@@ -69,8 +70,8 @@ int main(int argc, _TCHAR* argv[])
 	}
 
 	//read the NIS
-	char nisData[300];
-	if(NIS_ReadNis(handle, nisData, sizeof(nisData), callback)) {
+	char nisData[NIS_LENGTH+1];	//to take into account for the termination character
+	if(NIS_ReadNis(handle, nisData, callback)) {
 		std::cerr << "Could not read the NIS from token" << std::endl;
 		exit(-5);
 	}
