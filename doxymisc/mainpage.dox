@@ -37,4 +37,10 @@ To implement a new backend/reader (e.g. for PCSC/CT-API/custom protocol) one mus
 To implement a new token for a specific protocol (e.g. for PCSC/CT-API/custom protocol) one must extend the Token class. A reference implementation is given for PCSC in the class TokenPCSC. A Token subclass must implement the card functionalities such as connect/disconnect and transmission/reception of apdus. Usually for each specific subclass of Reader, a corresponding subclass of Token is required. The rationale behind this is to decouple the high level functionalities of init/enumeration from the lower per-token level functions such as card connect, disconnect and apdu tx/rx.
 
 The Request namespace is a collection of functions that provide higher-level facilities, such as reading the NIS, selecting DF as well as lower ones such as sending generic apdus. The decoupling of the high-level protocol from the specific backend protocol is guaranteed by passing a base Token parameter to which the function should operate.
+
+\section sec-specs Specifications
+
+On a CIE, the NIS always is 12 digits long. You can equivalently read it from one of these two (freely readable) files:
+- EF.SN.ICC: part of the EMV-IAS specs. It contains the Primary Account Number (PAN) that represents the ChipID. The IAS specs contain a custom PAN encoding in which the NIS is represented as 6 bytes BCD number.
+- EF.EdServizi: here the NIS is represented as a simple 12 bytes ASCII string.
 */
