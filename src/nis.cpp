@@ -33,23 +33,20 @@ public:
 	}
 private:
 	NISManager() {}
-	unordered_map<BackendType,Reader*,std::hash<int>> backends;
+	unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> backends;
 	vector<string> readers;
 	char *idList;
 public:
 	NISManager(const NISManager &) = delete;
 	void operator=(const NISManager &) = delete;
-	void addBackend(BackendType backtype, Reader *backend) { backends[backtype] = backend; }
-	Reader* removeBackend(BackendType backtype) { 
-		Reader* backend = nullptr; 
+	void addBackend(BackendType backtype, shared_ptr<Reader> backend) { backends[backtype] = backend; }
+	void removeBackend(BackendType backtype) { 
 		auto it = backends.find(backtype);
 		if(it != backends.end()) { 
-			backend = it->second; 
 			backends.erase(it); 
 		} 
-		return backend; 
 	}
-	const unordered_map<BackendType,Reader*,std::hash<int>> &getBackends() { return backends; };
+	const unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> &getBackends() { return backends; };
 	vector<string> &getReaders() { return readers; }
 	char* getIdentifiersList() { return idList; }
 	void deleteIdentifiersList() { if(idList) delete[] idList; }
@@ -67,11 +64,10 @@ int NIS_Init(uint32_t backendBitfield)
 	int ret = 0;
 
 	if(backendBitfield & NIS_BACKEND_PCSC) {
-		ReaderPCSC* backend = new ReaderPCSC();
+		shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
 		if(backend->hasContext())
 			NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
 		else {
-			delete backend;
 			ret = -1;
 		}
 	}
@@ -93,7 +89,7 @@ int NIS_ReaderList(char **readers, size_t *len)
 	vector<string> &allReaders = NISManager::getInstance().getReaders();
 	allReaders.clear();
 
-	for(auto &backend : NISManager::getInstance().getBackends())
+	for(auto backend : NISManager::getInstance().getBackends())
 	{
 		if(backend.second->enumerateReaderList() == READER_RESULT_OK)
 		{
@@ -138,9 +134,9 @@ int NIS_ReaderList(char **readers, size_t *len)
  */
 NISHandle NIS_GetHandle(char *readerName)
 {
-	for(auto &backend : NISManager::getInstance().getBackends())
+	for(auto backend : NISManager::getInstance().getBackends())
 	{
-		Token* token = backend.second->getToken(string(readerName));
+		Token* token = backend.second->getToken(string(readerName)).get();
 		if(token && token->connect() == TOK_RESULT_OK)
 			return token;
 	}
@@ -228,9 +224,7 @@ int NIS_ConfigHandle(NISHandle handle, uint32_t config)
 int NIS_Deinit(uint32_t backendBitfield)
 {
 	if(backendBitfield & NIS_BACKEND_PCSC) {
-		Reader *erased = NISManager::getInstance().removeBackend(NIS_BACKEND_PCSC);
-		if(erased)
-			delete erased;
+		NISManager::getInstance().removeBackend(NIS_BACKEND_PCSC);
 	}
 	//else ... //add backends here
 	

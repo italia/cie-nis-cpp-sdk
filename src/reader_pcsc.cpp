@@ -20,13 +20,6 @@ ReaderPCSC::~ReaderPCSC()
 
 	if(hasContextFlag)
 		SCardReleaseContext(context);
-	freeTokenList();
-}
-
-void ReaderPCSC::freeTokenList()
-{
-	for(auto it = tokenList.begin(); it != tokenList.end(); ++it)
-		delete it->second;
 }
 
 vector<string> ReaderPCSC::getReaderList()
@@ -45,7 +38,6 @@ vector<string> ReaderPCSC::getReaderList()
 
 ReaderResult ReaderPCSC::enumerateReaderList()
 {
-	freeTokenList();
 	tokenList.clear();
 
 	DWORD ReaderListLen = SCARD_AUTOALLOCATE;
@@ -56,7 +48,7 @@ ReaderResult ReaderPCSC::enumerateReaderList()
 	char* reader = readerList;
 	while (reader[0]) {
 		string name{reader};
-		tokenList[name] = new TokenPCSC{name, context};
+		tokenList[name] = shared_ptr<TokenPCSC>{new TokenPCSC{name, context}};
 		reader += strlen(reader) + 1;
 	}
 
