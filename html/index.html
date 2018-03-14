@@ -105,7 +105,14 @@ Hierarchy</h2>
 <p>The abstraction model is implemented through two main classes: Reader and Token. The former represents an actual reader class or protocol (usually called a 'backend' throughout the source code, e.g. PCSC) while the latter stands for a specific token or card. These are abstract classes so implementors need to subclass them.</p>
 <p>To implement a new backend/reader (e.g. for PCSC/CT-API/custom protocol) one must extend the Reader class. A reference implementation is given for PCSC in the class ReaderPCSC. A Reader subclass must implement the facilities to initialize/allocatei/grab context for the backend system it represents (usually in the constructor), to deinitialize/free/release context it in the destructor, and to enumerate all the readers connected to this backend. This SDK maintains a flat list of all the readers connected to the various initialized backends (see <a class="el" href="nis_8cpp.html#a1a4da622cc9443c4fc71b276454923da">NIS_Init()</a>) and each reader can be addressed based on its name (obtained through Reader::getReaderList()).</p>
 <p>To implement a new token for a specific protocol (e.g. for PCSC/CT-API/custom protocol) one must extend the Token class. A reference implementation is given for PCSC in the class TokenPCSC. A Token subclass must implement the card functionalities such as connect/disconnect and transmission/reception of apdus. Usually for each specific subclass of Reader, a corresponding subclass of Token is required. The rationale behind this is to decouple the high level functionalities of init/enumeration from the lower per-token level functions such as card connect, disconnect and apdu tx/rx.</p>
-<p>The Request namespace is a collection of functions that provide higher-level facilities, such as reading the NIS, selecting DF as well as lower ones such as sending generic apdus. The decoupling of the high-level protocol from the specific backend protocol is guaranteed by passing a base Token parameter to which the function should operate. </p>
+<p>The Request namespace is a collection of functions that provide higher-level facilities, such as reading the NIS, selecting DF as well as lower ones such as sending generic apdus. The decoupling of the high-level protocol from the specific backend protocol is guaranteed by passing a base Token parameter to which the function should operate.</p>
+<h1><a class="anchor" id="sec-specs"></a>
+Specifications</h1>
+<p>On a CIE, the NIS always is 12 digits long. You can equivalently read it from one of these two (freely readable) files:</p>
+<ul>
+<li>EF.SN.ICC: part of the EMV-IAS specs. It contains the Primary Account Number (PAN) that represents the ChipID. The IAS specs contain a custom PAN encoding in which the NIS is represented as 6 bytes BCD number.</li>
+<li>EF.EdServizi: here the NIS is represented as a simple 12 bytes ASCII string. </li>
+</ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
