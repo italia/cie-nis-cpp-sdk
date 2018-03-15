@@ -97,20 +97,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af191b49bf25bbf9bfd2cb5bd9cd9c434"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classNISManager.html">NISManager</a> &amp;)=delete</td></tr>
 <tr class="separator:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cad1a44e5ca799fc820c40fecd5cbf2"></a>
+const unordered_map<br class="typebreak"/>
+&lt; <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>, shared_ptr<br class="typebreak"/>
+&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackends</b> ()</td></tr>
+<tr class="separator:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16f0f685a40a858762febd50f158b0ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16f0f685a40a858762febd50f158b0ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt; backend)</td></tr>
 <tr class="separator:a16f0f685a40a858762febd50f158b0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ff32a0e450569a8091fb5373874d7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1ff32a0e450569a8091fb5373874d7e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype)</td></tr>
 <tr class="separator:ae1ff32a0e450569a8091fb5373874d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cad1a44e5ca799fc820c40fecd5cbf2"></a>
-const unordered_map<br class="typebreak"/>
-&lt; <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>, shared_ptr<br class="typebreak"/>
-&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackends</b> ()</td></tr>
-<tr class="separator:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27a3db14eb804948d4031f115d3f6234"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27a3db14eb804948d4031f115d3f6234"></a>
 vector&lt; string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getReaders</b> ()</td></tr>
 <tr class="separator:a27a3db14eb804948d4031f115d3f6234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40aeca3b6e971ecb75495e2eae06c967"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40aeca3b6e971ecb75495e2eae06c967"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addExecutor</b> (uint32_t uid, shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt; ex)</td></tr>
+<tr class="separator:a40aeca3b6e971ecb75495e2eae06c967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1334f6c8113f006d34ac12c10a71d169"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1334f6c8113f006d34ac12c10a71d169"></a>
+shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>removeExecutor</b> (uint32_t uid)</td></tr>
+<tr class="separator:a1334f6c8113f006d34ac12c10a71d169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19037ce4d2614109b7086abdab6fad95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19037ce4d2614109b7086abdab6fad95"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>removeAllExecutors</b> ()</td></tr>
+<tr class="separator:a19037ce4d2614109b7086abdab6fad95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a713e9399922ebfdb0b5bbe5fee8f1bc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a713e9399922ebfdb0b5bbe5fee8f1bc3"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>getIdentifiersList</b> ()</td></tr>
 <tr class="separator:a713e9399922ebfdb0b5bbe5fee8f1bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>

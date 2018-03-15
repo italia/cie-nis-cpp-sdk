@@ -9,6 +9,7 @@ Main facilities.
 {\ttfamily \#include \char`\"{}nis.\-h\char`\"{}}\\*
 {\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
 {\ttfamily \#include $<$functional$>$}\\*
 {\ttfamily \#include $<$cstring$>$}\\*
 {\ttfamily \#include $<$algorithm$>$}\\*
@@ -17,8 +18,8 @@ Main facilities.
 {\ttfamily \#include \char`\"{}token.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}token\-\_\-pcsc.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}requests.\-h\char`\"{}}\\*
-{\ttfamily \#include $<$thread$>$}\\*
 {\ttfamily \#include \char`\"{}thread.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}uid.\-h\char`\"{}}\\*
 Include dependency graph for nis.\-cpp\-:
 \nopagebreak
 \begin{figure}[H]
@@ -31,8 +32,6 @@ Include dependency graph for nis.\-cpp\-:
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classNISManager}{N\-I\-S\-Manager}
-\item 
-struct {\bfseries Poll\-Container}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -43,9 +42,9 @@ int \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader
 \item 
 \hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle} (char $\ast$reader\-Name)
 \item 
-int \hyperlink{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{N\-I\-S\-\_\-\-Read\-Nis} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback)
+int \hyperlink{nis_8cpp_adb93e961f1f17f1201604b40313875e0}{N\-I\-S\-\_\-\-Read\-Nis} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback, uint32\-\_\-t interval, uint32\-\_\-t $\ast$uid)
 \item 
-int \hyperlink{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}{N\-I\-S\-\_\-\-Stop\-Poll} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle)
+int \hyperlink{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{N\-I\-S\-\_\-\-Stop\-Poll} (uint32\-\_\-t uid)
 \item 
 \hypertarget{nis_8cpp_a1f9621bef29cd4cb4c7af129a78cdea4}{int {\bfseries N\-I\-S\-\_\-\-Config\-Handle} (\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} handle, uint32\-\_\-t config)}\label{nis_8cpp_a1f9621bef29cd4cb4c7af129a78cdea4}
 
@@ -130,15 +129,17 @@ Obtain the connected reader list.
 \begin{DoxyReturn}{Returns}
 0 on success, negative on error. If negative, the abs value stands for the number of backends for which it was not possible to get the reader list 
 \end{DoxyReturn}
-\hypertarget{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}}
+\hypertarget{nis_8cpp_adb93e961f1f17f1201604b40313875e0}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}}
 \index{N\-I\-S\-\_\-\-Read\-Nis@{N\-I\-S\-\_\-\-Read\-Nis}!nis.cpp@{nis.\-cpp}}
 \subsubsection[{N\-I\-S\-\_\-\-Read\-Nis}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Read\-Nis (
 \begin{DoxyParamCaption}
 \item[{{\bf N\-I\-S\-Handle}}]{handle, }
 \item[{char $\ast$const}]{nis\-Data, }
-\item[{{\bf nis\-\_\-callback\-\_\-t}}]{callback}
+\item[{{\bf nis\-\_\-callback\-\_\-t}}]{callback, }
+\item[{uint32\-\_\-t}]{interval, }
+\item[{uint32\-\_\-t $\ast$}]{uid}
 \end{DoxyParamCaption}
-)}}\label{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}
+)}}\label{nis_8cpp_adb93e961f1f17f1201604b40313875e0}
 Read the N\-I\-S from the specified token. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
@@ -153,19 +154,29 @@ Read the N\-I\-S from the specified token.
 \begin{DoxySeeAlso}{See Also}
 \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} 
 \end{DoxySeeAlso}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interval} & time in ms between polls \\
+\hline
+\mbox{\tt out}  & {\em the} & U\-I\-D associated to the newly created context of execution \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{N\-I\-S\-\_\-\-Stop\-Poll()} 
+\end{DoxySeeAlso}
 \begin{DoxyReturn}{Returns}
-0 on success, negative on error. 
+0 on success, negative on error 
 \end{DoxyReturn}
-\hypertarget{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}}
+\hypertarget{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}}
 \index{N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}!nis.cpp@{nis.\-cpp}}
 \subsubsection[{N\-I\-S\-\_\-\-Stop\-Poll}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Stop\-Poll (
 \begin{DoxyParamCaption}
-\item[{{\bf N\-I\-S\-Handle}}]{handle}
+\item[{uint32\-\_\-t}]{uid}
 \end{DoxyParamCaption}
-)}}\label{nis_8cpp_a3ae6aa050a3cf4382a3c887241fc5686}
-Stop the polling on a specified reader started invoking \hyperlink{nis_8cpp_af62cd785a1f774bbdd6732be2b2ab700}{N\-I\-S\-\_\-\-Read\-Nis()} with a callback function. 
+)}}\label{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}
+Stop the polling on a specified reader started invoking \hyperlink{nis_8cpp_adb93e961f1f17f1201604b40313875e0}{N\-I\-S\-\_\-\-Read\-Nis()} with a callback function. 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
+\mbox{\tt in}  & {\em uid} & the U\-I\-D of the context of execution previously obtained from e.\-g. \hyperlink{nis_8cpp_adb93e961f1f17f1201604b40313875e0}{N\-I\-S\-\_\-\-Read\-Nis()} \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

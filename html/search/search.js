@@ -7,8 +7,8 @@
 
 var indexSectionsWithContent =
 {
-  0: "bcenrt",
-  1: "nrt",
+  0: "bcenprtu",
+  1: "nprtu",
   2: "en",
   3: "n",
   4: "n",
