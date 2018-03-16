@@ -6,9 +6,13 @@ namespace nis
 {
 	namespace helper
 	{
-		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::shared_ptr<PollExecutor> pe)
+		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::weak_ptr<PollExecutor> pe)
 		{
-			if(pthread_create(&th, NULL, fnc, pe.get())) {
+			if(pe.expired())
+				return -2;
+
+			std::shared_ptr<PollExecutor> cntr{pe};
+			if(pthread_create(&th, NULL, fnc, pe.lock().get())) {
 				std::cerr << "Error creating thread" << std::endl;
 				return -1;
 			}
