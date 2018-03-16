@@ -10,7 +10,7 @@ namespace nis {
 		typedef pthread_t NISThread; 
 		typedef void*(*NISThFunc)(void*);
 
-		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::shared_ptr<PollExecutor>);
+		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::weak_ptr<PollExecutor>);
 		int NIS_JoinThread(NISThread &th);
 	}
 }

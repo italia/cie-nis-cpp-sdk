@@ -6,15 +6,6 @@
 #include "nis_types.h"
 
 struct PollExecutor {
-	~PollExecutor() {
-		//std::cout <<"HERE"<<std::endl;
-		exitPoll = true;
-#ifdef USE_EXT_THREAD
-		NIS_JoinThread(th);
-#else
-		th.join();
-#endif
-	}
 	nis_callback_t callback;
 #ifdef USE_EXT_THREAD
 	NISThread th;

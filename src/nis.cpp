@@ -54,13 +54,31 @@ public:
 	vector<string> &getReaders() { return readers; }
 
 	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) { executors[uid] = ex; }
-	shared_ptr<PollExecutor> removeExecutor(uint32_t uid) { auto it = executors.find(uid); if(it != executors.end()) { executors.erase(it); return it->second; } else return nullptr; }
-	void removeAllExecutors() { /*TODO: sync with global lock*/executors.clear(); }
+	shared_ptr<PollExecutor> removeExecutor(uint32_t uid);
+	void removeAllExecutors() { vector<uint32_t> keys; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it); }
 
 	char* getIdentifiersList() { return idList; }
 	void deleteIdentifiersList() { if(idList) delete[] idList; }
 	char* allocateIdentifiersList(size_t len) { deleteIdentifiersList(); idList = new char[len]; return idList; }
 };
+
+shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid) { 
+	//TODO: sync with global lock
+	auto it = executors.find(uid); 
+	if(it != executors.end()) 
+	{ 
+		executors.erase(it); 
+		it->second->exitPoll = true;
+		shared_ptr<PollExecutor> pe = it->second;
+#ifdef USE_EXT_THREAD
+		NIS_JoinThread(pe->th);
+#else
+		pe->th.join();
+#endif
+		return pe; 
+	} 
+	else return nullptr; 
+}
 
 /** 
  * Initialize the NIS sdk backends.
@@ -153,12 +171,18 @@ NISHandle NIS_GetHandle(char *readerName)
 	return nullptr;
 }
 
-static void *pollNis(shared_ptr<PollExecutor> cntr)
+static void *pollNis(weak_ptr<PollExecutor> pe)
 {
-	while(!cntr->exitPoll) {
-		if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, nullptr, 0, nullptr)) 
-			cntr->callback(cntr->pollData, cntr->pollSize);
-		std::this_thread::sleep_for(std::chrono::milliseconds {cntr->interval_ms});
+	if(!pe.expired()) {
+		shared_ptr<PollExecutor> cntr = pe.lock();
+
+		if(cntr) {
+			while(!cntr->exitPoll) {
+				if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, nullptr, 0, nullptr)) 
+					cntr->callback(cntr->pollData, cntr->pollSize);
+				std::this_thread::sleep_for(std::chrono::milliseconds {cntr->interval_ms});
+			}
+		}
 	}
 }
 
@@ -189,9 +213,9 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, 
 
 		//TODO: should take global lock
 #ifdef USE_EXT_THREAD
-		return NIS_CreateThread(pollCntr.th, pollNis, pollCntr);
+		return NIS_CreateThread(pollCntr.th, pollNis, weak_ptr<PollExecutor>{pollCntr});
 #else
-		pollCntr->th = thread(pollNis, pollCntr);
+		pollCntr->th = thread(pollNis, weak_ptr<PollExecutor>{pollCntr});
 #endif
 		//-----------------------
 		NISManager::getInstance().addExecutor(*uid, pollCntr);
@@ -221,19 +245,7 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, 
  */
 int NIS_StopPoll(uint32_t uid)
 {
-	//TODO: sync to global lock
 	shared_ptr<PollExecutor> pe = NISManager::getInstance().removeExecutor(uid);
-	/*if(pe == nullptr)
-		return -1;
-
-	pe->exitPoll = true;
-#ifdef USE_EXT_THREAD
-	return NIS_JoinThread(pe->th);
-#else
-	pe->th.join();
-	return 0;
-#endif*/
-	//-------------------------
 	return 0;
 }
 
