@@ -84,11 +84,11 @@ Buildin/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: C
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:240: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:265: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:166: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:166: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:166: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:252: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:277: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
   parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
@@ -112,14 +112,14 @@ Buildin/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: C
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:61: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:62: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:30: warning: Member getInstance() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:18: warning: Member callback (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:22: warning: Member th (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:24: warning: Member pollHandle (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:25: warning: Member exitPoll (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:26: warning: Member pollData (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:27: warning: Member pollSize (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:28: warning: Member interval_ms (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:29: warning: Member uid (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:9: warning: Member callback (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:13: warning: Member th (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:15: warning: Member pollHandle (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:16: warning: Member exitPoll (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:17: warning: Member pollData (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:18: warning: Member pollSize (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:19: warning: Member interval_ms (variable) of class PollExecutor is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:20: warning: Member uid (variable) of class PollExecutor is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:9: warning: Member getUid() (function) of class Utils is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:23: warning: Member enumerateReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:24: warning: Member getReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
@@ -293,5 +293,5 @@ Patching output file 20/23
 Patching output file 21/23
 Patching output file 22/23
 Patching output file 23/23
-lookup cache used 150/65536 hits=632 misses=161
+lookup cache used 150/65536 hits=624 misses=161
 finished...

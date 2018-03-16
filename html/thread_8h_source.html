@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="keyword">typedef</span> pthread_t NISThread; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keyword">typedef</span> <span class="keywordtype">void</span>*(*NISThFunc)(<span class="keywordtype">void</span>*);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">int</span> NIS_CreateThread(NISThread &amp;th, NISThFunc fnc, std::shared_ptr&lt;PollExecutor&gt;);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">int</span> NIS_CreateThread(NISThread &amp;th, NISThFunc fnc, std::weak_ptr&lt;PollExecutor&gt;);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">int</span> NIS_JoinThread(NISThread &amp;th);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
