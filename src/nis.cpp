@@ -63,7 +63,7 @@ public:
 };
 
 shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid) { 
-	//TODO: sync with global lock
+	//TODO: lock sync with global lock
 	auto it = executors.find(uid); 
 	if(it != executors.end()) 
 	{ 
@@ -211,14 +211,14 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, 
 		pollCntr->pollSize = lenData;
 		pollCntr->interval_ms = interval;
 
-		//TODO: should take global lock
+		//TODO: lock should take global lock
 #ifdef USE_EXT_THREAD
 		return NIS_CreateThread(pollCntr.th, pollNis, weak_ptr<PollExecutor>{pollCntr});
 #else
 		pollCntr->th = thread(pollNis, weak_ptr<PollExecutor>{pollCntr});
 #endif
-		//-----------------------
 		NISManager::getInstance().addExecutor(*uid, pollCntr);
+		//-----------------------
 
 		return 0;
 	}
