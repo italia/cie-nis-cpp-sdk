@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">nis.cpp File Reference</div>  </div>
@@ -101,26 +100,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;functional&gt;</code><br/>
 <code>#include &lt;cstring&gt;</code><br/>
 <code>#include &lt;algorithm&gt;</code><br/>
-<code>#include &quot;reader.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="reader_8h_source.html">reader.h</a>&quot;</code><br/>
 <code>#include &quot;reader_pcsc.h&quot;</code><br/>
-<code>#include &quot;token.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="token_8h_source.html">token.h</a>&quot;</code><br/>
 <code>#include &quot;token_pcsc.h&quot;</code><br/>
 <code>#include &quot;requests.h&quot;</code><br/>
 <code>#include &quot;thread.h&quot;</code><br/>
 <code>#include &quot;uid.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="nis__manager_8h_source.html">nis_manager.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nis.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="nis_8cpp__incl.png" border="0" usemap="#_2home_2travis_2build_2italia_2cie-nis-cpp-sdk_2src_2nis_8cpp" alt=""/></div>
 <map name="_2home_2travis_2build_2italia_2cie-nis-cpp-sdk_2src_2nis_8cpp" id="_2home_2travis_2build_2italia_2cie-nis-cpp-sdk_2src_2nis_8cpp">
-<area shape="rect" id="node2" href="nis_8h_source.html" title="nis.h" alt="" coords="5,259,56,285"/><area shape="rect" id="node13" href="reader_8h_source.html" title="reader.h" alt="" coords="372,184,441,211"/><area shape="rect" id="node14" href="token_8h_source.html" title="token.h" alt="" coords="213,259,277,285"/><area shape="rect" id="node17" href="reader__pcsc_8h_source.html" title="reader_pcsc.h" alt="" coords="359,109,463,136"/><area shape="rect" id="node18" href="token__pcsc_8h_source.html" title="token_pcsc.h" alt="" coords="31,184,131,211"/><area shape="rect" id="node19" href="requests_8h_source.html" title="requests.h" alt="" coords="207,184,288,211"/><area shape="rect" id="node20" href="thread_8h_source.html" title="thread.h" alt="" coords="639,109,708,136"/><area shape="rect" id="node24" href="uid_8h_source.html" title="uid.h" alt="" coords="1153,109,1204,136"/><area shape="rect" id="node4" href="nis__types_8h.html" title="NIS main header. " alt="" coords="271,333,360,360"/><area shape="rect" id="node22" href="executor_8h_source.html" title="../../executor.h" alt="" coords="740,184,847,211"/></map>
+<area shape="rect" id="node2" href="nis_8h_source.html" title="nis.h" alt="" coords="43,259,93,285"/><area shape="rect" id="node13" href="reader_8h.html" title="A Reader. " alt="" coords="675,259,744,285"/><area shape="rect" id="node14" href="token_8h.html" title="A Token. " alt="" coords="818,333,883,360"/><area shape="rect" id="node17" href="reader__pcsc_8h_source.html" title="reader_pcsc.h" alt="" coords="976,184,1080,211"/><area shape="rect" id="node18" href="token__pcsc_8h_source.html" title="token_pcsc.h" alt="" coords="921,259,1020,285"/><area shape="rect" id="node19" href="requests_8h_source.html" title="requests.h" alt="" coords="869,184,951,211"/><area shape="rect" id="node20" href="thread_8h_source.html" title="thread.h" alt="" coords="1267,184,1336,211"/><area shape="rect" id="node24" href="uid_8h_source.html" title="uid.h" alt="" coords="1360,184,1411,211"/><area shape="rect" id="node26" href="nis__manager_8h.html" title="NIS Manager. " alt="" coords="652,109,759,136"/><area shape="rect" id="node4" href="nis__types_8h.html" title="NIS main header. " alt="" coords="711,408,800,435"/><area shape="rect" id="node22" href="executor_8h.html" title="Executor thread. " alt="" coords="1096,259,1203,285"/></map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html">NISManager</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1a4da622cc9443c4fc71b276454923da"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nis_8cpp.html#a1a4da622cc9443c4fc71b276454923da">NIS_Init</a> (uint32_t backendBitfield)</td></tr>

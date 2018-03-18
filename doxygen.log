@@ -40,6 +40,10 @@ Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp...
 Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.h...
 Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.h...
+Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.cpp...
+Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.cpp...
+Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h...
+Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h...
 Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.cpp...
@@ -69,77 +73,58 @@ Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.cpp...
 Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.cpp...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h...
-Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h...
-Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h...
-Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h...
-Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/doxymisc/mainpage.dox...
-Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/doxymisc/mainpage.dox...
-Buildin/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: Compound nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:8: warning: Compound PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:7: warning: Compound Utils is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:12: warning: Compound nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:29: warning: Compound NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:15: warning: Compound nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:14: warning: Compound nis::interface::Reader is not documented.
+Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc./home/travis/build/italia/cie-nis-cpp-sdk/src/requests.h:1: warning: the name `request.h' supplied as the second argument in the \file statement is not an input file
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: Compound nis::implementation::TokenPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:20: warning: Compound nis::interface::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:22: warning: Compound nis::implementation::ReaderPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:22: warning: Compound nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:264: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:289: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:204: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:229: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:136: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:136: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:136: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
   parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:34: warning: Member ReaderResult (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:41: warning: Member BackendType (enumeration) of file nis_types.h is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:2: warning: explicit link request to 'Token' could not be resolved
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:14: warning: Member _TCHAR (macro definition) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:16: warning: Member deinit(void) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:22: warning: Member callback1(char *const nisData, size_t lenData) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:28: warning: Member callback2(char *const nisData, size_t lenData) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:34: warning: Member main(int argc, _TCHAR *argv[]) (function) of file example-nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:44: warning: Member NISManager(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:45: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:47: warning: Member getBackends() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:48: warning: Member addBackend(BackendType backtype, shared_ptr< Reader > backend) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:49: warning: Member removeBackend(BackendType backtype) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:56: warning: Member getReaders() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:58: warning: Member addExecutor(uint32_t uid, shared_ptr< PollExecutor > ex) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:59: warning: Member removeExecutor(uint32_t uid, bool mustLock=true) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:60: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:61: warning: Member lockExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:62: warning: Member unlockExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:64: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:65: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:66: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:31: warning: Member getInstance() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:9: warning: Member callback (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:13: warning: Member th (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:15: warning: Member pollHandle (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:16: warning: Member exitPoll (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:17: warning: Member pollData (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:18: warning: Member pollSize (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:19: warning: Member interval_ms (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:20: warning: Member uid (variable) of class PollExecutor is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:9: warning: Member getUid() (function) of class Utils is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:23: warning: Member enumerateReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:24: warning: Member getReaderList() (function) of class nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:25: warning: Member hasContext() (function) of class nis::implementation::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:21: warning: Member getToken(const string &name) (function) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:16: warning: Member tokenList (variable) of class nis::interface::Reader is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:60: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:106: warning: Member removeExecutor(uint32_t uid, bool mustLock=true) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:107: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:108: warning: Member lockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:109: warning: Member unlockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:111: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:112: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:113: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:70: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:70: warning: The following parameters of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend) are not documented:
+  parameter 'backtype'
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:78: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::removeBackend(BackendType backtype)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:78: warning: The following parameters of NISManager::removeBackend(BackendType backtype) are not documented:
+  parameter 'backtype'
+/home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:30: warning: explicit link request to 'pollData' could not be resolved
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:35: warning: Member hasContext() (function) of class nis::implementation::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:24: warning: Member TokenPCSC(const string &identifier, SCARDCONTEXT context) (function) of class nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:26: warning: Member connect() (function) of class nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:27: warning: Member disconnect() (function) of class nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:28: warning: Member transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const  (function) of class nis::implementation::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:19: warning: Member enumerateReaderList()=0 (function) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:20: warning: Member getReaderList()=0 (function) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:21: warning: Member getToken(const string &name) (function) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:16: warning: Member tokenList (variable) of class nis::interface::Reader is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:15: warning: Member connect()=0 (function) of class nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:16: warning: Member disconnect()=0 (function) of class nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:17: warning: Member transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0 (function) of class nis::interface::Token is not documented.
-g group list...
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:28: warning: argument 'array' of command @param is not found in the argument list of nis::implementation::TokenPCSC::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const inherited from member transmit at line 36 in file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:28: warning: argument 'the' of command @param is not found in the argument list of nis::implementation::TokenPCSC::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const inherited from member transmit at line 36 in file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:28: warning: The following parameters of nis::implementation::TokenPCSC::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const are not documented:
+  parameter 'apdu'
+  parameter 'response'
+h...
+Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h...
+Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h...
+Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/doxymisc/mainpage.dox...
+Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/doxymisc/mainpage.dox...
+Building group list...
 Building directory list...
 Building namespace list...
 Building file list...
@@ -194,6 +179,7 @@ Generating file sources...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/arch/posix/thread.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.h...
+Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h...
@@ -202,9 +188,14 @@ Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h..
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h...
 Generating code for file /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h...
 Generating file documentation...
+Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h...
 Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp...
+Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.cpp...
+Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h...
 Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h...
+Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h...
 Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp...
+Generating docs for file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h...
 Generating page documentation...
 Generating group documentation...
 Generating class documentation...
@@ -214,7 +205,13 @@ Generating docs for compound Utils...
 Generating namespace index...
 Generating docs for compound nis::implementation::ReaderPCSC...
 Generating docs for compound nis::implementation::TokenPCSC...
-Generating docs for compound nis::interface::Reader...
+Generating docs for compound nis::interface::Reader/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:41: warning: Found unknown command `\aram'
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:36: warning: argument 'array' of command @param is not found in the argument list of nis::interface::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:36: warning: argument 'the' of command @param is not found in the argument list of nis::interface::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:36: warning: The following parameters of nis::interface::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0 are not documented:
+  parameter 'apdu'
+  parameter 'response'
+...
 Generating docs for compound nis::interface::Token...
 Generating graph info page...
 Generating directory documentation...
@@ -238,62 +235,90 @@ Generating example index...
 finalizing index lists...
 Running dot...
 Generating dot graphs using 33 parallel threads...
-Running dot for graph 1/34
-Running dot for graph 2/34
-Running dot for graph 3/34
-Running dot for graph 4/34
-Running dot for graph 5/34
-Running dot for graph 6/34
-Running dot for graph 7/34
-Running dot for graph 8/34
-Running dot for graph 9/34
-Running dot for graph 10/34
-Running dot for graph 11/34
-Running dot for graph 12/34
-Running dot for graph 13/34
-Running dot for graph 14/34
-Running dot for graph 15/34
-Running dot for graph 16/34
-Running dot for graph 17/34
-Running dot for graph 18/34
-Running dot for graph 19/34
-Running dot for graph 20/34
-Running dot for graph 21/34
-Running dot for graph 22/34
-Running dot for graph 23/34
-Running dot for graph 24/34
-Running dot for graph 25/34
-Running dot for graph 26/34
-Running dot for graph 27/34
-Running dot for graph 28/34
-Running dot for graph 29/34
-Running dot for graph 30/34
-Running dot for graph 31/34
-Running dot for graph 32/34
-Running dot for graph 33/34
-Running dot for graph 34/34
-Patching output file 1/23
-Patching output file 2/23
-Patching output file 3/23
-Patching output file 4/23
-Patching output file 5/23
-Patching output file 6/23
-Patching output file 7/23
-Patching output file 8/23
-Patching output file 9/23
-Patching output file 10/23
-Patching output file 11/23
-Patching output file 12/23
-Patching output file 13/23
-Patching output file 14/23
-Patching output file 15/23
-Patching output file 16/23
-Patching output file 17/23
-Patching output file 18/23
-Patching output file 19/23
-Patching output file 20/23
-Patching output file 21/23
-Patching output file 22/23
-Patching output file 23/23
-lookup cache used 150/65536 hits=624 misses=161
+Running dot for graph 1/52
+Running dot for graph 2/52
+Running dot for graph 3/52
+Running dot for graph 4/52
+Running dot for graph 5/52
+Running dot for graph 6/52
+Running dot for graph 7/52
+Running dot for graph 8/52
+Running dot for graph 9/52
+Running dot for graph 10/52
+Running dot for graph 11/52
+Running dot for graph 12/52
+Running dot for graph 13/52
+Running dot for graph 14/52
+Running dot for graph 15/52
+Running dot for graph 16/52
+Running dot for graph 17/52
+Running dot for graph 18/52
+Running dot for graph 19/52
+Running dot for graph 20/52
+Running dot for graph 21/52
+Running dot for graph 22/52
+Running dot for graph 23/52
+Running dot for graph 24/52
+Running dot for graph 25/52
+Running dot for graph 26/52
+Running dot for graph 27/52
+Running dot for graph 28/52
+Running dot for graph 29/52
+Running dot for graph 30/52
+Running dot for graph 31/52
+Running dot for graph 32/52
+Running dot for graph 33/52
+Running dot for graph 34/52
+Running dot for graph 35/52
+Running dot for graph 36/52
+Running dot for graph 37/52
+Running dot for graph 38/52
+Running dot for graph 39/52
+Running dot for graph 40/52
+Running dot for graph 41/52
+Running dot for graph 42/52
+Running dot for graph 43/52
+Running dot for graph 44/52
+Running dot for graph 45/52
+Running dot for graph 46/52
+Running dot for graph 47/52
+Running dot for graph 48/52
+Running dot for graph 49/52
+Running dot for graph 50/52
+Running dot for graph 51/52
+Running dot for graph 52/52
+Patching output file 1/33
+Patching output file 2/33
+Patching output file 3/33
+Patching output file 4/33
+Patching output file 5/33
+Patching output file 6/33
+Patching output file 7/33
+Patching output file 8/33
+Patching output file 9/33
+Patching output file 10/33
+Patching output file 11/33
+Patching output file 12/33
+Patching output file 13/33
+Patching output file 14/33
+Patching output file 15/33
+Patching output file 16/33
+Patching output file 17/33
+Patching output file 18/33
+Patching output file 19/33
+Patching output file 20/33
+Patching output file 21/33
+Patching output file 22/33
+Patching output file 23/33
+Patching output file 24/33
+Patching output file 25/33
+Patching output file 26/33
+Patching output file 27/33
+Patching output file 28/33
+Patching output file 29/33
+Patching output file 30/33
+Patching output file 31/33
+Patching output file 32/33
+Patching output file 33/33
+lookup cache used 200/65536 hits=1118 misses=211
 finished...

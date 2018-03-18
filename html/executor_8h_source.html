@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,33 +87,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">executor.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef  EXECUTOR_GUARD</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define  EXECUTOR_GUARD</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nis__types_8h.html">nis_types.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structPollExecutor.html">    8</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structPollExecutor.html">PollExecutor</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="nis__types_8h.html#a01a69b218db702baa14290be05ef112d">nis_callback_t</a> callback;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef USE_EXT_THREAD</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span>    NISThread th;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span>    std::thread th;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span>    <a class="code" href="nis__types_8h.html#aeda8757494329f27e534f367b067eda3">NISHandle</a> pollHandle;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">bool</span> exitPoll;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">char</span> *pollData;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">size_t</span> pollSize; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    uint32_t interval_ms;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    uint32_t uid;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<a href="executor_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef  EXECUTOR_GUARD</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define  EXECUTOR_GUARD</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nis__types_8h.html">nis_types.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structPollExecutor.html">   15</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structPollExecutor.html">PollExecutor</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structPollExecutor.html#a28319240732a17a19f78db7ff325c552">   17</a></span>&#160;    <a class="code" href="nis__types_8h.html#a01a69b218db702baa14290be05ef112d">nis_callback_t</a> <a class="code" href="structPollExecutor.html#a28319240732a17a19f78db7ff325c552">callback</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifdef USE_EXT_THREAD</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span>    NISThread <a class="code" href="structPollExecutor.html#aedea242ce74052608ae9358ec93d70e2">th</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structPollExecutor.html#aedea242ce74052608ae9358ec93d70e2">   22</a></span>&#160;<span class="preprocessor"></span>    std::thread <a class="code" href="structPollExecutor.html#aedea242ce74052608ae9358ec93d70e2">th</a>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structPollExecutor_html"><div class="ttname"><a href="structPollExecutor.html">PollExecutor</a></div><div class="ttdef"><b>Definition:</b> executor.h:8</div></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structPollExecutor.html#ac4006982a46140b6b353c621921d171b">   25</a></span>&#160;    <a class="code" href="nis__types_8h.html#aeda8757494329f27e534f367b067eda3">NISHandle</a> <a class="code" href="structPollExecutor.html#ac4006982a46140b6b353c621921d171b">pollHandle</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structPollExecutor.html#a22f382f7d74c9cae694dc7b003bb12fb">   27</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structPollExecutor.html#a22f382f7d74c9cae694dc7b003bb12fb">exitPoll</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structPollExecutor.html#a6a278f48537a9f9701ff687ccc2125e8">   29</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="structPollExecutor.html#a6a278f48537a9f9701ff687ccc2125e8">pollData</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structPollExecutor.html#aaac2ecbce031c612792e6aea90196af4">   31</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structPollExecutor.html#aaac2ecbce031c612792e6aea90196af4">pollSize</a>; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structPollExecutor.html#aa371cc9916044879d56ddff0a169bc0c">   33</a></span>&#160;    uint32_t <a class="code" href="structPollExecutor.html#aa371cc9916044879d56ddff0a169bc0c">interval_ms</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structPollExecutor.html#a939fe0fc384eb018f62839be04fa519d">   35</a></span>&#160;    uint32_t <a class="code" href="structPollExecutor.html#a939fe0fc384eb018f62839be04fa519d">uid</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structPollExecutor_html_aaac2ecbce031c612792e6aea90196af4"><div class="ttname"><a href="structPollExecutor.html#aaac2ecbce031c612792e6aea90196af4">PollExecutor::pollSize</a></div><div class="ttdeci">size_t pollSize</div><div class="ttdef"><b>Definition:</b> executor.h:31</div></div>
+<div class="ttc" id="structPollExecutor_html"><div class="ttname"><a href="structPollExecutor.html">PollExecutor</a></div><div class="ttdef"><b>Definition:</b> executor.h:15</div></div>
+<div class="ttc" id="structPollExecutor_html_a28319240732a17a19f78db7ff325c552"><div class="ttname"><a href="structPollExecutor.html#a28319240732a17a19f78db7ff325c552">PollExecutor::callback</a></div><div class="ttdeci">nis_callback_t callback</div><div class="ttdef"><b>Definition:</b> executor.h:17</div></div>
 <div class="ttc" id="nis__types_8h_html_a01a69b218db702baa14290be05ef112d"><div class="ttname"><a href="nis__types_8h.html#a01a69b218db702baa14290be05ef112d">nis_callback_t</a></div><div class="ttdeci">void(* nis_callback_t)(char *const nisData, size_t lenData)</div><div class="ttdef"><b>Definition:</b> nis_types.h:21</div></div>
+<div class="ttc" id="structPollExecutor_html_a6a278f48537a9f9701ff687ccc2125e8"><div class="ttname"><a href="structPollExecutor.html#a6a278f48537a9f9701ff687ccc2125e8">PollExecutor::pollData</a></div><div class="ttdeci">char * pollData</div><div class="ttdef"><b>Definition:</b> executor.h:29</div></div>
+<div class="ttc" id="structPollExecutor_html_ac4006982a46140b6b353c621921d171b"><div class="ttname"><a href="structPollExecutor.html#ac4006982a46140b6b353c621921d171b">PollExecutor::pollHandle</a></div><div class="ttdeci">NISHandle pollHandle</div><div class="ttdef"><b>Definition:</b> executor.h:25</div></div>
 <div class="ttc" id="nis__types_8h_html_aeda8757494329f27e534f367b067eda3"><div class="ttname"><a href="nis__types_8h.html#aeda8757494329f27e534f367b067eda3">NISHandle</a></div><div class="ttdeci">void * NISHandle</div><div class="ttdef"><b>Definition:</b> nis_types.h:16</div></div>
 <div class="ttc" id="nis__types_8h_html"><div class="ttname"><a href="nis__types_8h.html">nis_types.h</a></div><div class="ttdoc">NIS main header. </div></div>
+<div class="ttc" id="structPollExecutor_html_a939fe0fc384eb018f62839be04fa519d"><div class="ttname"><a href="structPollExecutor.html#a939fe0fc384eb018f62839be04fa519d">PollExecutor::uid</a></div><div class="ttdeci">uint32_t uid</div><div class="ttdef"><b>Definition:</b> executor.h:35</div></div>
+<div class="ttc" id="structPollExecutor_html_a22f382f7d74c9cae694dc7b003bb12fb"><div class="ttname"><a href="structPollExecutor.html#a22f382f7d74c9cae694dc7b003bb12fb">PollExecutor::exitPoll</a></div><div class="ttdeci">bool exitPoll</div><div class="ttdef"><b>Definition:</b> executor.h:27</div></div>
+<div class="ttc" id="structPollExecutor_html_aa371cc9916044879d56ddff0a169bc0c"><div class="ttname"><a href="structPollExecutor.html#aa371cc9916044879d56ddff0a169bc0c">PollExecutor::interval_ms</a></div><div class="ttdeci">uint32_t interval_ms</div><div class="ttdef"><b>Definition:</b> executor.h:33</div></div>
+<div class="ttc" id="structPollExecutor_html_aedea242ce74052608ae9358ec93d70e2"><div class="ttname"><a href="structPollExecutor.html#aedea242ce74052608ae9358ec93d70e2">PollExecutor::th</a></div><div class="ttdeci">std::thread th</div><div class="ttdef"><b>Definition:</b> executor.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

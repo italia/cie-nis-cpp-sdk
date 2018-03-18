@@ -14,25 +14,80 @@ Inheritance diagram for nis\-:\-:interface\-:\-:Reader\-:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classnis_1_1interface_1_1Reader_abf689da8251ccbf468c495ce9b6eb2e7}{virtual \hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} {\bfseries enumerate\-Reader\-List} ()=0}\label{classnis_1_1interface_1_1Reader_abf689da8251ccbf468c495ce9b6eb2e7}
-
+virtual \hyperlink{classnis_1_1interface_1_1Reader_aa72c86236a788a73310f1800d06ec3ea}{$\sim$\-Reader} ()=0
 \item 
-\hypertarget{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}{virtual vector$<$ string $>$ {\bfseries get\-Reader\-List} ()=0}\label{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}
-
+virtual \hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} \hyperlink{classnis_1_1interface_1_1Reader_abf689da8251ccbf468c495ce9b6eb2e7}{enumerate\-Reader\-List} ()=0
 \item 
-\hypertarget{classnis_1_1interface_1_1Reader_a8132b33c794255154b626887af4a8795}{shared\-\_\-ptr$<$ \hyperlink{classnis_1_1interface_1_1Token}{Token} $>$ {\bfseries get\-Token} (const string \&name)}\label{classnis_1_1interface_1_1Reader_a8132b33c794255154b626887af4a8795}
-
+virtual vector$<$ string $>$ \hyperlink{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}{get\-Reader\-List} ()=0
+\item 
+shared\-\_\-ptr$<$ \hyperlink{classnis_1_1interface_1_1Token}{Token} $>$ \hyperlink{classnis_1_1interface_1_1Reader_a8132b33c794255154b626887af4a8795}{get\-Token} (const string \&name)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classnis_1_1interface_1_1Reader_a42d9beab85b111103582f3297fac667b}{unordered\-\_\-map$<$ string, \\*
-shared\-\_\-ptr$<$ \hyperlink{classnis_1_1interface_1_1Token}{Token} $>$ $>$ {\bfseries token\-List}}\label{classnis_1_1interface_1_1Reader_a42d9beab85b111103582f3297fac667b}
-
+unordered\-\_\-map$<$ string, \\*
+shared\-\_\-ptr$<$ \hyperlink{classnis_1_1interface_1_1Token}{Token} $>$ $>$ \hyperlink{classnis_1_1interface_1_1Reader_a42d9beab85b111103582f3297fac667b}{token\-List}
 \end{DoxyCompactItemize}
 
 
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classnis_1_1interface_1_1Reader_aa72c86236a788a73310f1800d06ec3ea}{\index{nis\-::interface\-::\-Reader@{nis\-::interface\-::\-Reader}!$\sim$\-Reader@{$\sim$\-Reader}}
+\index{$\sim$\-Reader@{$\sim$\-Reader}!nis::interface::Reader@{nis\-::interface\-::\-Reader}}
+\subsubsection[{$\sim$\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}nis\-::interface\-::\-Reader\-::$\sim$\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classnis_1_1interface_1_1Reader_aa72c86236a788a73310f1800d06ec3ea}
+destructor extending this class should release all associated resources, that's why it's declared pure virtual 
+
+\subsection{Member Function Documentation}
+\hypertarget{classnis_1_1interface_1_1Reader_abf689da8251ccbf468c495ce9b6eb2e7}{\index{nis\-::interface\-::\-Reader@{nis\-::interface\-::\-Reader}!enumerate\-Reader\-List@{enumerate\-Reader\-List}}
+\index{enumerate\-Reader\-List@{enumerate\-Reader\-List}!nis::interface::Reader@{nis\-::interface\-::\-Reader}}
+\subsubsection[{enumerate\-Reader\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Reader\-Result} nis\-::interface\-::\-Reader\-::enumerate\-Reader\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classnis_1_1interface_1_1Reader_abf689da8251ccbf468c495ce9b6eb2e7}
+Add to token\-List the reader compatible with this implementation. \begin{DoxyReturn}{Returns}
+\hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} indicating the success or error 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classnis_1_1implementation_1_1ReaderPCSC_a56fcc4887491509d7ae634f89d18a8d6}{nis\-::implementation\-::\-Reader\-P\-C\-S\-C}.
+
+\hypertarget{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}{\index{nis\-::interface\-::\-Reader@{nis\-::interface\-::\-Reader}!get\-Reader\-List@{get\-Reader\-List}}
+\index{get\-Reader\-List@{get\-Reader\-List}!nis::interface::Reader@{nis\-::interface\-::\-Reader}}
+\subsubsection[{get\-Reader\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual vector$<$string$>$ nis\-::interface\-::\-Reader\-::get\-Reader\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}
+Obtain the array of all compatible readers. \begin{DoxyReturn}{Returns}
+The array of all the readers managed by this backend 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classnis_1_1implementation_1_1ReaderPCSC_a696551fbfc3e27e5f8ea6f4118540bad}{nis\-::implementation\-::\-Reader\-P\-C\-S\-C}.
+
+\hypertarget{classnis_1_1interface_1_1Reader_a8132b33c794255154b626887af4a8795}{\index{nis\-::interface\-::\-Reader@{nis\-::interface\-::\-Reader}!get\-Token@{get\-Token}}
+\index{get\-Token@{get\-Token}!nis::interface::Reader@{nis\-::interface\-::\-Reader}}
+\subsubsection[{get\-Token}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Token}$>$ nis\-::interface\-::\-Reader\-::get\-Token (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classnis_1_1interface_1_1Reader_a8132b33c794255154b626887af4a8795}
+Obtain a token given its name. \mbox{[}in\mbox{]} name the name of the token as enumerated in \hyperlink{classnis_1_1interface_1_1Reader_a65d1522165b9660c1c1be260af28cbd0}{get\-Reader\-List()} \begin{DoxyReturn}{Returns}
+A reference to the specified \hyperlink{classnis_1_1interface_1_1Token}{Token}, or nullptr if there's no token with that name 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classnis_1_1interface_1_1Reader_a42d9beab85b111103582f3297fac667b}{\index{nis\-::interface\-::\-Reader@{nis\-::interface\-::\-Reader}!token\-List@{token\-List}}
+\index{token\-List@{token\-List}!nis::interface::Reader@{nis\-::interface\-::\-Reader}}
+\subsubsection[{token\-List}]{\setlength{\rightskip}{0pt plus 5cm}unordered\-\_\-map$<$string,shared\-\_\-ptr$<${\bf Token}$>$ $>$ nis\-::interface\-::\-Reader\-::token\-List\hspace{0.3cm}{\ttfamily [protected]}}}\label{classnis_1_1interface_1_1Reader_a42d9beab85b111103582f3297fac667b}
+the list of the token managed by this backend 
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.\-h\item 
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/\hyperlink{reader_8h}{reader.\-h}\item 
 /home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.\-cpp\end{DoxyCompactItemize}

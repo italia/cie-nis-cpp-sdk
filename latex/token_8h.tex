@@ -1,0 +1,41 @@
+\hypertarget{token_8h}{\section{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/token.h File Reference}
+\label{token_8h}\index{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/token.\-h@{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/token.\-h}}
+}
+
+
+A Token.  
+
+
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$winscard.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}nis\-\_\-types.\-h\char`\"{}}\\*
+Include dependency graph for token.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{token_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{token_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classnis_1_1interface_1_1Token}{nis\-::interface\-::\-Token}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Token. A Token represents a card or token with which a Reader can interact. It's main use is to connect/disconnect and to transmit/receive data packets to/from a card. This is an abstract class meaning that it must be extended to provide the funcionality of a specific protocol (e.\-g. P\-C\-S\-C). Usually for each Token's subclass there is a corresponding Reader's subclass. \begin{DoxySeeAlso}{See Also}
+Token\-P\-C\-S\-C 
+
+Reader\-P\-C\-S\-C 
+\end{DoxySeeAlso}

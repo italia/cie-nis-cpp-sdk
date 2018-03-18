@@ -62,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,31 +89,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">NISManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="nis__manager_8h_source.html">nis_manager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5694196f1df5f18ab9a2c8061075175e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5694196f1df5f18ab9a2c8061075175e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NISManager</b> (const <a class="el" href="classNISManager.html">NISManager</a> &amp;)=delete</td></tr>
+<tr class="memitem:a5694196f1df5f18ab9a2c8061075175e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#a5694196f1df5f18ab9a2c8061075175e">NISManager</a> (const <a class="el" href="classNISManager.html">NISManager</a> &amp;)=delete</td></tr>
 <tr class="separator:a5694196f1df5f18ab9a2c8061075175e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af191b49bf25bbf9bfd2cb5bd9cd9c434"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classNISManager.html">NISManager</a> &amp;)=delete</td></tr>
 <tr class="separator:af191b49bf25bbf9bfd2cb5bd9cd9c434"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cad1a44e5ca799fc820c40fecd5cbf2"></a>
-const unordered_map<br class="typebreak"/>
+<tr class="memitem:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memItemLeft" align="right" valign="top">const unordered_map<br class="typebreak"/>
 &lt; <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>, shared_ptr<br class="typebreak"/>
-&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackends</b> ()</td></tr>
+&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;, std::hash&lt; int &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">getBackends</a> ()</td></tr>
 <tr class="separator:a6cad1a44e5ca799fc820c40fecd5cbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16f0f685a40a858762febd50f158b0ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16f0f685a40a858762febd50f158b0ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt; backend)</td></tr>
+<tr class="memitem:a16f0f685a40a858762febd50f158b0ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">addBackend</a> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt; backend)</td></tr>
 <tr class="separator:a16f0f685a40a858762febd50f158b0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1ff32a0e450569a8091fb5373874d7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1ff32a0e450569a8091fb5373874d7e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeBackend</b> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype)</td></tr>
+<tr class="memitem:ae1ff32a0e450569a8091fb5373874d7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">removeBackend</a> (<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype)</td></tr>
 <tr class="separator:ae1ff32a0e450569a8091fb5373874d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27a3db14eb804948d4031f115d3f6234"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27a3db14eb804948d4031f115d3f6234"></a>
-vector&lt; string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getReaders</b> ()</td></tr>
+<tr class="memitem:a27a3db14eb804948d4031f115d3f6234"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">getReaders</a> ()</td></tr>
 <tr class="separator:a27a3db14eb804948d4031f115d3f6234"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40aeca3b6e971ecb75495e2eae06c967"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40aeca3b6e971ecb75495e2eae06c967"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addExecutor</b> (uint32_t uid, shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt; ex)</td></tr>
+<tr class="memitem:a40aeca3b6e971ecb75495e2eae06c967"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">addExecutor</a> (uint32_t uid, shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt; ex)</td></tr>
 <tr class="separator:a40aeca3b6e971ecb75495e2eae06c967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d3721ef41e981161364b5c33eeccfc6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d3721ef41e981161364b5c33eeccfc6"></a>
 shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>removeExecutor</b> (uint32_t uid, bool mustLock=true)</td></tr>
@@ -138,12 +135,246 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>allocateIdentifiers
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af6a7f2cb644fe38ef43b2ed9323506c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6a7f2cb644fe38ef43b2ed9323506c7"></a>
-static <a class="el" href="classNISManager.html">NISManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="memitem:af6a7f2cb644fe38ef43b2ed9323506c7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classNISManager.html">NISManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">getInstance</a> ()</td></tr>
 <tr class="separator:af6a7f2cb644fe38ef43b2ed9323506c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/travis/build/italia/cie-nis-cpp-sdk/src/<a class="el" href="nis_8cpp.html">nis.cpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Singleton that manages backends list, tokens and associated executors. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a5694196f1df5f18ab9a2c8061075175e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NISManager::NISManager </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNISManager.html">NISManager</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>We really don't want to let this singleton being copied </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a16f0f685a40a858762febd50f158b0ab"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NISManager::addBackend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>&#160;</td>
+          <td class="paramname"><em>backtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a> &gt;&#160;</td>
+          <td class="paramname"><em>backend</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add a backend to the backends list </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">backendType</td><td>Represents the backend to be added, taken from <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">backend</td><td>pointer to the backend to be added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">getBackends()</a> </dd>
+<dd>
+<a class="el" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">removeBackend()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a40aeca3b6e971ecb75495e2eae06c967"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NISManager::addExecutor </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>uid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">shared_ptr&lt; <a class="el" href="structPollExecutor.html">PollExecutor</a> &gt;&#160;</td>
+          <td class="paramname"><em>ex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add a <a class="el" href="structPollExecutor.html">PollExecutor</a> to the executors list </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">uid</td><td>a unique identifier that serves as an handler to represent this executor in future calls </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ex</td><td>pointer to the <a class="el" href="structPollExecutor.html">PollExecutor</a> to be added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd>removeExecutor() </dd>
+<dd>
+removeAllExecutors() </dd>
+<dd>
+lockExecutors() </dd>
+<dd>
+unlockExecutors() </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6cad1a44e5ca799fc820c40fecd5cbf2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unordered_map&lt;<a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>,shared_ptr&lt;<a class="el" href="classnis_1_1interface_1_1Reader.html">Reader</a>&gt;,std::hash&lt;int&gt; &gt;&amp; NISManager::getBackends </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Obtain a list of all backends currently initialized succesfully </p>
+<dl class="section return"><dt>Returns</dt><dd>a map whose values points to a specific backend </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">addBackend()</a> </dd>
+<dd>
+<a class="el" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">removeBackend()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af6a7f2cb644fe38ef43b2ed9323506c7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classNISManager.html">NISManager</a>&amp; NISManager::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Singleton factory method. Call this to obtain the unique reference to the NIS Manager. </p>
+
+</div>
+</div>
+<a class="anchor" id="a27a3db14eb804948d4031f115d3f6234"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt;&amp; NISManager::getReaders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the list of the names of all readers connected </p>
+<dl class="section return"><dt>Returns</dt><dd>the array of the reader names </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae1ff32a0e450569a8091fb5373874d7e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NISManager::removeBackend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a>&#160;</td>
+          <td class="paramname"><em>backtype</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Remove a backend from the backend list </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">backendType</td><td>Represents the backend to be removed, taken from <a class="el" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">getBackends()</a> </dd>
+<dd>
+<a class="el" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">addBackend()</a> </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/travis/build/italia/cie-nis-cpp-sdk/src/<a class="el" href="nis__manager_8h_source.html">nis_manager.h</a></li>
+<li>/home/travis/build/italia/cie-nis-cpp-sdk/src/<a class="el" href="nis__manager_8cpp.html">nis_manager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

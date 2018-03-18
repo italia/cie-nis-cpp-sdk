@@ -1,35 +1,61 @@
 \hypertarget{structPollExecutor}{\section{Poll\-Executor Struct Reference}
 \label{structPollExecutor}\index{Poll\-Executor@{Poll\-Executor}}
 }
+
+
+{\ttfamily \#include $<$executor.\-h$>$}
+
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{structPollExecutor_a28319240732a17a19f78db7ff325c552}{\hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} {\bfseries callback}}\label{structPollExecutor_a28319240732a17a19f78db7ff325c552}
-
+\hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} \hyperlink{structPollExecutor_a28319240732a17a19f78db7ff325c552}{callback}
 \item 
-\hypertarget{structPollExecutor_aedea242ce74052608ae9358ec93d70e2}{std\-::thread {\bfseries th}}\label{structPollExecutor_aedea242ce74052608ae9358ec93d70e2}
-
+std\-::thread \hyperlink{structPollExecutor_aedea242ce74052608ae9358ec93d70e2}{th}
 \item 
-\hypertarget{structPollExecutor_ac4006982a46140b6b353c621921d171b}{\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} {\bfseries poll\-Handle}}\label{structPollExecutor_ac4006982a46140b6b353c621921d171b}
-
+\hyperlink{nis__types_8h_aeda8757494329f27e534f367b067eda3}{N\-I\-S\-Handle} \hyperlink{structPollExecutor_ac4006982a46140b6b353c621921d171b}{poll\-Handle}
 \item 
-\hypertarget{structPollExecutor_a22f382f7d74c9cae694dc7b003bb12fb}{bool {\bfseries exit\-Poll}}\label{structPollExecutor_a22f382f7d74c9cae694dc7b003bb12fb}
-
+bool \hyperlink{structPollExecutor_a22f382f7d74c9cae694dc7b003bb12fb}{exit\-Poll}
 \item 
-\hypertarget{structPollExecutor_a6a278f48537a9f9701ff687ccc2125e8}{char $\ast$ {\bfseries poll\-Data}}\label{structPollExecutor_a6a278f48537a9f9701ff687ccc2125e8}
-
+char $\ast$ \hyperlink{structPollExecutor_a6a278f48537a9f9701ff687ccc2125e8}{poll\-Data}
 \item 
-\hypertarget{structPollExecutor_aaac2ecbce031c612792e6aea90196af4}{size\-\_\-t {\bfseries poll\-Size}}\label{structPollExecutor_aaac2ecbce031c612792e6aea90196af4}
-
+size\-\_\-t \hyperlink{structPollExecutor_aaac2ecbce031c612792e6aea90196af4}{poll\-Size}
 \item 
-\hypertarget{structPollExecutor_aa371cc9916044879d56ddff0a169bc0c}{uint32\-\_\-t {\bfseries interval\-\_\-ms}}\label{structPollExecutor_aa371cc9916044879d56ddff0a169bc0c}
-
+uint32\-\_\-t \hyperlink{structPollExecutor_aa371cc9916044879d56ddff0a169bc0c}{interval\-\_\-ms}
 \item 
-\hypertarget{structPollExecutor_a939fe0fc384eb018f62839be04fa519d}{uint32\-\_\-t {\bfseries uid}}\label{structPollExecutor_a939fe0fc384eb018f62839be04fa519d}
-
+uint32\-\_\-t \hyperlink{structPollExecutor_a939fe0fc384eb018f62839be04fa519d}{uid}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+\hyperlink{structPollExecutor}{Poll\-Executor} performs some specific work (in polling) and the call a callback passing the results, at regular intervals 
+
+\subsection{Member Data Documentation}
+\hypertarget{structPollExecutor_a28319240732a17a19f78db7ff325c552}{\index{Poll\-Executor@{Poll\-Executor}!callback@{callback}}
+\index{callback@{callback}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf nis\-\_\-callback\-\_\-t} Poll\-Executor\-::callback}}\label{structPollExecutor_a28319240732a17a19f78db7ff325c552}
+the callback to be called each interval has expired \hypertarget{structPollExecutor_a22f382f7d74c9cae694dc7b003bb12fb}{\index{Poll\-Executor@{Poll\-Executor}!exit\-Poll@{exit\-Poll}}
+\index{exit\-Poll@{exit\-Poll}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{exit\-Poll}]{\setlength{\rightskip}{0pt plus 5cm}bool Poll\-Executor\-::exit\-Poll}}\label{structPollExecutor_a22f382f7d74c9cae694dc7b003bb12fb}
+flag to indicate the thread has to stop. Setting this will let the deferred activity to end gracefully \hypertarget{structPollExecutor_aa371cc9916044879d56ddff0a169bc0c}{\index{Poll\-Executor@{Poll\-Executor}!interval\-\_\-ms@{interval\-\_\-ms}}
+\index{interval\-\_\-ms@{interval\-\_\-ms}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{interval\-\_\-ms}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t Poll\-Executor\-::interval\-\_\-ms}}\label{structPollExecutor_aa371cc9916044879d56ddff0a169bc0c}
+interval in milliseconds between polls \hypertarget{structPollExecutor_a6a278f48537a9f9701ff687ccc2125e8}{\index{Poll\-Executor@{Poll\-Executor}!poll\-Data@{poll\-Data}}
+\index{poll\-Data@{poll\-Data}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{poll\-Data}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Poll\-Executor\-::poll\-Data}}\label{structPollExecutor_a6a278f48537a9f9701ff687ccc2125e8}
+point to the data associated to this executor. Will be passed as a parameter to the callback \hypertarget{structPollExecutor_ac4006982a46140b6b353c621921d171b}{\index{Poll\-Executor@{Poll\-Executor}!poll\-Handle@{poll\-Handle}}
+\index{poll\-Handle@{poll\-Handle}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{poll\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\-I\-S\-Handle} Poll\-Executor\-::poll\-Handle}}\label{structPollExecutor_ac4006982a46140b6b353c621921d171b}
+handle of the token you're performing the callback on \hypertarget{structPollExecutor_aaac2ecbce031c612792e6aea90196af4}{\index{Poll\-Executor@{Poll\-Executor}!poll\-Size@{poll\-Size}}
+\index{poll\-Size@{poll\-Size}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{poll\-Size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Poll\-Executor\-::poll\-Size}}\label{structPollExecutor_aaac2ecbce031c612792e6aea90196af4}
+size of the \-::poll\-Data array. Will be passed as a parameter to teh callback \hypertarget{structPollExecutor_aedea242ce74052608ae9358ec93d70e2}{\index{Poll\-Executor@{Poll\-Executor}!th@{th}}
+\index{th@{th}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{th}]{\setlength{\rightskip}{0pt plus 5cm}std\-::thread Poll\-Executor\-::th}}\label{structPollExecutor_aedea242ce74052608ae9358ec93d70e2}
+internal thread handler that manages the deferred work and, after that, calls the callback with the result of that work \hypertarget{structPollExecutor_a939fe0fc384eb018f62839be04fa519d}{\index{Poll\-Executor@{Poll\-Executor}!uid@{uid}}
+\index{uid@{uid}!PollExecutor@{Poll\-Executor}}
+\subsubsection[{uid}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t Poll\-Executor\-::uid}}\label{structPollExecutor_a939fe0fc384eb018f62839be04fa519d}
+unique identifier that represents this executor 
+
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/executor.\-h\end{DoxyCompactItemize}
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/\hyperlink{executor_8h}{executor.\-h}\end{DoxyCompactItemize}

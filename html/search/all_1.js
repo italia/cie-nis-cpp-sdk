@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cie_2dnis_2dcpp_2dsdk_20_2d_20sdk_20to_20leverage_20the_20cie_20facilities_2e',['CIE-NIS-CPP-SDK - SDK to leverage the CIE facilities.',['../index.html',1,'']]]
+  ['backendtype',['BackendType',['../nis__types_8h.html#acee299fbb7d897867808250049524594',1,'nis_types.h']]]
 ];

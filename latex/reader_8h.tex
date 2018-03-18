@@ -1,0 +1,41 @@
+\hypertarget{reader_8h}{\section{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.h File Reference}
+\label{reader_8h}\index{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.\-h@{/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.\-h}}
+}
+
+
+A Reader.  
+
+
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
+{\ttfamily \#include \char`\"{}nis\-\_\-types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}token.\-h\char`\"{}}\\*
+Include dependency graph for reader.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{reader_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{reader_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classnis_1_1interface_1_1Reader}{nis\-::interface\-::\-Reader}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Reader. This file contains the declaration of a base Reader. In this library, the words 'Reader' and 'Backend' are used almost interchangeably, meaning that a Reador or a Backend is a system that can exchange information with a Token (i.\-e. a card) via a specific protocol (e.\-g. P\-C\-S\-C compatible reader). A Reader is responsible for high-\/level facilities like enumerating the connected readers that are compatible with the backend it implements and to provide a reference to a named \-::\-Token. This calss is abstract and need to be extended in order to provide a specific implementation. Usually for each Reader's subclass there is a corresponding Token's subclass. \begin{DoxySeeAlso}{See Also}
+Reader\-P\-C\-S\-C 
+
+Token\-P\-C\-S\-C 
+\end{DoxySeeAlso}

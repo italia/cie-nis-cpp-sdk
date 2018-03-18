@@ -62,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,23 +103,149 @@ Inheritance diagram for nis::interface::Reader:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf689da8251ccbf468c495ce9b6eb2e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf689da8251ccbf468c495ce9b6eb2e7"></a>
-virtual <a class="el" href="nis__types_8h.html#a484156f5b8cf43396c5bbe77226fa8da">ReaderResult</a>&#160;</td><td class="memItemRight" valign="bottom"><b>enumerateReaderList</b> ()=0</td></tr>
+<tr class="memitem:aa72c86236a788a73310f1800d06ec3ea"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnis_1_1interface_1_1Reader.html#aa72c86236a788a73310f1800d06ec3ea">~Reader</a> ()=0</td></tr>
+<tr class="separator:aa72c86236a788a73310f1800d06ec3ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf689da8251ccbf468c495ce9b6eb2e7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="nis__types_8h.html#a484156f5b8cf43396c5bbe77226fa8da">ReaderResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnis_1_1interface_1_1Reader.html#abf689da8251ccbf468c495ce9b6eb2e7">enumerateReaderList</a> ()=0</td></tr>
 <tr class="separator:abf689da8251ccbf468c495ce9b6eb2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65d1522165b9660c1c1be260af28cbd0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65d1522165b9660c1c1be260af28cbd0"></a>
-virtual vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getReaderList</b> ()=0</td></tr>
+<tr class="memitem:a65d1522165b9660c1c1be260af28cbd0"><td class="memItemLeft" align="right" valign="top">virtual vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnis_1_1interface_1_1Reader.html#a65d1522165b9660c1c1be260af28cbd0">getReaderList</a> ()=0</td></tr>
 <tr class="separator:a65d1522165b9660c1c1be260af28cbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8132b33c794255154b626887af4a8795"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8132b33c794255154b626887af4a8795"></a>
-shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getToken</b> (const string &amp;name)</td></tr>
+<tr class="memitem:a8132b33c794255154b626887af4a8795"><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnis_1_1interface_1_1Reader.html#a8132b33c794255154b626887af4a8795">getToken</a> (const string &amp;name)</td></tr>
 <tr class="separator:a8132b33c794255154b626887af4a8795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a42d9beab85b111103582f3297fac667b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42d9beab85b111103582f3297fac667b"></a>
-unordered_map&lt; string, <br class="typebreak"/>
-shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tokenList</b></td></tr>
+<tr class="memitem:a42d9beab85b111103582f3297fac667b"><td class="memItemLeft" align="right" valign="top">unordered_map&lt; string, <br class="typebreak"/>
+shared_ptr&lt; <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnis_1_1interface_1_1Reader.html#a42d9beab85b111103582f3297fac667b">tokenList</a></td></tr>
 <tr class="separator:a42d9beab85b111103582f3297fac667b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aa72c86236a788a73310f1800d06ec3ea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nis::interface::Reader::~Reader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>destructor extending this class should release all associated resources, that's why it's declared pure virtual </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="abf689da8251ccbf468c495ce9b6eb2e7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="nis__types_8h.html#a484156f5b8cf43396c5bbe77226fa8da">ReaderResult</a> nis::interface::Reader::enumerateReaderList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add to tokenList the reader compatible with this implementation. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="nis__types_8h.html#a484156f5b8cf43396c5bbe77226fa8da">ReaderResult</a> indicating the success or error </dd></dl>
+
+<p>Implemented in <a class="el" href="classnis_1_1implementation_1_1ReaderPCSC.html#a56fcc4887491509d7ae634f89d18a8d6">nis::implementation::ReaderPCSC</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a65d1522165b9660c1c1be260af28cbd0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual vector&lt;string&gt; nis::interface::Reader::getReaderList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Obtain the array of all compatible readers. </p>
+<dl class="section return"><dt>Returns</dt><dd>The array of all the readers managed by this backend </dd></dl>
+
+<p>Implemented in <a class="el" href="classnis_1_1implementation_1_1ReaderPCSC.html#a696551fbfc3e27e5f8ea6f4118540bad">nis::implementation::ReaderPCSC</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8132b33c794255154b626887af4a8795"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">shared_ptr&lt;<a class="el" href="classnis_1_1interface_1_1Token.html">Token</a>&gt; nis::interface::Reader::getToken </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Obtain a token given its name. [in] name the name of the token as enumerated in <a class="el" href="classnis_1_1interface_1_1Reader.html#a65d1522165b9660c1c1be260af28cbd0">getReaderList()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the specified <a class="el" href="classnis_1_1interface_1_1Token.html">Token</a>, or nullptr if there's no token with that name </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a42d9beab85b111103582f3297fac667b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unordered_map&lt;string,shared_ptr&lt;<a class="el" href="classnis_1_1interface_1_1Token.html">Token</a>&gt; &gt; nis::interface::Reader::tokenList</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>the list of the token managed by this backend </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/italia/cie-nis-cpp-sdk/src/<a class="el" href="reader_8h_source.html">reader.h</a></li>
 <li>/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.cpp</li>
