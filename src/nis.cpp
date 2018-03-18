@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <vector>
 #include <thread>
+#include <mutex>
 #include <functional>
 #include <cstring>
 #include <algorithm>
@@ -38,6 +39,7 @@ private:
 	unordered_map<uint32_t,shared_ptr<PollExecutor>> executors;
 	vector<string> readers;
 	char *idList;
+	mutex execMutex;
 public:
 	NISManager(const NISManager &) = delete;
 	void operator=(const NISManager &) = delete;
@@ -54,16 +56,20 @@ public:
 	vector<string> &getReaders() { return readers; }
 
 	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) { executors[uid] = ex; }
-	shared_ptr<PollExecutor> removeExecutor(uint32_t uid);
-	void removeAllExecutors() { vector<uint32_t> keys; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it); }
+	shared_ptr<PollExecutor> removeExecutor(uint32_t uid, bool mustLock=true);
+	void removeAllExecutors() { vector<uint32_t> keys; lock_guard<mutex> lock{execMutex}; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it, false); }
+	void lockExecutors() { execMutex.lock(); }
+	void unlockExecutors() { execMutex.unlock(); }
 
 	char* getIdentifiersList() { return idList; }
 	void deleteIdentifiersList() { if(idList) delete[] idList; }
 	char* allocateIdentifiersList(size_t len) { deleteIdentifiersList(); idList = new char[len]; return idList; }
 };
 
-shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid) { 
-	//TODO: lock sync with global lock
+shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid, bool mustLock) { 
+	if(mustLock)
+		lock_guard<mutex> lock{execMutex}; 
+	
 	auto it = executors.find(uid); 
 	if(it != executors.end()) 
 	{ 
@@ -198,6 +204,7 @@ static void *pollNis(weak_ptr<PollExecutor> pe)
  */
 int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
 {
+	int ret = 0;
 	const size_t lenData = NIS_LENGTH;
 	if(callback && uid) {
 		*uid = Utils::getUid();
@@ -211,16 +218,21 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, 
 		pollCntr->pollSize = lenData;
 		pollCntr->interval_ms = interval;
 
-		//TODO: lock should take global lock
+		NISManager::getInstance().lockExecutors();
 #ifdef USE_EXT_THREAD
-		return NIS_CreateThread(pollCntr.th, pollNis, weak_ptr<PollExecutor>{pollCntr});
+		ret = NIS_CreateThread(pollCntr.th, pollNis, weak_ptr<PollExecutor>{pollCntr});
 #else
-		pollCntr->th = thread(pollNis, weak_ptr<PollExecutor>{pollCntr});
+		try {
+			pollCntr->th = thread(pollNis, weak_ptr<PollExecutor>{pollCntr});
+		} catch(...) {
+			cerr << "Cannot create polling thread." << endl;
+		}
 #endif
 		NISManager::getInstance().addExecutor(*uid, pollCntr);
-		//-----------------------
 
-		return 0;
+		NISManager::getInstance().unlockExecutors();
+
+		return ret;
 	}
 	else {
 		std::vector<BYTE> response(lenData);
