@@ -2,6 +2,7 @@
 #define TOKEN_GUARD
 
 #include <vector>
+#include <memory>
 #include <winscard.h>
 #include "nis_types.h"
 

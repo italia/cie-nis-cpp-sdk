@@ -19,9 +19,16 @@ void deinit(void)
 	NIS_Deinit(NIS_BACKEND_ALL);
 }
 
-void callback(char *const nisData, size_t lenData)
+void callback1(char *const nisData, size_t lenData)
 {
-	std::cout << "NIS: " << std::string{nisData} << std::endl;
+	nisData[NIS_LENGTH] = '\0';
+	std::cout << "NIS thA: " << std::string{nisData} << std::endl;
+}
+
+void callback2(char *const nisData, size_t lenData)
+{
+	nisData[NIS_LENGTH] = '\0';
+	std::cout << "NIS thB: " << std::string{nisData} << std::endl;
 }
 
 int main(int argc, _TCHAR* argv[])
@@ -69,18 +76,24 @@ int main(int argc, _TCHAR* argv[])
 	}
 
 	//read the NIS
-	char nisData[300];
-	if(NIS_ReadNis(handle, nisData, sizeof(nisData), callback)) {
-		std::cerr << "Could not read the NIS from token" << std::endl;
+	char nisData1[NIS_LENGTH+1];	//to take into account for the termination character
+	char nisData2[NIS_LENGTH+1];	//to take into account for the termination character
+	uint32_t uid1, uid2;
+	if(NIS_ReadNis(handle, nisData1, callback1, 1000/*ms*/, &uid1)) {
+		std::cerr << "Could not start the 1st NIS reading thread" << std::endl;
 		exit(-5);
 	}
-	else {
-		//wait while the callback read the NIS at regular interval
-		for(int i = 0; i < 10; ++i)
+	if(NIS_ReadNis(handle, nisData2, callback2, 1000/*ms*/, &uid2)) {
+		std::cerr << "Could not start the 2nd NIS reading thread" << std::endl;
+		exit(-6);
+	}
+		
+	//wait while the callback read the NIS at regular interval
+	for(int i = 0; i < 10; ++i)
 			std::this_thread::sleep_for(std::chrono::milliseconds {1000});
 
-		NIS_StopPoll(handle);
-	}
+	NIS_StopPoll(uid1);
+	NIS_StopPoll(uid2);
 
 	return 0;
 }

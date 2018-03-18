@@ -8,6 +8,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <thread>
 #include <functional>
 #include <cstring>
 #include <algorithm>
@@ -16,8 +17,8 @@
 #include "token.h"
 #include "token_pcsc.h"
 #include "requests.h"
-#include <thread>
 #include "thread.h"
+#include "uid.h"
 
 using namespace nis::interface;
 using namespace nis::implementation;
@@ -33,28 +34,51 @@ public:
 	}
 private:
 	NISManager() {}
-	unordered_map<BackendType,Reader*,std::hash<int>> backends;
+	unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> backends;
+	unordered_map<uint32_t,shared_ptr<PollExecutor>> executors;
 	vector<string> readers;
 	char *idList;
 public:
 	NISManager(const NISManager &) = delete;
 	void operator=(const NISManager &) = delete;
-	void addBackend(BackendType backtype, Reader *backend) { backends[backtype] = backend; }
-	Reader* removeBackend(BackendType backtype) { 
-		Reader* backend = nullptr; 
+
+	const unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> &getBackends() { return backends; };
+	void addBackend(BackendType backtype, shared_ptr<Reader> backend) { backends[backtype] = backend; }
+	void removeBackend(BackendType backtype) { 
 		auto it = backends.find(backtype);
 		if(it != backends.end()) { 
-			backend = it->second; 
 			backends.erase(it); 
 		} 
-		return backend; 
 	}
-	const unordered_map<BackendType,Reader*,std::hash<int>> &getBackends() { return backends; };
+
 	vector<string> &getReaders() { return readers; }
+
+	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) { executors[uid] = ex; }
+	shared_ptr<PollExecutor> removeExecutor(uint32_t uid);
+	void removeAllExecutors() { vector<uint32_t> keys; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it); }
+
 	char* getIdentifiersList() { return idList; }
 	void deleteIdentifiersList() { if(idList) delete[] idList; }
 	char* allocateIdentifiersList(size_t len) { deleteIdentifiersList(); idList = new char[len]; return idList; }
 };
+
+shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid) { 
+	//TODO: lock sync with global lock
+	auto it = executors.find(uid); 
+	if(it != executors.end()) 
+	{ 
+		executors.erase(it); 
+		it->second->exitPoll = true;
+		shared_ptr<PollExecutor> pe = it->second;
+#ifdef USE_EXT_THREAD
+		NIS_JoinThread(pe->th);
+#else
+		pe->th.join();
+#endif
+		return pe; 
+	} 
+	else return nullptr; 
+}
 
 /** 
  * Initialize the NIS sdk backends.
@@ -67,11 +91,10 @@ int NIS_Init(uint32_t backendBitfield)
 	int ret = 0;
 
 	if(backendBitfield & NIS_BACKEND_PCSC) {
-		ReaderPCSC* backend = new ReaderPCSC();
+		shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
 		if(backend->hasContext())
 			NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
 		else {
-			delete backend;
 			ret = -1;
 		}
 	}
@@ -93,7 +116,7 @@ int NIS_ReaderList(char **readers, size_t *len)
 	vector<string> &allReaders = NISManager::getInstance().getReaders();
 	allReaders.clear();
 
-	for(auto &backend : NISManager::getInstance().getBackends())
+	for(auto backend : NISManager::getInstance().getBackends())
 	{
 		if(backend.second->enumerateReaderList() == READER_RESULT_OK)
 		{
@@ -138,9 +161,9 @@ int NIS_ReaderList(char **readers, size_t *len)
  */
 NISHandle NIS_GetHandle(char *readerName)
 {
-	for(auto &backend : NISManager::getInstance().getBackends())
+	for(auto backend : NISManager::getInstance().getBackends())
 	{
-		Token* token = backend.second->getToken(string(readerName));
+		Token* token = backend.second->getToken(string(readerName)).get();
 		if(token && token->connect() == TOK_RESULT_OK)
 			return token;
 	}
@@ -148,26 +171,20 @@ NISHandle NIS_GetHandle(char *readerName)
 	return nullptr;
 }
 
-//temporary! What follows must be converted to thread-safe data and code
-static struct PollContainer { 
-	nis_callback_t callback;
-	NISThread th;	
-	bool exitPoll;
-	NISHandle pollHandle;
-	char *pollData;
-	size_t pollSize;
-} pollCntr;
-static void *pollNis(void *data)
+static void *pollNis(weak_ptr<PollExecutor> pe)
 {
-	PollContainer* cntr = (PollContainer*)data;
+	if(!pe.expired()) {
+		shared_ptr<PollExecutor> cntr = pe.lock();
 
-	while(!pollCntr.exitPoll) {
-		if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, cntr->pollSize, nullptr)) 
-			cntr->callback(cntr->pollData, cntr->pollSize);
-		std::this_thread::sleep_for(std::chrono::milliseconds {1000});
+		if(cntr) {
+			while(!cntr->exitPoll) {
+				if(!NIS_ReadNis(cntr->pollHandle, cntr->pollData, nullptr, 0, nullptr)) 
+					cntr->callback(cntr->pollData, cntr->pollSize);
+				std::this_thread::sleep_for(std::chrono::milliseconds {cntr->interval_ms});
+			}
+		}
 	}
 }
-//----------------------------------------------------------
 
 /** 
  * Read the NIS from the specified token.
@@ -175,20 +192,38 @@ static void *pollNis(void *data)
  * @param[out] nisData array in which to store the NIS read back from the token
  * @param[in] lenData the size of the @e nisData array
  * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS @sa ::nis_callback_t
- * @return 0 on success, negative on error.
+ * @param[in] interval time in ms between polls
+ * @param[out] the UID associated to the newly created context of execution @sa ::NIS_StopPoll()
+ * @return 0 on success, negative on error
  */
-int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callback_t callback)
+int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
 {
-	if(callback) {
-		pollCntr.pollHandle = handle;
-		pollCntr.callback = callback;
-		pollCntr.exitPoll = false;
-		pollCntr.pollData = nisData;
-		pollCntr.pollSize = lenData;
-		return NIS_CreateThread(&pollCntr.th, pollNis, &pollCntr);
+	const size_t lenData = NIS_LENGTH;
+	if(callback && uid) {
+		*uid = Utils::getUid();
+		shared_ptr<PollExecutor> pollCntr{new PollExecutor{}};
+
+		pollCntr->uid = *uid;
+		pollCntr->pollHandle = handle;
+		pollCntr->callback = callback;
+		pollCntr->exitPoll = false;
+		pollCntr->pollData = nisData;
+		pollCntr->pollSize = lenData;
+		pollCntr->interval_ms = interval;
+
+		//TODO: lock should take global lock
+#ifdef USE_EXT_THREAD
+		return NIS_CreateThread(pollCntr.th, pollNis, weak_ptr<PollExecutor>{pollCntr});
+#else
+		pollCntr->th = thread(pollNis, weak_ptr<PollExecutor>{pollCntr});
+#endif
+		NISManager::getInstance().addExecutor(*uid, pollCntr);
+		//-----------------------
+
+		return 0;
 	}
 	else {
-		std::vector<BYTE> response(RESPONSE_SIZE);
+		std::vector<BYTE> response(lenData);
 
 		if(Requests::select_df_ias(*((Token*)handle), response)) {
 			if(Requests::select_df_cie(*((Token*)handle), response)) {
@@ -205,13 +240,13 @@ int NIS_ReadNis(NISHandle handle, char *const nisData, size_t lenData, nis_callb
 
 /** 
  * Stop the polling on a specified reader started invoking ::NIS_ReadNis() with a callback function.
- * @param[in] handle the handler of the reader previously obtained calling ::NIS_GetHandle()
+ * @param[in] uid the UID of the context of execution previously obtained from e.g. ::NIS_ReadNis()
  * @return 0 on success, negative on error.
  */
-int NIS_StopPoll(NISHandle handle)
+int NIS_StopPoll(uint32_t uid)
 {
-	pollCntr.exitPoll = true;
-	return NIS_JoinThread(&pollCntr.th);
+	shared_ptr<PollExecutor> pe = NISManager::getInstance().removeExecutor(uid);
+	return 0;
 }
 
 int NIS_ConfigHandle(NISHandle handle, uint32_t config)
@@ -227,10 +262,10 @@ int NIS_ConfigHandle(NISHandle handle, uint32_t config)
  */
 int NIS_Deinit(uint32_t backendBitfield)
 {
+	NISManager::getInstance().removeAllExecutors();
+
 	if(backendBitfield & NIS_BACKEND_PCSC) {
-		Reader *erased = NISManager::getInstance().removeBackend(NIS_BACKEND_PCSC);
-		if(erased)
-			delete erased;
+		NISManager::getInstance().removeBackend(NIS_BACKEND_PCSC);
 	}
 	//else ... //add backends here
 	
