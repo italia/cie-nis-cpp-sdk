@@ -20,71 +20,11 @@
 #include "requests.h"
 #include "thread.h"
 #include "uid.h"
+#include "nis_manager.h"
 
 using namespace nis::interface;
 using namespace nis::implementation;
 using namespace nis::helper;
-
-class NISManager
-{
-public:
-	static NISManager& getInstance()
-	{
-		static NISManager instance;
-		return instance;
-	}
-private:
-	NISManager() {}
-	unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> backends;
-	unordered_map<uint32_t,shared_ptr<PollExecutor>> executors;
-	vector<string> readers;
-	char *idList;
-	mutex execMutex;
-public:
-	NISManager(const NISManager &) = delete;
-	void operator=(const NISManager &) = delete;
-
-	const unordered_map<BackendType,shared_ptr<Reader>,std::hash<int>> &getBackends() { return backends; };
-	void addBackend(BackendType backtype, shared_ptr<Reader> backend) { backends[backtype] = backend; }
-	void removeBackend(BackendType backtype) { 
-		auto it = backends.find(backtype);
-		if(it != backends.end()) { 
-			backends.erase(it); 
-		} 
-	}
-
-	vector<string> &getReaders() { return readers; }
-
-	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) { executors[uid] = ex; }
-	shared_ptr<PollExecutor> removeExecutor(uint32_t uid, bool mustLock=true);
-	void removeAllExecutors() { vector<uint32_t> keys; lock_guard<mutex> lock{execMutex}; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it, false); }
-	void lockExecutors() { execMutex.lock(); }
-	void unlockExecutors() { execMutex.unlock(); }
-
-	char* getIdentifiersList() { return idList; }
-	void deleteIdentifiersList() { if(idList) delete[] idList; }
-	char* allocateIdentifiersList(size_t len) { deleteIdentifiersList(); idList = new char[len]; return idList; }
-};
-
-shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid, bool mustLock) { 
-	if(mustLock)
-		lock_guard<mutex> lock{execMutex}; 
-	
-	auto it = executors.find(uid); 
-	if(it != executors.end()) 
-	{ 
-		executors.erase(it); 
-		it->second->exitPoll = true;
-		shared_ptr<PollExecutor> pe = it->second;
-#ifdef USE_EXT_THREAD
-		NIS_JoinThread(pe->th);
-#else
-		pe->th.join();
-#endif
-		return pe; 
-	} 
-	else return nullptr; 
-}
 
 /** 
  * Initialize the NIS sdk backends.
