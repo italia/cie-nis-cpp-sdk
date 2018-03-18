@@ -8,7 +8,7 @@ tests: $(LIBNAME)
 
 CFLAGS += -I$(VPATH)
 
-OBJS = requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o thread.o
+OBJS = requests.o nis.o token.o reader.o reader_pcsc.o token_pcsc.o thread.o nis_manager.o
 	
 .cpp.o:
 	$(CXX) -fPIC $(CFLAGS) -c $<
