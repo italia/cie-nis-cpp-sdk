@@ -78,17 +78,17 @@ Buildin/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: C
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:8: warning: Compound PollExecutor is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:7: warning: Compound Utils is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:12: warning: Compound nis::interface::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:28: warning: Compound NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:29: warning: Compound NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:15: warning: Compound nis::implementation::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:14: warning: Compound nis::interface::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:252: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:277: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:264: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:289: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: argument 'lenData' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:196: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
   parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
@@ -99,19 +99,21 @@ Buildin/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:17: warning: C
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:22: warning: Member callback1(char *const nisData, size_t lenData) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:28: warning: Member callback2(char *const nisData, size_t lenData) (function) of file example-nis.cpp is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis.cpp:34: warning: Member main(int argc, _TCHAR *argv[]) (function) of file example-nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:42: warning: Member NISManager(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:43: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:45: warning: Member getBackends() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:46: warning: Member addBackend(BackendType backtype, shared_ptr< Reader > backend) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:47: warning: Member removeBackend(BackendType backtype) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:54: warning: Member getReaders() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:56: warning: Member addExecutor(uint32_t uid, shared_ptr< PollExecutor > ex) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:57: warning: Member removeExecutor(uint32_t uid) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:58: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:60: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:61: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:62: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:30: warning: Member getInstance() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:44: warning: Member NISManager(const NISManager &)=delete (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:45: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:47: warning: Member getBackends() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:48: warning: Member addBackend(BackendType backtype, shared_ptr< Reader > backend) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:49: warning: Member removeBackend(BackendType backtype) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:56: warning: Member getReaders() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:58: warning: Member addExecutor(uint32_t uid, shared_ptr< PollExecutor > ex) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:59: warning: Member removeExecutor(uint32_t uid, bool mustLock=true) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:60: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:61: warning: Member lockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:62: warning: Member unlockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:64: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:65: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:66: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:31: warning: Member getInstance() (function) of class NISManager is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:9: warning: Member callback (variable) of class PollExecutor is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:13: warning: Member th (variable) of class PollExecutor is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:15: warning: Member pollHandle (variable) of class PollExecutor is not documented.
