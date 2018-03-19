@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['token',['Token',['../classnis_1_1interface_1_1Token.html',1,'nis::interface']]],
-  ['tokenpcsc',['TokenPCSC',['../classnis_1_1implementation_1_1TokenPCSC.html',1,'nis::implementation']]]
+  ['token',['Token',['../classcie_1_1nis_1_1Token.html',1,'cie::nis']]],
+  ['tokenpcsc',['TokenPCSC',['../classcie_1_1nis_1_1TokenPCSC.html',1,'cie::nis']]]
 ];

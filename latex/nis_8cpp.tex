@@ -33,6 +33,21 @@ Include dependency graph for nis.\-cpp\-:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}{int {\bfseries cie\-::nis\-::init} (uint32\-\_\-t backend\-Bitfield)}\label{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}
+
+\item 
+\hypertarget{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{vector$<$ string $>$ {\bfseries cie\-::nis\-::readers\-List} ()}\label{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}
+
+\item 
+\hypertarget{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{\hyperlink{classcie_1_1nis_1_1Token}{Token} $\ast$ {\bfseries cie\-::nis\-::get\-Token} (string reader\-Name)}\label{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}
+
+\item 
+\hypertarget{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}{int {\bfseries cie\-::nis\-::deinit} (uint32\-\_\-t backend\-Bitfield)}\label{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}
+
+\item 
+\hypertarget{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{int {\bfseries cie\-::nis\-::stop\-Poll} (uint32\-\_\-t uid)}\label{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}
+
+\item 
 int \hyperlink{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}{N\-I\-S\-\_\-\-Init} (uint32\-\_\-t backend\-Bitfield)
 \item 
 int \hyperlink{nis_8cpp_a8a7d97b92e4703b0c539676d98697224}{N\-I\-S\-\_\-\-Reader\-List} (char $\ast$$\ast$readers, size\-\_\-t $\ast$len)
@@ -141,9 +156,7 @@ Read the N\-I\-S from the specified token.
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em handle} & the handler of the reader previously obtained calling \hyperlink{nis_8cpp_a580bbcb89dd427ba80c7965e374e47a4}{N\-I\-S\-\_\-\-Get\-Handle()} \\
 \hline
-\mbox{\tt out}  & {\em nis\-Data} & array in which to store the N\-I\-S read back from the token \\
-\hline
-\mbox{\tt in}  & {\em len\-Data} & the size of the {\itshape nis\-Data} array \\
+\mbox{\tt out}  & {\em nis\-Data} & array in which to store the N\-I\-S read back from the token. Should be long enough to contains the entire nis as a C-\/style sring, i.\-e. 12 (N\-I\-S) + 1 (null terminator) = 13 chars \\
 \hline
 \mbox{\tt in}  & {\em callback} & if {\itshape N\-U\-L\-L} the call is blocking and the N\-I\-S is copied inside {\itshape nis\-Data} upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read N\-I\-S \\
 \hline

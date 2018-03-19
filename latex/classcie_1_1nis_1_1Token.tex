@@ -1,0 +1,99 @@
+\hypertarget{classcie_1_1nis_1_1Token}{\section{cie\-:\-:nis\-:\-:Token Class Reference}
+\label{classcie_1_1nis_1_1Token}\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}}
+}
+
+
+Inheritance diagram for cie\-:\-:nis\-:\-:Token\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classcie_1_1nis_1_1Token__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}{int {\bfseries read\-Nis} (char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback, uint32\-\_\-t interval, uint32\-\_\-t $\ast$uid)}\label{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}
+
+\item 
+\hypertarget{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{std\-::string {\bfseries read\-Nis} ()}\label{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}
+
+\item 
+\hypertarget{classcie_1_1nis_1_1Token_ab9147907b6d02c2361c2df2212d17a4d}{int {\bfseries configure} (uint32\-\_\-t config)}\label{classcie_1_1nis_1_1Token_ab9147907b6d02c2361c2df2212d17a4d}
+
+\item 
+\hypertarget{classcie_1_1nis_1_1Token_a249238a0e7a79237d443bb42bee06b6f}{int {\bfseries reset} ()}\label{classcie_1_1nis_1_1Token_a249238a0e7a79237d443bb42bee06b6f}
+
+\item 
+virtual \hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} \hyperlink{classcie_1_1nis_1_1Token_ab7a55406f6b9b15a39d70e64bab0042f}{connect} ()=0
+\item 
+virtual \hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} \hyperlink{classcie_1_1nis_1_1Token_a851b111864dade8826daa21920fa7cdf}{disconnect} ()=0
+\item 
+virtual \hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} \hyperlink{classcie_1_1nis_1_1Token_a90c1d8936133fc35b1826b7eebbd13ff}{transmit} (const std\-::vector$<$ B\-Y\-T\-E $>$ \&apdu, std\-::vector$<$ B\-Y\-T\-E $>$ \&response) const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcie_1_1nis_1_1Token_ab7a55406f6b9b15a39d70e64bab0042f}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!connect@{connect}}
+\index{connect@{connect}!cie::nis::Token@{cie\-::nis\-::\-Token}}
+\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tok\-Result} cie\-::nis\-::\-Token\-::connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Token_ab7a55406f6b9b15a39d70e64bab0042f}
+Connect to this instance of a token \begin{DoxyReturn}{Returns}
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} representing the success or error conditiona 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classcie_1_1nis_1_1Token_a851b111864dade8826daa21920fa7cdf}{disconnect()} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classcie_1_1nis_1_1TokenPCSC_a7078555ef89f4388fa32b60d56d14437}{cie\-::nis\-::\-Token\-P\-C\-S\-C}.
+
+\hypertarget{classcie_1_1nis_1_1Token_a851b111864dade8826daa21920fa7cdf}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!cie::nis::Token@{cie\-::nis\-::\-Token}}
+\subsubsection[{disconnect}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tok\-Result} cie\-::nis\-::\-Token\-::disconnect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Token_a851b111864dade8826daa21920fa7cdf}
+Disconnect to this instance of a token \begin{DoxyReturn}{Returns}
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} representing the success or error conditiona 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classcie_1_1nis_1_1Token_ab7a55406f6b9b15a39d70e64bab0042f}{connect()} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classcie_1_1nis_1_1TokenPCSC_af95dd044db07754ff4ee09e186821fa2}{cie\-::nis\-::\-Token\-P\-C\-S\-C}.
+
+\hypertarget{classcie_1_1nis_1_1Token_a90c1d8936133fc35b1826b7eebbd13ff}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!transmit@{transmit}}
+\index{transmit@{transmit}!cie::nis::Token@{cie\-::nis\-::\-Token}}
+\subsubsection[{transmit}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tok\-Result} cie\-::nis\-::\-Token\-::transmit (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ B\-Y\-T\-E $>$ \&}]{apdu, }
+\item[{std\-::vector$<$ B\-Y\-T\-E $>$ \&}]{response}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Token_a90c1d8936133fc35b1826b7eebbd13ff}
+Transmit a specific apdu to a card and obtain its response 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em array} & containing the apdu to be sent to the token \\
+\hline
+\mbox{\tt out}  & {\em the} & response sent from the token \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{nis__types_8h_a6ef53483e8ce2f8bc58bd1f75b3d0b38}{Tok\-Result} representing the success or error condition 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcie_1_1nis_1_1TokenPCSC_a23176a026828460420ea3e9619c7664d}{cie\-::nis\-::\-Token\-P\-C\-S\-C}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/\hyperlink{token_8h}{token.\-h}\item 
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/token.\-cpp\end{DoxyCompactItemize}

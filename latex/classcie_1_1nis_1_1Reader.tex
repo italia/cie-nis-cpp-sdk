@@ -1,0 +1,93 @@
+\hypertarget{classcie_1_1nis_1_1Reader}{\section{cie\-:\-:nis\-:\-:Reader Class Reference}
+\label{classcie_1_1nis_1_1Reader}\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}}
+}
+
+
+Inheritance diagram for cie\-:\-:nis\-:\-:Reader\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classcie_1_1nis_1_1Reader__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classcie_1_1nis_1_1Reader_aaca585569e44593b0f56818604336016}{$\sim$\-Reader} ()=0
+\item 
+virtual \hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} \hyperlink{classcie_1_1nis_1_1Reader_adcb144784f8ea7c24af4a3f60b47b73d}{enumerate\-Reader\-List} ()=0
+\item 
+virtual vector$<$ string $>$ \hyperlink{classcie_1_1nis_1_1Reader_adaa0e8d0e2b367c0af8053fde8ae0af8}{get\-Reader\-List} ()=0
+\item 
+shared\-\_\-ptr$<$ \hyperlink{classcie_1_1nis_1_1Token}{Token} $>$ \hyperlink{classcie_1_1nis_1_1Reader_a40efb63e999b4a53b56a9f3999e884bb}{get\-Token} (const string \&name)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unordered\-\_\-map$<$ string, \\*
+shared\-\_\-ptr$<$ \hyperlink{classcie_1_1nis_1_1Token}{Token} $>$ $>$ \hyperlink{classcie_1_1nis_1_1Reader_ad94db6ba461e4f00d53488c4863cda20}{token\-List}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classcie_1_1nis_1_1Reader_aaca585569e44593b0f56818604336016}{\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}!$\sim$\-Reader@{$\sim$\-Reader}}
+\index{$\sim$\-Reader@{$\sim$\-Reader}!cie::nis::Reader@{cie\-::nis\-::\-Reader}}
+\subsubsection[{$\sim$\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}cie\-::nis\-::\-Reader\-::$\sim$\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Reader_aaca585569e44593b0f56818604336016}
+destructor extending this class should release all associated resources, that's why it's declared pure virtual 
+
+\subsection{Member Function Documentation}
+\hypertarget{classcie_1_1nis_1_1Reader_adcb144784f8ea7c24af4a3f60b47b73d}{\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}!enumerate\-Reader\-List@{enumerate\-Reader\-List}}
+\index{enumerate\-Reader\-List@{enumerate\-Reader\-List}!cie::nis::Reader@{cie\-::nis\-::\-Reader}}
+\subsubsection[{enumerate\-Reader\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Reader\-Result} cie\-::nis\-::\-Reader\-::enumerate\-Reader\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Reader_adcb144784f8ea7c24af4a3f60b47b73d}
+Add to token\-List the reader compatible with this implementation. \begin{DoxyReturn}{Returns}
+\hyperlink{nis__types_8h_a484156f5b8cf43396c5bbe77226fa8da}{Reader\-Result} indicating the success or error 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcie_1_1nis_1_1ReaderPCSC_a56fcc4887491509d7ae634f89d18a8d6}{cie\-::nis\-::\-Reader\-P\-C\-S\-C}.
+
+\hypertarget{classcie_1_1nis_1_1Reader_adaa0e8d0e2b367c0af8053fde8ae0af8}{\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}!get\-Reader\-List@{get\-Reader\-List}}
+\index{get\-Reader\-List@{get\-Reader\-List}!cie::nis::Reader@{cie\-::nis\-::\-Reader}}
+\subsubsection[{get\-Reader\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual vector$<$string$>$ cie\-::nis\-::\-Reader\-::get\-Reader\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classcie_1_1nis_1_1Reader_adaa0e8d0e2b367c0af8053fde8ae0af8}
+Obtain the array of all compatible readers. \begin{DoxyReturn}{Returns}
+The array of all the readers managed by this backend 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcie_1_1nis_1_1ReaderPCSC_a696551fbfc3e27e5f8ea6f4118540bad}{cie\-::nis\-::\-Reader\-P\-C\-S\-C}.
+
+\hypertarget{classcie_1_1nis_1_1Reader_a40efb63e999b4a53b56a9f3999e884bb}{\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}!get\-Token@{get\-Token}}
+\index{get\-Token@{get\-Token}!cie::nis::Reader@{cie\-::nis\-::\-Reader}}
+\subsubsection[{get\-Token}]{\setlength{\rightskip}{0pt plus 5cm}shared\-\_\-ptr$<${\bf Token}$>$ cie\-::nis\-::\-Reader\-::get\-Token (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcie_1_1nis_1_1Reader_a40efb63e999b4a53b56a9f3999e884bb}
+Obtain a token given its name. \mbox{[}in\mbox{]} name the name of the token as enumerated in \hyperlink{classcie_1_1nis_1_1Reader_adaa0e8d0e2b367c0af8053fde8ae0af8}{get\-Reader\-List()} \begin{DoxyReturn}{Returns}
+A reference to the specified \hyperlink{classcie_1_1nis_1_1Token}{Token}, or nullptr if there's no token with that name 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classcie_1_1nis_1_1Reader_ad94db6ba461e4f00d53488c4863cda20}{\index{cie\-::nis\-::\-Reader@{cie\-::nis\-::\-Reader}!token\-List@{token\-List}}
+\index{token\-List@{token\-List}!cie::nis::Reader@{cie\-::nis\-::\-Reader}}
+\subsubsection[{token\-List}]{\setlength{\rightskip}{0pt plus 5cm}unordered\-\_\-map$<$string,shared\-\_\-ptr$<${\bf Token}$>$ $>$ cie\-::nis\-::\-Reader\-::token\-List\hspace{0.3cm}{\ttfamily [protected]}}}\label{classcie_1_1nis_1_1Reader_ad94db6ba461e4f00d53488c4863cda20}
+the list of the token managed by this backend 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/\hyperlink{reader_8h}{reader.\-h}\item 
+/home/travis/build/italia/cie-\/nis-\/cpp-\/sdk/src/reader.\-cpp\end{DoxyCompactItemize}

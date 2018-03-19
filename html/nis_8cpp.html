@@ -118,6 +118,21 @@ Include dependency graph for nis.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:abcdd144762aaa78abbf48a4252ee15e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcdd144762aaa78abbf48a4252ee15e5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cie::nis::init</b> (uint32_t backendBitfield)</td></tr>
+<tr class="separator:abcdd144762aaa78abbf48a4252ee15e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d4445f8f3cc7ab7ea75b8c70aeaf63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90d4445f8f3cc7ab7ea75b8c70aeaf63"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cie::nis::readersList</b> ()</td></tr>
+<tr class="separator:a90d4445f8f3cc7ab7ea75b8c70aeaf63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf97fb070ca1d79e93f802d8de769e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadf97fb070ca1d79e93f802d8de769e6"></a>
+<a class="el" href="classcie_1_1nis_1_1Token.html">Token</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>cie::nis::getToken</b> (string readerName)</td></tr>
+<tr class="separator:aadf97fb070ca1d79e93f802d8de769e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c20f013bbac3f773e89a57591af68a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c20f013bbac3f773e89a57591af68a9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cie::nis::deinit</b> (uint32_t backendBitfield)</td></tr>
+<tr class="separator:a0c20f013bbac3f773e89a57591af68a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa031abccb193d600ad1cd71b414abafa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa031abccb193d600ad1cd71b414abafa"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cie::nis::stopPoll</b> (uint32_t uid)</td></tr>
+<tr class="separator:aa031abccb193d600ad1cd71b414abafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a4da622cc9443c4fc71b276454923da"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nis_8cpp.html#a1a4da622cc9443c4fc71b276454923da">NIS_Init</a> (uint32_t backendBitfield)</td></tr>
 <tr class="separator:a1a4da622cc9443c4fc71b276454923da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a7d97b92e4703b0c539676d98697224"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nis_8cpp.html#a8a7d97b92e4703b0c539676d98697224">NIS_ReaderList</a> (char **readers, size_t *len)</td></tr>
@@ -295,8 +310,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NIS_Reset</b> (<a clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>the handler of the reader previously obtained calling <a class="el" href="nis_8cpp.html#a580bbcb89dd427ba80c7965e374e47a4">NIS_GetHandle()</a> </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">nisData</td><td>array in which to store the NIS read back from the token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lenData</td><td>the size of the <em>nisData</em> array </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">nisData</td><td>array in which to store the NIS read back from the token. Should be long enough to contains the entire nis as a C-style sring, i.e. 12 (NIS) + 1 (null terminator) = 13 chars </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>if <em>NULL</em> the call is blocking and the NIS is copied inside <em>nisData</em> upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS </td></tr>
   </table>
   </dd>

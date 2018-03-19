@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ereader',['~Reader',['../classnis_1_1interface_1_1Reader.html#aa72c86236a788a73310f1800d06ec3ea',1,'nis::interface::Reader']]]
+  ['_7ereader',['~Reader',['../classcie_1_1nis_1_1Reader.html#aaca585569e44593b0f56818604336016',1,'cie::nis::Reader']]]
 ];
