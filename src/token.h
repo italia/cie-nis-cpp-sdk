@@ -14,12 +14,17 @@
 #include <winscard.h>
 #include "nis_types.h"
 
-namespace nis {
-	namespace interface {
+namespace cie {
+	namespace nis {
 		class Token
 		{
 		public:
 			virtual ~Token() = 0;
+			int readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid);
+			std::string readNis();
+			int configure(uint32_t config);
+			int reset();
+		public:	//this should really be private
 			/** 
 			 * Connect to this instance of a token 
 			 * @return ::TokResult representing the success or error conditiona

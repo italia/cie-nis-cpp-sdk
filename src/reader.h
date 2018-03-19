@@ -16,8 +16,8 @@
 
 using namespace std;
 
-namespace nis {
-	namespace interface {
+namespace cie {
+	namespace nis {
 		class Reader
 		{
 		protected:

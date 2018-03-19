@@ -11,13 +11,11 @@
 #include <winscard.h>
 #include "reader.h"
 
-using namespace nis::interface;
+using namespace cie::nis;
 using namespace std;
 
-namespace nis
-{
-	namespace implementation
-	{
+namespace cie {
+	namespace nis {
 		class ReaderPCSC : public Reader
 		{
 		private:
