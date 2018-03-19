@@ -2,8 +2,8 @@
 #include "thread.h"
 #include "../../executor.h"
 
-namespace nis 
-{
+namespace cie {
+    namespace nis {
 	namespace helper
 	{
 		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::weak_ptr<PollExecutor> pe)
@@ -30,5 +30,6 @@ namespace nis
 			return 0;
 		}
 	}
+    }
 }
 

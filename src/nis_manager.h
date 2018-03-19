@@ -24,9 +24,8 @@
 #include "thread.h"
 #include "uid.h"
 
-using namespace nis::interface;
-using namespace nis::implementation;
-using namespace nis::helper;
+using namespace cie::nis;
+using namespace cie::nis::helper;
 
 /**
  * Singleton that manages backends list, tokens and associated executors.

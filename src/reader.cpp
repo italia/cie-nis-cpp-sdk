@@ -1,3 +1,3 @@
 #include "reader.h"
 
-nis::interface::Reader::~Reader() {} //pure virtual destructors must be defined 
+cie::nis::Reader::~Reader() {} //pure virtual destructors must be defined 
