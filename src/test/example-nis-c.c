@@ -68,7 +68,7 @@ int main(int argc, _TCHAR* argv[])
 	//ask the user to select a reader, if more than one
 	if(readersSize > 1)
 	{
-		for (int i = 0; i < readersSize; i++) {
+		for (i = 0; i < readersSize; i++) {
 			printf("(%d) %s\n", (i + 1), readers[i]);
 		}
 		printf("Select a reader\n");
@@ -100,7 +100,7 @@ int main(int argc, _TCHAR* argv[])
 	}
 		
 	//wait while the callback read the NIS at regular interval
-	for(int i = 0; i < 10; ++i)
+	for(i = 0; i < 10; ++i)
 		sleep(1);
 
 	NIS_StopPoll(uid1);
