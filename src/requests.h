@@ -10,7 +10,7 @@
 
 #include "token.h"
 
-using namespace nis::interface;
+using namespace cie::nis;
 
 namespace Requests
 {

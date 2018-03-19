@@ -5,7 +5,8 @@
 #include <pthread.h> 
 #include "../../executor.h"
 
-namespace nis {
+namespace cie {
+    namespace nis {
 	namespace helper {
 		typedef pthread_t NISThread; 
 		typedef void*(*NISThFunc)(void*);
@@ -13,6 +14,7 @@ namespace nis {
 		int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::weak_ptr<PollExecutor>);
 		int NIS_JoinThread(NISThread &th);
 	}
+    }
 }
 
 #endif
