@@ -6,7 +6,7 @@
 #include "reader_pcsc.h"
 #include <cstring>
 
-using namespace nis::implementation;
+using namespace cie::nis;
 
 ReaderPCSC::ReaderPCSC() : readerList{nullptr}
 {

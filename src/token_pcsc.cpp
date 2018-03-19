@@ -4,7 +4,7 @@
 #include <ios>
 #include "token_pcsc.h"
 
-using namespace nis::implementation;
+using namespace cie::nis;
 
 TokenPCSC::TokenPCSC(const string &identifier, SCARDCONTEXT context) : identifier{identifier}, context(context), isConnected{false}
 {

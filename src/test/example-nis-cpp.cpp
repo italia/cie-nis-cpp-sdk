@@ -13,10 +13,12 @@
 
 #define _TCHAR char
 
+using namespace std;
+
 void deinit(void)
 {
 	//deinit all subsystems
-	NIS_Deinit(NIS_BACKEND_ALL);
+	cie::nis::deinit(NIS_BACKEND_ALL);
 }
 
 void callback1(char *const nisData, size_t lenData)
@@ -34,43 +36,33 @@ void callback2(char *const nisData, size_t lenData)
 int main(int argc, _TCHAR* argv[])
 {
 	//init all subsystems (PCSC, ...)
-	if(NIS_Init(NIS_BACKEND_ALL)) {
+	if(cie::nis::init(NIS_BACKEND_ALL)) {
 		std::cerr << "Error initializing backend sybsystem" << std::endl;
 		exit(-1);
 	}
 	atexit(deinit);
 
 	//obtain the flat list of all readers from all backends
-	char *readerList = nullptr;
-	size_t len = 0;
-	if(NIS_ReaderList(&readerList, &len)) {
-		std::cerr << "Error obtaining readers list" << std::endl;
-		exit(-2);
-	}
+	vector<string> readers = cie::nis::readersList();
 	
-	//helper structure to visualize and select the reader to be used
-	char* reader = readerList;
-	std::vector<char*> readers;
-	while (reader[0]) {
-		readers.push_back(reader);
-		reader += strlen(reader) + 1;
-	}
-
-	//ask the user to select a reader
-	for (int i = 0; i < readers.size(); i++) {
-		std::cout << (i + 1) << ") " << readers[i] << std::endl;
-	}
-	std::cout << "Select a reader" << std::endl;
-	int readerNum = -1;
-	std::cin >> readerNum;
-	if (readerNum < 1 || readerNum > readers.size()) {
-		std::cerr << "Reader not found" << std::endl;
-		exit(-3);
+	int readerNum = 1;
+	//ask the user to select a reader, if more than one is present
+	if(readers.size() > 1)
+	{
+		for (int i = 0; i < readers.size(); i++) {
+			std::cout << (i + 1) << ") " << readers[i] << std::endl;
+		}
+		std::cout << "Select a reader" << std::endl;
+		std::cin >> readerNum;
+		if (readerNum < 1 || readerNum > readers.size()) {
+			std::cerr << "Reader not found" << std::endl;
+			exit(-3);
+		}
 	}
 	
 	//obtain the handle to the specified reader
-	NISHandle handle = NIS_GetHandle(readers[readerNum - 1]);
-	if(handle == nullptr) {
+	cie::nis::Token* token = cie::nis::getToken(readers[readerNum - 1]);
+	if(token == nullptr) {
 		std::cerr << "Error obtaining reader handle" << std::endl;
 		exit(-4);
 	}
@@ -79,11 +71,11 @@ int main(int argc, _TCHAR* argv[])
 	char nisData1[NIS_LENGTH+1];	//to take into account for the termination character
 	char nisData2[NIS_LENGTH+1];	//to take into account for the termination character
 	uint32_t uid1, uid2;
-	if(NIS_ReadNis(handle, nisData1, callback1, 1000/*ms*/, &uid1)) {
+	if(token->readNis(nisData1, callback1, 1000/*ms*/, &uid1)) {
 		std::cerr << "Could not start the 1st NIS reading thread" << std::endl;
 		exit(-5);
 	}
-	if(NIS_ReadNis(handle, nisData2, callback2, 1000/*ms*/, &uid2)) {
+	if(token->readNis(nisData2, callback2, 1000/*ms*/, &uid2)) {
 		std::cerr << "Could not start the 2nd NIS reading thread" << std::endl;
 		exit(-6);
 	}
@@ -92,8 +84,8 @@ int main(int argc, _TCHAR* argv[])
 	for(int i = 0; i < 10; ++i)
 			std::this_thread::sleep_for(std::chrono::milliseconds {1000});
 
-	NIS_StopPoll(uid1);
-	NIS_StopPoll(uid2);
+	cie::nis::stopPoll(uid1);
+	cie::nis::stopPoll(uid2);
 
 	return 0;
 }

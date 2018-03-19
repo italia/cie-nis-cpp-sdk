@@ -7,7 +7,8 @@ CFLAGS += -I..
 #test-interactive:
 #test-verify:
 test-nis:
-	$(CXX) -o ../../$(BINDIR)/test-nis $(CFLAGS) example-nis.cpp $(LINK_FLAGS) 
+	$(CXX) -o ../../$(BINDIR)/test-nis-cpp $(CFLAGS) example-nis-cpp.cpp $(LINK_FLAGS) 
+	$(CC) -o ../../$(BINDIR)/test-nis-c $(CFLAGS) example-nis-c.c $(LINK_FLAGS) 
 
 clean:
 	rm -f *.o

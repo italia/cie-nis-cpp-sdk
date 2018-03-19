@@ -4,13 +4,11 @@
 #include <winscard.h>
 #include "token.h"
 
-using namespace nis::interface;
+using namespace cie::nis;
 using namespace std;
 
-namespace nis
-{
-	namespace implementation
-	{
+namespace cie {
+	namespace nis {
 		const std::size_t RESPONSE_SIZE {300};
 
 		class TokenPCSC : public Token
