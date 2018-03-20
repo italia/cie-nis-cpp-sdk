@@ -1,7 +1,7 @@
-/** file uis.h
+/** @file uis.h
  *  @brief UID generator
  *
- *  This file contains an (really simple) helper class that generated unique identifier
+ *  This file contains a (really simple) helper class that generated unique identifier
  */
 
 #ifndef UID_GUARD
