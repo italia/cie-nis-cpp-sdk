@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,8 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="classcie_1_1nis_1_1Token.html">Token</a>() = 0;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="keywordtype">int</span> readNis(<span class="keywordtype">char</span> *<span class="keyword">const</span> nisData, <a class="code" href="nis__types_8h.html#a01a69b218db702baa14290be05ef112d">nis_callback_t</a> callback, uint32_t interval, uint32_t *uid);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            std::string readNis();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="keywordtype">int</span> <a class="code" href="classcie_1_1nis_1_1Token.html#a3c246d7e4a06c864bcadc6db97d1870e">readNis</a>(<span class="keywordtype">char</span> *<span class="keyword">const</span> nisData, <a class="code" href="nis__types_8h.html#a01a69b218db702baa14290be05ef112d">nis_callback_t</a> callback, uint32_t interval, uint32_t *uid);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            std::string <a class="code" href="classcie_1_1nis_1_1Token.html#a3c246d7e4a06c864bcadc6db97d1870e">readNis</a>();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordtype">int</span> configure(uint32_t config);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordtype">int</span> reset();</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">public</span>: <span class="comment">//this should really be private</span></div>
@@ -122,6 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classcie_1_1nis_1_1Token_html_a90c1d8936133fc35b1826b7eebbd13ff"><div class="ttname"><a href="classcie_1_1nis_1_1Token.html#a90c1d8936133fc35b1826b7eebbd13ff">cie::nis::Token::transmit</a></div><div class="ttdeci">virtual TokResult transmit(const std::vector&lt; BYTE &gt; &amp;apdu, std::vector&lt; BYTE &gt; &amp;response) const =0</div></div>
 <div class="ttc" id="classcie_1_1nis_1_1Token_html"><div class="ttname"><a href="classcie_1_1nis_1_1Token.html">cie::nis::Token</a></div><div class="ttdef"><b>Definition:</b> token.h:19</div></div>
 <div class="ttc" id="classcie_1_1nis_1_1Token_html_a851b111864dade8826daa21920fa7cdf"><div class="ttname"><a href="classcie_1_1nis_1_1Token.html#a851b111864dade8826daa21920fa7cdf">cie::nis::Token::disconnect</a></div><div class="ttdeci">virtual TokResult disconnect()=0</div></div>
+<div class="ttc" id="classcie_1_1nis_1_1Token_html_a3c246d7e4a06c864bcadc6db97d1870e"><div class="ttname"><a href="classcie_1_1nis_1_1Token.html#a3c246d7e4a06c864bcadc6db97d1870e">cie::nis::Token::readNis</a></div><div class="ttdeci">std::string readNis()</div><div class="ttdef"><b>Definition:</b> token.cpp:90</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -30,23 +30,25 @@ Include dependency graph for nis.\-cpp\-:
 \includegraphics[width=350pt]{nis_8cpp__incl}
 \end{center}
 \end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacecie}{cie}
+\begin{DoxyCompactList}\small\item\em cie namespace \end{DoxyCompactList}\item 
+\hyperlink{namespacecie_1_1nis}{cie\-::nis}
+\begin{DoxyCompactList}\small\item\em nis namespace \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}{int {\bfseries cie\-::nis\-::init} (uint32\-\_\-t backend\-Bitfield)}\label{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}
-
+int \hyperlink{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}{cie\-::nis\-::init} (uint32\-\_\-t backend\-Bitfield)
 \item 
-\hypertarget{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{vector$<$ string $>$ {\bfseries cie\-::nis\-::readers\-List} ()}\label{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}
-
+vector$<$ string $>$ \hyperlink{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{cie\-::nis\-::readers\-List} ()
 \item 
-\hypertarget{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{\hyperlink{classcie_1_1nis_1_1Token}{Token} $\ast$ {\bfseries cie\-::nis\-::get\-Token} (string reader\-Name)}\label{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}
-
+\hyperlink{classcie_1_1nis_1_1Token}{Token} $\ast$ \hyperlink{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{cie\-::nis\-::get\-Token} (string reader\-Name)
 \item 
-\hypertarget{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}{int {\bfseries cie\-::nis\-::deinit} (uint32\-\_\-t backend\-Bitfield)}\label{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}
-
+int \hyperlink{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}{cie\-::nis\-::deinit} (uint32\-\_\-t backend\-Bitfield)
 \item 
-\hypertarget{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{int {\bfseries cie\-::nis\-::stop\-Poll} (uint32\-\_\-t uid)}\label{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}
-
+int \hyperlink{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{cie\-::nis\-::stop\-Poll} (uint32\-\_\-t uid)
 \item 
 int \hyperlink{nis_8cpp_a1a4da622cc9443c4fc71b276454923da}{N\-I\-S\-\_\-\-Init} (uint32\-\_\-t backend\-Bitfield)
 \item 
@@ -160,23 +162,17 @@ Read the N\-I\-S from the specified token.
 \hline
 \mbox{\tt in}  & {\em callback} & if {\itshape N\-U\-L\-L} the call is blocking and the N\-I\-S is copied inside {\itshape nis\-Data} upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read N\-I\-S \\
 \hline
-\end{DoxyParams}
-\begin{DoxySeeAlso}{See Also}
-\hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} 
-\end{DoxySeeAlso}
-
-\begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em interval} & time in ms between polls \\
 \hline
 \mbox{\tt out}  & {\em the} & U\-I\-D associated to the newly created context of execution \\
 \hline
 \end{DoxyParams}
-\begin{DoxySeeAlso}{See Also}
-\hyperlink{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{N\-I\-S\-\_\-\-Stop\-Poll()} 
-\end{DoxySeeAlso}
 \begin{DoxyReturn}{Returns}
 0 on success, negative on error 
 \end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{N\-I\-S\-\_\-\-Stop\-Poll()} 
+\end{DoxySeeAlso}
 \hypertarget{nis_8cpp_a209375c2a603b38401c2a75074a7ede4}{\index{nis.\-cpp@{nis.\-cpp}!N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}}
 \index{N\-I\-S\-\_\-\-Stop\-Poll@{N\-I\-S\-\_\-\-Stop\-Poll}!nis.cpp@{nis.\-cpp}}
 \subsubsection[{N\-I\-S\-\_\-\-Stop\-Poll}]{\setlength{\rightskip}{0pt plus 5cm}int N\-I\-S\-\_\-\-Stop\-Poll (

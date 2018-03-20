@@ -1,0 +1,129 @@
+\hypertarget{namespacecie_1_1nis}{\section{cie\-:\-:nis Namespace Reference}
+\label{namespacecie_1_1nis}\index{cie\-::nis@{cie\-::nis}}
+}
+
+
+nis namespace  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcie_1_1nis_1_1Reader}{Reader}
+\item 
+class \hyperlink{classcie_1_1nis_1_1ReaderPCSC}{Reader\-P\-C\-S\-C}
+\item 
+class \hyperlink{classcie_1_1nis_1_1Token}{Token}
+\item 
+class \hyperlink{classcie_1_1nis_1_1TokenPCSC}{Token\-P\-C\-S\-C}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}{init} (uint32\-\_\-t backend\-Bitfield)
+\item 
+vector$<$ string $>$ \hyperlink{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{readers\-List} ()
+\item 
+\hyperlink{classcie_1_1nis_1_1Token}{Token} $\ast$ \hyperlink{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{get\-Token} (string reader\-Name)
+\item 
+int \hyperlink{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}{deinit} (uint32\-\_\-t backend\-Bitfield)
+\item 
+int \hyperlink{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{stop\-Poll} (uint32\-\_\-t uid)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacecie_1_1nis_a87d8cc437c39bc9b1462464cc73b9e34}{const std\-::size\-\_\-t {\bfseries R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E} \{300\}}\label{namespacecie_1_1nis_a87d8cc437c39bc9b1462464cc73b9e34}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+nis namespace 
+
+\subsection{Function Documentation}
+\hypertarget{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}{\index{cie\-::nis@{cie\-::nis}!deinit@{deinit}}
+\index{deinit@{deinit}!cie::nis@{cie\-::nis}}
+\subsubsection[{deinit}]{\setlength{\rightskip}{0pt plus 5cm}int cie\-::nis\-::deinit (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{backend\-Bitfield}
+\end{DoxyParamCaption}
+)}}\label{namespacecie_1_1nis_a0c20f013bbac3f773e89a57591af68a9}
+Deinitialize the N\-I\-S sdk backends. Frees all related data, so handlers obtained through \hyperlink{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{get\-Token()} are not valid anymore. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em backend\-Bitfield} & Bitfield representing the backends to be deinitialized, taken from \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594}{Backend\-Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error 
+\end{DoxyReturn}
+\hypertarget{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{\index{cie\-::nis@{cie\-::nis}!get\-Token@{get\-Token}}
+\index{get\-Token@{get\-Token}!cie::nis@{cie\-::nis}}
+\subsubsection[{get\-Token}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Token}$\ast$ cie\-::nis\-::get\-Token (
+\begin{DoxyParamCaption}
+\item[{string}]{reader\-Name}
+\end{DoxyParamCaption}
+)}}\label{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}
+Obtain the handler of a specific reader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reader\-Name} & a string representing the name of the reader. A list of readers name can be obtain invoking \hyperlink{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{readers\-List()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the named \hyperlink{classcie_1_1nis_1_1Token}{Token} object on success, nullptr on error. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{readers\-List()} 
+\end{DoxySeeAlso}
+\hypertarget{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}{\index{cie\-::nis@{cie\-::nis}!init@{init}}
+\index{init@{init}!cie::nis@{cie\-::nis}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}int cie\-::nis\-::init (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{backend\-Bitfield}
+\end{DoxyParamCaption}
+)}}\label{namespacecie_1_1nis_abcdd144762aaa78abbf48a4252ee15e5}
+Initialize the N\-I\-S sdk backends. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em backend\-Bitfield} & Bitfield representing the backends to be initialized, taken from \hyperlink{nis__types_8h_acee299fbb7d897867808250049524594}{Backend\-Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error 
+\end{DoxyReturn}
+\hypertarget{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}{\index{cie\-::nis@{cie\-::nis}!readers\-List@{readers\-List}}
+\index{readers\-List@{readers\-List}!cie::nis@{cie\-::nis}}
+\subsubsection[{readers\-List}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ cie\-::nis\-::readers\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{namespacecie_1_1nis_a90d4445f8f3cc7ab7ea75b8c70aeaf63}
+Obtain the connected reader list. \begin{DoxyReturn}{Returns}
+a vector containing the name of the connected readers. Can be empty in case of error. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespacecie_1_1nis_aadf97fb070ca1d79e93f802d8de769e6}{get\-Token()} 
+\end{DoxySeeAlso}
+\hypertarget{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{\index{cie\-::nis@{cie\-::nis}!stop\-Poll@{stop\-Poll}}
+\index{stop\-Poll@{stop\-Poll}!cie::nis@{cie\-::nis}}
+\subsubsection[{stop\-Poll}]{\setlength{\rightskip}{0pt plus 5cm}int cie\-::nis\-::stop\-Poll (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{uid}
+\end{DoxyParamCaption}
+)}}\label{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}
+Stop the polling on a specified reader started invoking read\-Nis() with a callback function. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em uid} & the U\-I\-D of the context of execution previously obtained from e.\-g. \hyperlink{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{Token\-::read\-Nis()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{Token\-::read\-Nis()} 
+\end{DoxySeeAlso}

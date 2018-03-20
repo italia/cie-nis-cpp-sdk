@@ -76,22 +76,19 @@ Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.cpp...
 Parsing file /home/travis/build/italia/cie-nis-c/home/travis/build/italia/cie-nis-cpp-sdk/src/requests.h:1: warning: the name `request.h' supplied as the second argument in the \file statement is not an input file
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis-c.c:1: warning: the name `example-nis.cpp' supplied as the second argument in the \file statement is not an input file
 /home/travis/build/italia/cie-nis-cpp-sdk/src/test/example-nis-cpp.cpp:1: warning: the name `example-nis.cpp' supplied as the second argument in the \file statement is not an input file
+/home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:1: warning: the name `uis.h' supplied as the second argument in the \file statement is not an input file
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:15: warning: Compound cie::nis::TokenPCSC is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/uid.h:13: warning: Compound Utils is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:20: warning: Compound cie::nis::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:22: warning: Compound cie::nis::Reader is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:20: warning: Compound cie::nis::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:31: warning: Member init(uint32_t backendBitfield) (function) of namespace cie::nis is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:48: warning: Member readersList() (function) of namespace cie::nis is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:68: warning: Member getToken(string readerName) (function) of namespace cie::nis is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:80: warning: Member deinit(uint32_t backendBitfield) (function) of namespace cie::nis is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:94: warning: Member stopPoll(uint32_t uid) (function) of namespace cie::nis is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:228: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:244: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:161: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:161: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:216: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:232: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:192: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:192: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
   parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
@@ -113,7 +110,7 @@ Parsing file /home/travis/build/italia/cie-nis-c/home/travis/build/italia/cie-ni
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:77: warning: The following parameters of NISManager::removeBackend(BackendType backtype) are not documented:
   parameter 'backtype'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:30: warning: explicit link request to 'pollData' could not be resolved
-/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:41: warning: Found unknown command `\aram'
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:12: warning: Member RESPONSE_SIZE (variable) of namespace cie::nis is not documented.
 pp-sdk/src/token_pcsc.cpp...
 Preprocessing /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h...
 Parsing file /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h...
@@ -199,20 +196,21 @@ Generating docs for compound NISManager...
 Generating docs for compound PollExecutor...
 Generating docs for compound Utils...
 Generating namespace index...
-Generating docs for compound cie::nis::Reader...
-Generating docs for compound cie::nis::ReaderPCSC/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:33: warning: Member hasContext() (function) of class cie::nis::ReaderPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:23: warning: Member readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) (function) of class cie::nis::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:24: warning: Member readNis() (function) of class cie::nis::Token is not documented.
+Generating docs for namespace cie
+Generating docs for namespace cie::nis
+Generating docs for compo/home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:41: warning: Found unknown command `\aram'
+/home/travis/build/italia/cie-nis-cpp-sdk/src/reader_pcsc.h:33: warning: Member hasContext() (function) of class cie::nis::ReaderPCSC is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:25: warning: Member configure(uint32_t config) (function) of class cie::nis::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:26: warning: Member reset() (function) of class cie::nis::Token is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.cpp:37: warning: argument 'the' of command @param is not found in the argument list of cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/token.cpp:37: warning: The following parameters of cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+  parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:41: warning: argument 'array' of command @param is not found in the argument list of cie::nis::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:41: warning: argument 'the' of command @param is not found in the argument list of cie::nis::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:41: warning: The following parameters of cie::nis::Token::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const =0 are not documented:
   parameter 'apdu'
   parameter 'response'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:22: warning: Member TokenPCSC(const string &identifier, SCARDCONTEXT context) (function) of class cie::nis::TokenPCSC is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:23: warning: Member readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) (function) of class cie::nis::Token is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:24: warning: Member readNis() (function) of class cie::nis::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:25: warning: Member configure(uint32_t config) (function) of class cie::nis::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h:26: warning: Member reset() (function) of class cie::nis::Token is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:26: warning: argument 'array' of command @param is not found in the argument list of cie::nis::TokenPCSC::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const inherited from member transmit at line 41 in file /home/travis/build/italia/cie-nis-cpp-sdk/src/token.h
@@ -220,7 +218,8 @@ Generating docs for compound cie::nis::ReaderPCSC/home/travis/build/italia/cie-n
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:26: warning: The following parameters of cie::nis::TokenPCSC::transmit(const std::vector< BYTE > &apdu, std::vector< BYTE > &response) const are not documented:
   parameter 'apdu'
   parameter 'response'
-...
+und cie::nis::Reader...
+Generating docs for compound cie::nis::ReaderPCSC...
 Generating docs for compound cie::nis::Token...
 Generating docs for compound cie::nis::TokenPCSC...
 Generating graph info page...
@@ -326,5 +325,5 @@ Patching output file 28/31
 Patching output file 29/31
 Patching output file 30/31
 Patching output file 31/31
-lookup cache used 209/65536 hits=996 misses=217
+lookup cache used 211/65536 hits=1011 misses=219
 finished...

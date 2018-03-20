@@ -11,7 +11,7 @@ This library has been designed with the following requirements\-:
 \begin{DoxyItemize}
 \item highly abstracted to decouple the various backends (P\-C\-S\-C/\-C\-T-\/\-A\-P\-I/proprietary interface), token protocols and high-\/level apdu commands
 \item modern event-\/driven model
-\item plain-\/\-C interface to the outside world, to accomodate for the difference in C++ A\-B\-I
+\item plain-\/\-C and C++ interface to the outside world, to accomodate for the difference in C++ A\-B\-I
 \item highly portable among Operating Systems. All platform dependent code is isolated
 \end{DoxyItemize}\hypertarget{index_subsec-hierarchy}{}\subsection{Hierarchy}\label{index_subsec-hierarchy}
 The abstraction model is implemented through two main classes\-: Reader and Token. The former represents an actual reader class or protocol (usually called a 'backend' throughout the source code, e.\-g. P\-C\-S\-C) while the latter stands for a specific token or card. These are abstract classes so implementors need to subclass them.

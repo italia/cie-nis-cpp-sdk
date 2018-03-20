@@ -14,11 +14,9 @@ Inheritance diagram for cie\-:\-:nis\-:\-:Token\-:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}{int {\bfseries read\-Nis} (char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback, uint32\-\_\-t interval, uint32\-\_\-t $\ast$uid)}\label{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}
-
+int \hyperlink{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}{read\-Nis} (char $\ast$const nis\-Data, \hyperlink{nis__types_8h_a01a69b218db702baa14290be05ef112d}{nis\-\_\-callback\-\_\-t} callback, uint32\-\_\-t interval, uint32\-\_\-t $\ast$uid)
 \item 
-\hypertarget{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{std\-::string {\bfseries read\-Nis} ()}\label{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}
-
+std\-::string \hyperlink{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{read\-Nis} ()
 \item 
 \hypertarget{classcie_1_1nis_1_1Token_ab9147907b6d02c2361c2df2212d17a4d}{int {\bfseries configure} (uint32\-\_\-t config)}\label{classcie_1_1nis_1_1Token_ab9147907b6d02c2361c2df2212d17a4d}
 
@@ -69,6 +67,43 @@ Disconnect to this instance of a token \begin{DoxyReturn}{Returns}
 
 Implemented in \hyperlink{classcie_1_1nis_1_1TokenPCSC_af95dd044db07754ff4ee09e186821fa2}{cie\-::nis\-::\-Token\-P\-C\-S\-C}.
 
+\hypertarget{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!read\-Nis@{read\-Nis}}
+\index{read\-Nis@{read\-Nis}!cie::nis::Token@{cie\-::nis\-::\-Token}}
+\subsubsection[{read\-Nis}]{\setlength{\rightskip}{0pt plus 5cm}int cie\-::nis\-::\-Token\-::read\-Nis (
+\begin{DoxyParamCaption}
+\item[{char $\ast$const}]{nis\-Data, }
+\item[{{\bf nis\-\_\-callback\-\_\-t}}]{callback, }
+\item[{uint32\-\_\-t}]{interval, }
+\item[{uint32\-\_\-t $\ast$}]{uid}
+\end{DoxyParamCaption}
+)}}\label{classcie_1_1nis_1_1Token_ae677403b3b8074b908cb416741f93e9e}
+Read the N\-I\-S contained in this token. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em nis\-Data} & array in which to store the N\-I\-S read back from the token. Should be long enough to contains the entire nis as a C-\/style sring, i.\-e. 12 (N\-I\-S) + 1 (null terminator) = 13 chars \\
+\hline
+\mbox{\tt in}  & {\em callback} & if {\itshape N\-U\-L\-L} the call is blocking and the N\-I\-S is copied inside {\itshape nis\-Data} upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read N\-I\-S \\
+\hline
+\mbox{\tt in}  & {\em interval} & time in ms between polls \\
+\hline
+\mbox{\tt out}  & {\em the} & U\-I\-D associated to the newly created context of execution \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, negative on error 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespacecie_1_1nis_aa031abccb193d600ad1cd71b414abafa}{stop\-Poll()} 
+\end{DoxySeeAlso}
+\hypertarget{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!read\-Nis@{read\-Nis}}
+\index{read\-Nis@{read\-Nis}!cie::nis::Token@{cie\-::nis\-::\-Token}}
+\subsubsection[{read\-Nis}]{\setlength{\rightskip}{0pt plus 5cm}string cie\-::nis\-::\-Token\-::read\-Nis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcie_1_1nis_1_1Token_a3c246d7e4a06c864bcadc6db97d1870e}
+Read the N\-I\-S contained in this token. This method is blocking. \begin{DoxyReturn}{Returns}
+a string representing the N\-I\-S 
+\end{DoxyReturn}
 \hypertarget{classcie_1_1nis_1_1Token_a90c1d8936133fc35b1826b7eebbd13ff}{\index{cie\-::nis\-::\-Token@{cie\-::nis\-::\-Token}!transmit@{transmit}}
 \index{transmit@{transmit}!cie::nis::Token@{cie\-::nis\-::\-Token}}
 \subsubsection[{transmit}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tok\-Result} cie\-::nis\-::\-Token\-::transmit (
