@@ -33,6 +33,15 @@ int cie::nis::Token::reset()
 	return 0;
 }
 
+/** 
+ * Read the NIS contained in this token.
+ * @param[out] nisData array in which to store the NIS read back from the token. Should be long enough to contains the entire nis as a C-style sring, i.e. 12 (NIS) + 1 (null terminator) = 13 chars
+ * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
+ * @param[in] interval time in ms between polls
+ * @param[out] the UID associated to the newly created context of execution
+ * @return 0 on success, negative on error
+ * @see stopPoll()
+ */
 int cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
 {
 	int ret = 0;
@@ -74,6 +83,10 @@ int cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint3
 	return -1;
 }
 
+/** 
+ * Read the NIS contained in this token. This method is blocking.
+ * @return a string representing the NIS
+ */
 string cie::nis::Token::readNis()
 {
 	const size_t lenData = NIS_LENGTH;

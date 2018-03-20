@@ -25,7 +25,7 @@ You can find the interface to this library here: nis.cpp.
 This library has been designed with the following requirements:
 - highly abstracted to decouple the various backends (PCSC/CT-API/proprietary interface), token protocols and high-level apdu commands 
 - modern event-driven model
-- plain-C interface to the outside world, to accomodate for the difference in C++ ABI
+- plain-C and C++ interface to the outside world, to accomodate for the difference in C++ ABI
 - highly portable among Operating Systems. All platform dependent code is isolated
 
 \subsection subsec-hierarchy Hierarchy
