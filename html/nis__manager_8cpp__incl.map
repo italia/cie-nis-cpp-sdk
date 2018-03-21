@@ -1,13 +1,12 @@
 <map id="/home/travis/build/italia/cie&#45;nis&#45;cpp&#45;sdk/src/nis_manager.cpp" name="/home/travis/build/italia/cie&#45;nis&#45;cpp&#45;sdk/src/nis_manager.cpp">
-<area shape="rect" id="node2" href="$nis__manager_8h.html" title="NIS Manager. " alt="" coords="548,109,655,136"/>
-<area shape="rect" id="node3" href="$nis_8h_source.html" title="nis.h" alt="" coords="5,333,56,360"/>
-<area shape="rect" id="node14" href="$reader_8h.html" title="A Reader. " alt="" coords="372,259,441,285"/>
-<area shape="rect" id="node15" href="$token_8h.html" title="A Token. " alt="" coords="213,333,277,360"/>
-<area shape="rect" id="node18" href="$reader__pcsc_8h_source.html" title="reader_pcsc.h" alt="" coords="359,184,463,211"/>
-<area shape="rect" id="node19" href="$token__pcsc_8h_source.html" title="token_pcsc.h" alt="" coords="31,259,131,285"/>
-<area shape="rect" id="node20" href="$requests_8h_source.html" title="requests.h" alt="" coords="207,259,288,285"/>
-<area shape="rect" id="node21" href="$thread_8h_source.html" title="thread.h" alt="" coords="639,184,708,211"/>
-<area shape="rect" id="node25" href="$uid_8h_source.html" title="uid.h" alt="" coords="1153,184,1204,211"/>
-<area shape="rect" id="node5" href="$nis__types_8h.html" title="NIS main header. " alt="" coords="271,408,360,435"/>
-<area shape="rect" id="node23" href="$executor_8h.html" title="Executor thread. " alt="" coords="740,259,847,285"/>
+<area shape="rect" id="node2" href="$nis__manager_8h.html" title="NIS Manager. " alt="" coords="495,109,602,136"/>
+<area shape="rect" id="node3" href="$nis_8h_source.html" title="nis.h" alt="" coords="15,333,66,360"/>
+<area shape="rect" id="node14" href="$reader_8h.html" title="A Reader. " alt="" coords="567,259,636,285"/>
+<area shape="rect" id="node15" href="$token_8h.html" title="A Token. " alt="" coords="725,333,790,360"/>
+<area shape="rect" id="node18" href="$reader__pcsc_8h_source.html" title="reader_pcsc.h" alt="" coords="762,184,866,211"/>
+<area shape="rect" id="node19" href="$token__pcsc_8h_source.html" title="token_pcsc.h" alt="" coords="890,259,990,285"/>
+<area shape="rect" id="node20" href="$requests_8h_source.html" title="requests.h" alt="" coords="715,259,796,285"/>
+<area shape="rect" id="node21" href="$executor_8h.html" title="Executor thread. " alt="" coords="82,184,163,211"/>
+<area shape="rect" id="node23" href="$uid_8h_source.html" title="uid.h" alt="" coords="1031,184,1082,211"/>
+<area shape="rect" id="node5" href="$nis__types_8h.html" title="NIS main header. " alt="" coords="84,408,172,435"/>
 </map>

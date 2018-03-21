@@ -105,64 +105,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="token_8h.html">token.h</a>&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;token_pcsc.h&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;requests.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;thread.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="executor_8h.html">executor.h</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;uid.h&quot;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using namespace </span>cie::nis;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using namespace </span>cie::nis::helper;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classNISManager.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNISManager.html">NISManager</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">   39</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classNISManager.html">NISManager</a>&amp; <a class="code" href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">getInstance</a>()</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">static</span> <a class="code" href="classNISManager.html">NISManager</a> instance;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classNISManager.html">NISManager</a>() {}</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    unordered_map&lt;BackendType,shared_ptr&lt;Reader&gt;,std::hash&lt;int&gt;&gt; backends;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    unordered_map&lt;uint32_t,shared_ptr&lt;PollExecutor&gt;&gt; executors;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    vector&lt;string&gt; readers;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">char</span> *idList;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    mutex execMutex;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classNISManager.html">NISManager</a>(<span class="keyword">const</span> <a class="code" href="classNISManager.html">NISManager</a> &amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="classNISManager.html">NISManager</a> &amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">   67</a></span>&#160;    <span class="keyword">const</span> unordered_map&lt;BackendType,shared_ptr&lt;Reader&gt;,std::hash&lt;int&gt;&gt; &amp;<a class="code" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">getBackends</a>() { <span class="keywordflow">return</span> backends; };</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">   75</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">addBackend</a>(<a class="code" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt;Reader&gt; backend) { backends[backtype] = backend; }</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">   82</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">removeBackend</a>(<a class="code" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype) { </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">auto</span> it = backends.find(backtype);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">if</span>(it != backends.end()) { </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            backends.erase(it); </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        } </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">   93</a></span>&#160;    vector&lt;string&gt; &amp;<a class="code" href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">getReaders</a>() { <span class="keywordflow">return</span> readers; }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">  104</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">addExecutor</a>(uint32_t uid, shared_ptr&lt;PollExecutor&gt; ex) { executors[uid] = ex; }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    shared_ptr&lt;PollExecutor&gt; removeExecutor(uint32_t uid, <span class="keywordtype">bool</span> mustLock=<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> removeAllExecutors() { vector&lt;uint32_t&gt; keys; lock_guard&lt;mutex&gt; lock{execMutex}; <span class="keywordflow">for</span>(<span class="keyword">auto</span> it : executors) keys.push_back(it.first); <span class="keywordflow">for</span>(<span class="keyword">auto</span> it : keys) removeExecutor(it, <span class="keyword">false</span>); }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> lockExecutors() { execMutex.lock(); }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> unlockExecutors() { execMutex.unlock(); }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">char</span>* getIdentifiersList() { <span class="keywordflow">return</span> idList; }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> deleteIdentifiersList() { <span class="keywordflow">if</span>(idList) <span class="keyword">delete</span>[] idList; }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">char</span>* allocateIdentifiersList(<span class="keywordtype">size_t</span> len) { deleteIdentifiersList(); idList = <span class="keyword">new</span> <span class="keywordtype">char</span>[len]; <span class="keywordflow">return</span> idList; }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classNISManager.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNISManager.html">NISManager</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">   38</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classNISManager.html">NISManager</a>&amp; <a class="code" href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">getInstance</a>()</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">static</span> <a class="code" href="classNISManager.html">NISManager</a> instance;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classNISManager.html">NISManager</a>() {}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    unordered_map&lt;BackendType,shared_ptr&lt;Reader&gt;,std::hash&lt;int&gt;&gt; backends;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    unordered_map&lt;uint32_t,shared_ptr&lt;PollExecutor&gt;&gt; executors;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    vector&lt;string&gt; readers;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">char</span> *idList;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    mutex execMutex;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classNISManager.html">NISManager</a>(<span class="keyword">const</span> <a class="code" href="classNISManager.html">NISManager</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="classNISManager.html">NISManager</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">   66</a></span>&#160;    <span class="keyword">const</span> unordered_map&lt;BackendType,shared_ptr&lt;Reader&gt;,std::hash&lt;int&gt;&gt; &amp;<a class="code" href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">getBackends</a>() { <span class="keywordflow">return</span> backends; };</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">   74</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">addBackend</a>(<a class="code" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype, shared_ptr&lt;Reader&gt; backend) { backends[backtype] = backend; }</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">   81</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">removeBackend</a>(<a class="code" href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a> backtype) { </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">auto</span> it = backends.find(backtype);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">if</span>(it != backends.end()) { </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            backends.erase(it); </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        } </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">   92</a></span>&#160;    vector&lt;string&gt; &amp;<a class="code" href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">getReaders</a>() { <span class="keywordflow">return</span> readers; }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">  103</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">addExecutor</a>(uint32_t uid, shared_ptr&lt;PollExecutor&gt; ex) { executors[uid] = ex; }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    shared_ptr&lt;PollExecutor&gt; removeExecutor(uint32_t uid, <span class="keywordtype">bool</span> mustLock=<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> removeAllExecutors() { vector&lt;uint32_t&gt; keys; lock_guard&lt;mutex&gt; lock{execMutex}; <span class="keywordflow">for</span>(<span class="keyword">auto</span> it : executors) keys.push_back(it.first); <span class="keywordflow">for</span>(<span class="keyword">auto</span> it : keys) removeExecutor(it, <span class="keyword">false</span>); }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> lockExecutors() { execMutex.lock(); }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> unlockExecutors() { execMutex.unlock(); }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">char</span>* getIdentifiersList() { <span class="keywordflow">return</span> idList; }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> deleteIdentifiersList() { <span class="keywordflow">if</span>(idList) <span class="keyword">delete</span>[] idList; }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">char</span>* allocateIdentifiersList(<span class="keywordtype">size_t</span> len) { deleteIdentifiersList(); idList = <span class="keyword">new</span> <span class="keywordtype">char</span>[len]; <span class="keywordflow">return</span> idList; }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="reader_8h_html"><div class="ttname"><a href="reader_8h.html">reader.h</a></div><div class="ttdoc">A Reader. </div></div>
-<div class="ttc" id="classNISManager_html"><div class="ttname"><a href="classNISManager.html">NISManager</a></div><div class="ttdef"><b>Definition:</b> nis_manager.h:33</div></div>
+<div class="ttc" id="classNISManager_html"><div class="ttname"><a href="classNISManager.html">NISManager</a></div><div class="ttdef"><b>Definition:</b> nis_manager.h:32</div></div>
+<div class="ttc" id="executor_8h_html"><div class="ttname"><a href="executor_8h.html">executor.h</a></div><div class="ttdoc">Executor thread. </div></div>
 <div class="ttc" id="nis__types_8h_html_acee299fbb7d897867808250049524594"><div class="ttname"><a href="nis__types_8h.html#acee299fbb7d897867808250049524594">BackendType</a></div><div class="ttdeci">BackendType</div><div class="ttdef"><b>Definition:</b> nis_types.h:41</div></div>
-<div class="ttc" id="classNISManager_html_ae1ff32a0e450569a8091fb5373874d7e"><div class="ttname"><a href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">NISManager::removeBackend</a></div><div class="ttdeci">void removeBackend(BackendType backtype)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:82</div></div>
-<div class="ttc" id="classNISManager_html_a6cad1a44e5ca799fc820c40fecd5cbf2"><div class="ttname"><a href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">NISManager::getBackends</a></div><div class="ttdeci">const unordered_map&lt; BackendType, shared_ptr&lt; Reader &gt;, std::hash&lt; int &gt; &gt; &amp; getBackends()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:67</div></div>
-<div class="ttc" id="classNISManager_html_a27a3db14eb804948d4031f115d3f6234"><div class="ttname"><a href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">NISManager::getReaders</a></div><div class="ttdeci">vector&lt; string &gt; &amp; getReaders()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:93</div></div>
-<div class="ttc" id="classNISManager_html_a40aeca3b6e971ecb75495e2eae06c967"><div class="ttname"><a href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">NISManager::addExecutor</a></div><div class="ttdeci">void addExecutor(uint32_t uid, shared_ptr&lt; PollExecutor &gt; ex)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:104</div></div>
-<div class="ttc" id="classNISManager_html_a16f0f685a40a858762febd50f158b0ab"><div class="ttname"><a href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">NISManager::addBackend</a></div><div class="ttdeci">void addBackend(BackendType backtype, shared_ptr&lt; Reader &gt; backend)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:75</div></div>
+<div class="ttc" id="classNISManager_html_ae1ff32a0e450569a8091fb5373874d7e"><div class="ttname"><a href="classNISManager.html#ae1ff32a0e450569a8091fb5373874d7e">NISManager::removeBackend</a></div><div class="ttdeci">void removeBackend(BackendType backtype)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:81</div></div>
+<div class="ttc" id="classNISManager_html_a6cad1a44e5ca799fc820c40fecd5cbf2"><div class="ttname"><a href="classNISManager.html#a6cad1a44e5ca799fc820c40fecd5cbf2">NISManager::getBackends</a></div><div class="ttdeci">const unordered_map&lt; BackendType, shared_ptr&lt; Reader &gt;, std::hash&lt; int &gt; &gt; &amp; getBackends()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:66</div></div>
+<div class="ttc" id="classNISManager_html_a27a3db14eb804948d4031f115d3f6234"><div class="ttname"><a href="classNISManager.html#a27a3db14eb804948d4031f115d3f6234">NISManager::getReaders</a></div><div class="ttdeci">vector&lt; string &gt; &amp; getReaders()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:92</div></div>
+<div class="ttc" id="classNISManager_html_a40aeca3b6e971ecb75495e2eae06c967"><div class="ttname"><a href="classNISManager.html#a40aeca3b6e971ecb75495e2eae06c967">NISManager::addExecutor</a></div><div class="ttdeci">void addExecutor(uint32_t uid, shared_ptr&lt; PollExecutor &gt; ex)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:103</div></div>
+<div class="ttc" id="classNISManager_html_a16f0f685a40a858762febd50f158b0ab"><div class="ttname"><a href="classNISManager.html#a16f0f685a40a858762febd50f158b0ab">NISManager::addBackend</a></div><div class="ttdeci">void addBackend(BackendType backtype, shared_ptr&lt; Reader &gt; backend)</div><div class="ttdef"><b>Definition:</b> nis_manager.h:74</div></div>
 <div class="ttc" id="token_8h_html"><div class="ttname"><a href="token_8h.html">token.h</a></div><div class="ttdoc">A Token. </div></div>
-<div class="ttc" id="classNISManager_html_af6a7f2cb644fe38ef43b2ed9323506c7"><div class="ttname"><a href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">NISManager::getInstance</a></div><div class="ttdeci">static NISManager &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:39</div></div>
+<div class="ttc" id="classNISManager_html_af6a7f2cb644fe38ef43b2ed9323506c7"><div class="ttname"><a href="classNISManager.html#af6a7f2cb644fe38ef43b2ed9323506c7">NISManager::getInstance</a></div><div class="ttdeci">static NISManager &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> nis_manager.h:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

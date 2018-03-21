@@ -85,29 +85,29 @@ Parsing file /home/travis/build/italia/cie-nis-c/home/travis/build/italia/cie-ni
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:23: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:32: warning: Documentation for undefined enum `Represents' found.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:39: warning: Documentation for undefined enum `Represents' found.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:216: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:232: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:192: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:192: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:214: warning: Member NIS_ConfigHandle(NISHandle handle, uint32_t config) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:230: warning: Member NIS_Reset(NISHandle handle) (function) of file nis.cpp is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: argument 'the' of command @param is not found in the argument list of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis.cpp:190: warning: The following parameters of NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid) are not documented:
   parameter 'uid'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:13: warning: Member NIS_LENGTH (macro definition) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:25: warning: Member TokResult (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:34: warning: Member ReaderResult (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/nis_types.h:41: warning: Member BackendType (enumeration) of file nis_types.h is not documented.
 /home/travis/build/italia/cie-nis-cpp-sdk/src/reader.h:2: warning: explicit link request to 'Token' could not be resolved
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:59: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:105: warning: Member removeExecutor(uint32_t uid, bool mustLock=true) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:106: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:107: warning: Member lockExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:108: warning: Member unlockExecutors() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:110: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:111: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:112: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:69: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:69: warning: The following parameters of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:58: warning: Member operator=(const NISManager &)=delete (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:104: warning: Member removeExecutor(uint32_t uid, bool mustLock=true) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:105: warning: Member removeAllExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:106: warning: Member lockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:107: warning: Member unlockExecutors() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:109: warning: Member getIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:110: warning: Member deleteIdentifiersList() (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:111: warning: Member allocateIdentifiersList(size_t len) (function) of class NISManager is not documented.
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:68: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:68: warning: The following parameters of NISManager::addBackend(BackendType backtype, shared_ptr< Reader > backend) are not documented:
   parameter 'backtype'
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:77: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::removeBackend(BackendType backtype)
-/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:77: warning: The following parameters of NISManager::removeBackend(BackendType backtype) are not documented:
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:76: warning: argument 'backendType' of command @param is not found in the argument list of NISManager::removeBackend(BackendType backtype)
+/home/travis/build/italia/cie-nis-cpp-sdk/src/nis_manager.h:76: warning: The following parameters of NISManager::removeBackend(BackendType backtype) are not documented:
   parameter 'backtype'
 /home/travis/build/italia/cie-nis-cpp-sdk/src/executor.h:30: warning: explicit link request to 'pollData' could not be resolved
 /home/travis/build/italia/cie-nis-cpp-sdk/src/token_pcsc.h:12: warning: Member RESPONSE_SIZE (variable) of namespace cie::nis is not documented.
@@ -325,5 +325,5 @@ Patching output file 28/31
 Patching output file 29/31
 Patching output file 30/31
 Patching output file 31/31
-lookup cache used 211/65536 hits=1011 misses=219
+lookup cache used 210/65536 hits=954 misses=218
 finished...
