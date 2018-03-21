@@ -38,7 +38,7 @@ addons:
     - doxygen-gui
     - graphviz
 
-script: autoreconf -f -i && ./configure && make
+script: make maintainer-clean && autoreconf -f -i && ./configure && make
 
 # Generate and deploy documentation
 after_success:
