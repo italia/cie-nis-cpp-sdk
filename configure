@@ -5411,41 +5411,7 @@ else
 fi
 
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -std=c++11" >&5
-$as_echo_n "checking whether C compiler accepts -std=c++11... " >&6; }
-if ${ax_cv_check_cflags___std_cpp11+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-
-  ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -std=c++11"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___std_cpp11=yes
-else
-  ax_cv_check_cflags___std_cpp11=no
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-  CFLAGS=$ax_check_save_flags
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___std_cpp11" >&5
-$as_echo "$ax_cv_check_cflags___std_cpp11" >&6; }
-if test "x$ax_cv_check_cflags___std_cpp11" = xyes; then :
-  CXXFLAGS="$CXXFLAGS -std=c++11"
-else
-  exit -1
-fi
-
+#AX_CHECK_COMPILE_FLAG([-std=c++11], [CXXFLAGS="$CXXFLAGS -std=c++11"], [exit -1])a
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for SCardConnect in -lpcsclite" >&5
 $as_echo_n "checking for SCardConnect in -lpcsclite... " >&6; }
