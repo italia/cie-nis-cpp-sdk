@@ -18,12 +18,10 @@
 #include "token.h"
 #include "token_pcsc.h"
 #include "requests.h"
-#include "thread.h"
 #include "uid.h"
 #include "nis_manager.h"
 
 using namespace cie::nis;
-using namespace cie::nis::helper;
 using namespace std;
 
 //! cie namespace
