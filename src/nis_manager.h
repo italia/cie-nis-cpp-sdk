@@ -21,11 +21,10 @@
 #include "token.h"
 #include "token_pcsc.h"
 #include "requests.h"
-#include "thread.h"
+#include "executor.h"
 #include "uid.h"
 
 using namespace cie::nis;
-using namespace cie::nis::helper;
 
 /**
  * Singleton that manages backends list, tokens and associated executors.
