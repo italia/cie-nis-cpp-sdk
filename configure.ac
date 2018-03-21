@@ -3,7 +3,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AM_PROG_AR
 AC_PROG_CC
 AC_PROG_CXX
-AX_CHECK_COMPILE_FLAG([-std=c++11], [CFLAGS+=" -std=c++11"],[echo "C++ compiler cannot compile C++11 code" exit -1])
+AX_CHECK_COMPILE_FLAG([-std=c++11], [CXXFLAGS="$CXXFLAGS -std=c++11"], [exit -1])
 AC_PROG_INSTALL
 AC_CHECK_LIB([pcsclite],[SCardConnect])
 AC_SEARCH_LIBS([SCardConnect],[pcsclite])
