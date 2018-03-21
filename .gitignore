@@ -1,5 +1,6 @@
 #artifacts
 bin/
+autom4te.cache/
 
 # Prerequisites
 *.d
