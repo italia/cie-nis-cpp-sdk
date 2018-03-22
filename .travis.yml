@@ -42,6 +42,6 @@ script: autoreconf -f -i && ./configure && make
 
 # Generate and deploy documentation
 after_success:
-  - cd $TRAVIS_BUILD_DIR
+  - cd $TRAVIS_BUILD_DIR/docs
   - chmod +x generateDocumentationAndDeploy.sh
   - ./generateDocumentationAndDeploy.sh
