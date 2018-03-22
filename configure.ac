@@ -9,6 +9,11 @@ AC_CHECK_LIB([pcsclite],[SCardConnect])
 AC_SEARCH_LIBS([SCardConnect],[pcsclite])
 #AC_CHECK_HEADERS([winscard.h PCSC/winscard.h],[],[AC_MSG_ERROR([Couldn't find or include winscard.h (consider installing pcsclite-dev package)])])
 PKG_CHECK_MODULES(PCSC, libpcsclite > 0.20)
+AC_CHECK_PROGS([DOXYGEN], [doxygen])
+	if test -z "$DOXYGEN";
+		   then AC_MSG_WARN([Doxygen not found - continuing without Doxygen support])
+	fi
+	AM_CONDITIONAL([HAVE_DOXYGEN], [test -n "$DOXYGEN"])AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([docs/Doxyfile docs/Makefile])])
 AC_CHECK_FUNCS([atexit])
 AC_CHECK_HEADERS([stddef.h])
 AC_CHECK_HEADER_STDBOOL
