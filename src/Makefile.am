@@ -1,12 +1,12 @@
 AM_CXXFLAGS=$(CXXFLAGS) -std=c++11
 
 lib_LTLIBRARIES = libcienis.la
-libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h
+libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h ber/cie_BerReader.cpp ber/cie_BerReader.h ber/cie_BerTriple.h digest.cpp digest.h sod.cpp sod.h
 libcienis_la_CPPFLAGS = $(PCSC_CFLAGS)
-libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS)
+libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS) $(CRYPTO_LIBS)
 pkginclude_HEADERS = nis.h nis_types.h token.h
 
-bin_PROGRAMS = testnisc testniscpp
+bin_PROGRAMS = testnisc testniscpp testnissod
 
 testnisc_SOURCES = test/example-nis-c.c
 testnisc_LDADD = libcienis.la
@@ -15,3 +15,7 @@ testnisc_CPPFLAGS = $(PCSC_CFLAGS)
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
 testniscpp_CPPFLAGS = $(PCSC_CFLAGS)
+
+testnissod_SOURCES = test/example-nis-sod.cpp
+testnissod_LDADD = libcienis.la
+testnissod_CPPFLAGS = $(PCSC_CFLAGS)
