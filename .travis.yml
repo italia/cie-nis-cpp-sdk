@@ -32,6 +32,7 @@ addons:
   apt:
     packages:
     - libpcsclite-dev
+    - libcrypto++-dev
     - doxygen
     - doxygen-doc
     - doxygen-latex
