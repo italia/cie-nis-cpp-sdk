@@ -90,13 +90,11 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = testnisc$(EXEEXT) testniscpp$(EXEEXT)
+bin_PROGRAMS = testnisc$(EXEEXT) testniscpp$(EXEEXT) \
+	testnissod$(EXEEXT)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(pkginclude_HEADERS) \
@@ -136,10 +134,13 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(pkgincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libcienis_la_LIBADD =
+am__dirstamp = $(am__leading_dot)dirstamp
 am_libcienis_la_OBJECTS = libcienis_la-nis.lo \
 	libcienis_la-nis_manager.lo libcienis_la-reader.lo \
 	libcienis_la-reader_pcsc.lo libcienis_la-requests.lo \
-	libcienis_la-token.lo libcienis_la-token_pcsc.lo
+	libcienis_la-token.lo libcienis_la-token_pcsc.lo \
+	ber/libcienis_la-cie_BerReader.lo libcienis_la-digest.lo \
+	libcienis_la-sod.lo
 libcienis_la_OBJECTS = $(am_libcienis_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -149,13 +150,15 @@ libcienis_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(libcienis_la_LDFLAGS) $(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
-am__dirstamp = $(am__leading_dot)dirstamp
 am_testnisc_OBJECTS = test/testnisc-example-nis-c.$(OBJEXT)
 testnisc_OBJECTS = $(am_testnisc_OBJECTS)
 testnisc_DEPENDENCIES = libcienis.la
 am_testniscpp_OBJECTS = test/testniscpp-example-nis-cpp.$(OBJEXT)
 testniscpp_OBJECTS = $(am_testniscpp_OBJECTS)
 testniscpp_DEPENDENCIES = libcienis.la
+am_testnissod_OBJECTS = test/testnissod-example-nis-sod.$(OBJEXT)
+testnissod_OBJECTS = $(am_testnissod_OBJECTS)
+testnissod_DEPENDENCIES = libcienis.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -209,9 +212,9 @@ am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = $(libcienis_la_SOURCES) $(testnisc_SOURCES) \
-	$(testniscpp_SOURCES)
+	$(testniscpp_SOURCES) $(testnissod_SOURCES)
 DIST_SOURCES = $(libcienis_la_SOURCES) $(testnisc_SOURCES) \
-	$(testniscpp_SOURCES)
+	$(testniscpp_SOURCES) $(testnissod_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -250,7 +253,6 @@ AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
-CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
@@ -368,9 +370,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = $(CXXFLAGS) -std=c++11
 lib_LTLIBRARIES = libcienis.la
-libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h
+libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h ber/cie_BerReader.cpp ber/cie_BerReader.h ber/cie_BerTriple.h digest.cpp digest.h sod.cpp sod.h
 libcienis_la_CPPFLAGS = $(PCSC_CFLAGS)
-libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS)
+libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS) $(CRYPTO_LIBS)
 pkginclude_HEADERS = nis.h nis_types.h token.h
 testnisc_SOURCES = test/example-nis-c.c
 testnisc_LDADD = libcienis.la
@@ -378,6 +380,9 @@ testnisc_CPPFLAGS = $(PCSC_CFLAGS)
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
 testniscpp_CPPFLAGS = $(PCSC_CFLAGS)
+testnissod_SOURCES = test/example-nis-sod.cpp
+testnissod_LDADD = libcienis.la
+testnissod_CPPFLAGS = $(PCSC_CFLAGS)
 all: all-am
 
 .SUFFIXES:
@@ -446,6 +451,14 @@ clean-libLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+ber/$(am__dirstamp):
+	@$(MKDIR_P) ber
+	@: > ber/$(am__dirstamp)
+ber/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ber/$(DEPDIR)
+	@: > ber/$(DEPDIR)/$(am__dirstamp)
+ber/libcienis_la-cie_BerReader.lo: ber/$(am__dirstamp) \
+	ber/$(DEPDIR)/$(am__dirstamp)
 
 libcienis.la: $(libcienis_la_OBJECTS) $(libcienis_la_DEPENDENCIES) $(EXTRA_libcienis_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libcienis_la_LINK) -rpath $(libdir) $(libcienis_la_OBJECTS) $(libcienis_la_LIBADD) $(LIBS)
@@ -516,23 +529,35 @@ test/testniscpp-example-nis-cpp.$(OBJEXT): test/$(am__dirstamp) \
 testniscpp$(EXEEXT): $(testniscpp_OBJECTS) $(testniscpp_DEPENDENCIES) $(EXTRA_testniscpp_DEPENDENCIES) 
 	@rm -f testniscpp$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(testniscpp_OBJECTS) $(testniscpp_LDADD) $(LIBS)
+test/testnissod-example-nis-sod.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+
+testnissod$(EXEEXT): $(testnissod_OBJECTS) $(testnissod_DEPENDENCIES) $(EXTRA_testnissod_DEPENDENCIES) 
+	@rm -f testnissod$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(testnissod_OBJECTS) $(testnissod_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ber/*.$(OBJEXT)
+	-rm -f ber/*.lo
 	-rm -f test/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-digest.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-nis.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-nis_manager.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-reader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-reader_pcsc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-requests.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-sod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-token.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-token_pcsc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@ber/$(DEPDIR)/libcienis_la-cie_BerReader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testnisc-example-nis-c.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testniscpp-example-nis-cpp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testnissod-example-nis-sod.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -645,6 +670,27 @@ libcienis_la-token_pcsc.lo: token_pcsc.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libcienis_la-token_pcsc.lo `test -f 'token_pcsc.cpp' || echo '$(srcdir)/'`token_pcsc.cpp
 
+ber/libcienis_la-cie_BerReader.lo: ber/cie_BerReader.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ber/libcienis_la-cie_BerReader.lo -MD -MP -MF ber/$(DEPDIR)/libcienis_la-cie_BerReader.Tpo -c -o ber/libcienis_la-cie_BerReader.lo `test -f 'ber/cie_BerReader.cpp' || echo '$(srcdir)/'`ber/cie_BerReader.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) ber/$(DEPDIR)/libcienis_la-cie_BerReader.Tpo ber/$(DEPDIR)/libcienis_la-cie_BerReader.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ber/cie_BerReader.cpp' object='ber/libcienis_la-cie_BerReader.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ber/libcienis_la-cie_BerReader.lo `test -f 'ber/cie_BerReader.cpp' || echo '$(srcdir)/'`ber/cie_BerReader.cpp
+
+libcienis_la-digest.lo: digest.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libcienis_la-digest.lo -MD -MP -MF $(DEPDIR)/libcienis_la-digest.Tpo -c -o libcienis_la-digest.lo `test -f 'digest.cpp' || echo '$(srcdir)/'`digest.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcienis_la-digest.Tpo $(DEPDIR)/libcienis_la-digest.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='digest.cpp' object='libcienis_la-digest.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libcienis_la-digest.lo `test -f 'digest.cpp' || echo '$(srcdir)/'`digest.cpp
+
+libcienis_la-sod.lo: sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libcienis_la-sod.lo -MD -MP -MF $(DEPDIR)/libcienis_la-sod.Tpo -c -o libcienis_la-sod.lo `test -f 'sod.cpp' || echo '$(srcdir)/'`sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcienis_la-sod.Tpo $(DEPDIR)/libcienis_la-sod.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sod.cpp' object='libcienis_la-sod.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libcienis_la-sod.lo `test -f 'sod.cpp' || echo '$(srcdir)/'`sod.cpp
+
 test/testniscpp-example-nis-cpp.o: test/example-nis-cpp.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testniscpp_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/testniscpp-example-nis-cpp.o -MD -MP -MF test/$(DEPDIR)/testniscpp-example-nis-cpp.Tpo -c -o test/testniscpp-example-nis-cpp.o `test -f 'test/example-nis-cpp.cpp' || echo '$(srcdir)/'`test/example-nis-cpp.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/testniscpp-example-nis-cpp.Tpo test/$(DEPDIR)/testniscpp-example-nis-cpp.Po
@@ -659,11 +705,26 @@ test/testniscpp-example-nis-cpp.obj: test/example-nis-cpp.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testniscpp_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testniscpp-example-nis-cpp.obj `if test -f 'test/example-nis-cpp.cpp'; then $(CYGPATH_W) 'test/example-nis-cpp.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-cpp.cpp'; fi`
 
+test/testnissod-example-nis-sod.o: test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/testnissod-example-nis-sod.o -MD -MP -MF test/$(DEPDIR)/testnissod-example-nis-sod.Tpo -c -o test/testnissod-example-nis-sod.o `test -f 'test/example-nis-sod.cpp' || echo '$(srcdir)/'`test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/testnissod-example-nis-sod.Tpo test/$(DEPDIR)/testnissod-example-nis-sod.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/example-nis-sod.cpp' object='test/testnissod-example-nis-sod.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testnissod-example-nis-sod.o `test -f 'test/example-nis-sod.cpp' || echo '$(srcdir)/'`test/example-nis-sod.cpp
+
+test/testnissod-example-nis-sod.obj: test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/testnissod-example-nis-sod.obj -MD -MP -MF test/$(DEPDIR)/testnissod-example-nis-sod.Tpo -c -o test/testnissod-example-nis-sod.obj `if test -f 'test/example-nis-sod.cpp'; then $(CYGPATH_W) 'test/example-nis-sod.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-sod.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/testnissod-example-nis-sod.Tpo test/$(DEPDIR)/testnissod-example-nis-sod.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/example-nis-sod.cpp' object='test/testnissod-example-nis-sod.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testnissod-example-nis-sod.obj `if test -f 'test/example-nis-sod.cpp'; then $(CYGPATH_W) 'test/example-nis-sod.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-sod.cpp'; fi`
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf ber/.libs ber/_libs
 install-pkgincludeHEADERS: $(pkginclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
@@ -803,6 +864,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f ber/$(DEPDIR)/$(am__dirstamp)
+	-rm -f ber/$(am__dirstamp)
 	-rm -f test/$(DEPDIR)/$(am__dirstamp)
 	-rm -f test/$(am__dirstamp)
 
@@ -815,7 +878,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) test/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) ber/$(DEPDIR) test/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -861,7 +924,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) test/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) ber/$(DEPDIR) test/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

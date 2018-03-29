@@ -33,6 +33,8 @@ struct PollExecutor {
 	uint32_t interval_ms;
 	/** unique identifier that represents this executor */
 	uint32_t uid;
+	/** method of authetication, see ::AuthType */
+	AuthType auth;
 };
 
 #endif

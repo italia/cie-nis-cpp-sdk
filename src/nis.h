@@ -15,7 +15,7 @@ extern "C" {
 	int NIS_Init(uint32_t backendBitfield);
 	int NIS_ReaderList(char **readers, size_t *len);
 	NISHandle NIS_GetHandle(char *readerName);
-	int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid);
+	int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid, enum AuthType auth);
 	int NIS_ConfigHandle(NISHandle handle, uint32_t config);
 	int NIS_Deinit(uint32_t backendBitfield);
 	int NIS_Reset(NISHandle handle);

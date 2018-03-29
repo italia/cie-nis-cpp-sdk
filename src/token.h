@@ -13,6 +13,8 @@
 #include <memory>
 #include <winscard.h>
 #include "nis_types.h"
+#include "sod.h"
+#include "ber/cie_BerTriple.h"
 
 namespace cie {
 	namespace nis {
@@ -20,8 +22,9 @@ namespace cie {
 		{
 		public:
 			virtual ~Token() = 0;
-			int readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid);
-			std::string readNis();
+			int readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid, AuthType auth);
+			std::string readNis(AuthType auth);
+			int parseSod(cieBerTripleCallbackFunc callback, Sod *sod);
 			int configure(uint32_t config);
 			int reset();
 		public:	//this should really be private
@@ -44,6 +47,8 @@ namespace cie {
 			 * @return ::TokResult representing the success or error condition
 			 */
 			virtual TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response) const = 0;
+
+			bool readBinaryContent(const cie_EFPath filePath, byte *contentBuffer, word startingOffset, const word contentLength);
 		};
 	}
 }

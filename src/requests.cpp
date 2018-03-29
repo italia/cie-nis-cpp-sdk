@@ -50,6 +50,7 @@ bool Requests::select_df_cie(const Token &card, std::vector<BYTE> &response)
 	} 
 	return true;
 }
+
 bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> readNIS = {0x00, // CLA
