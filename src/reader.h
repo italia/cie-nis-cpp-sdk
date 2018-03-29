@@ -9,6 +9,7 @@
 #ifndef READER_GUARD
 #define READER_GUARD
 
+#include <string>
 #include <vector>
 #include <unordered_map>
 #include "nis_types.h"
