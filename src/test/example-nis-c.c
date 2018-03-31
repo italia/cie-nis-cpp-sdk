@@ -72,8 +72,7 @@ int main(int argc, _TCHAR* argv[])
 			printf("(%d) %s\n", (i + 1), readers[i]);
 		}
 		printf("Select a reader\n");
-		scanf("%d", &readerNum);
-		if (readerNum < 1 || readerNum > readersSize) {
+		if (scanf("%d", &readerNum) != 1 || readerNum < 1 || readerNum > readersSize) {
 			printf("Reader not found\n");
 			exit(-3);
 		}

@@ -9,6 +9,7 @@ AC_CHECK_LIB([pcsclite],[SCardConnect])
 AC_SEARCH_LIBS([SCardConnect],[pcsclite])
 #AC_CHECK_HEADERS([winscard.h PCSC/winscard.h],[],[AC_MSG_ERROR([Couldn't find or include winscard.h (consider installing pcsclite-dev package)])])
 PKG_CHECK_MODULES(PCSC, libpcsclite > 0.20)
+PKG_CHECK_MODULES(SSL, libssl > 1.0)
 
 AC_MSG_CHECKING([for libcrypto++])
 AC_LANG(C++)
