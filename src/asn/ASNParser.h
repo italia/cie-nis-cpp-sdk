@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <winscard.h>
+#include "../util/array.h"
 
 size_t GetASN1DataLenght(ByteArray &data);
 

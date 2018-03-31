@@ -1,8 +1,11 @@
 #include "array.h"
-#include <opensll/rand.h>
+#include "limits.h"
+#include <openssl/rand.h>
 #include <fstream>
-#include <bcrypt.h>
+#include <string.h>
+#include <sys/time.h>
 
+using namespace std;
 
 ByteArray::ByteArray() {
 	_data = nullptr;
@@ -86,13 +89,13 @@ bool ByteArray::operator!=(const ByteArray &src) const {
 void ByteArray::copy(const ByteArray &src, size_t start) {
 	if (src._size + start>_size)
 		throw logged_error(stdPrintf("Dimensione array da copiare %i troppo grande; dimensione massima %i", src._size + start, _size));
-	::memcpy_s(_data + start, _size - (start), src._data, src._size);
+	memcpy/*_s*/(_data + start/*, _size - (start)*/, src._data, src._size);
 }
 
 void ByteArray::rightcopy(const ByteArray &src, size_t end) {
 	if (src._size + end>_size)
 		throw logged_error(stdPrintf("Dimensione array da copiare %i troppo grande; dimensione massima %i", src._size + end, _size));
-	::memcpy_s(_data + _size - end - src._size, (end + src._size), src._data, src._size);
+	memcpy/*_s*/(_data + _size - end - src._size/*, (end + src._size)*/, src._data, src._size);
 }
 
 ByteArray &ByteArray::fill(const uint8_t value) {
@@ -121,10 +124,10 @@ ByteArray &ByteArray::random() {
 #else
 class init_rnd {
 public:
-	initRand() {
-		SYSTEMTIME tm;
-		GetSystemTime(&tm);
-		RAND_seed(&tm, sizeof(SYSTEMTIME));
+	void initRand() {
+		struct timeval now;
+		gettimeofday(&now, NULL);
+		RAND_seed(&now, sizeof(timeval));
 	}
 } _initRand;
 
@@ -196,7 +199,8 @@ ByteDynArray ByteArray::getASN1Tag(unsigned int tag) const {
 	size_t ll = ASN1LLength(size());
 	ByteDynArray result(tl + ll + size());
 	putASN1Tag(tag, result);
-	putASN1Length(size(), result.mid(tl));
+	ByteArray ba(result.mid(tl));
+	putASN1Length(size(), ba);
 	result.mid(tl + ll).copy(*this);
 	return result;
 }
@@ -250,7 +254,7 @@ void ByteDynArray::resize(size_t size, bool bKeepData) {
 		uint8_t* pbtNewData = new uint8_t[size];
 		size_t dwMinSize = min(size, _size);
 		if (dwMinSize>0)
-			memcpy_s(pbtNewData, size, _data, dwMinSize);
+			memcpy/*_s*/(pbtNewData/*, size*/, _data, dwMinSize);
 		clear();
 		_data = pbtNewData;
 		_size = size;
@@ -310,7 +314,8 @@ ByteDynArray &ByteDynArray::setASN1Tag(unsigned int tag, ByteArray &content) {
 	size_t ll = ASN1LLength(content.size());
 	resize(tl + ll + content.size());
 	putASN1Tag(tag, *this);
-	putASN1Length(content.size(), mid(tl));
+	ByteArray ba(mid(tl));
+	putASN1Length(content.size(), ba);
 	mid(tl + ll).copy(content);
 	return *this;
 }
