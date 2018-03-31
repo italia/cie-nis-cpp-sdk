@@ -9,9 +9,12 @@ pkginclude_HEADERS = nis.h nis_types.h token.h
 bin_PROGRAMS = testnisc testniscpp
 
 testnisc_SOURCES = test/example-nis-c.c
+nodist_EXTRA_testnisc_SOURCES = dummy.cpp
 testnisc_LDADD = libcienis.la
 testnisc_CPPFLAGS = $(PCSC_CFLAGS)
+testnisc_LDFLAGS = -static
 
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
 testniscpp_CPPFLAGS = $(PCSC_CFLAGS)
+testniscpp_LDFLAGS = -static
