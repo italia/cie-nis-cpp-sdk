@@ -144,7 +144,8 @@ am_libcienis_la_OBJECTS = libcienis_la-nis.lo \
 	libcienis_la-token.lo libcienis_la-token_pcsc.lo \
 	ber/libcienis_la-cie_BerReader.lo libcienis_la-digest.lo \
 	libcienis_la-sod.lo asn/libcienis_la-ASNParser.lo \
-	util/libcienis_la-array.lo util/libcienis_la-utilexception.lo
+	util/libcienis_la-array.lo util/libcienis_la-exception.lo \
+	util/libcienis_la-util.lo
 libcienis_la_OBJECTS = $(am_libcienis_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -268,6 +269,8 @@ CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
+CRYPTO_CFLAGS = @CRYPTO_CFLAGS@
+CRYPTO_LIBS = @CRYPTO_LIBS@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -386,22 +389,22 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = $(CXXFLAGS) -std=c++11
 lib_LTLIBRARIES = libcienis.la
-libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h ber/cie_BerReader.cpp ber/cie_BerReader.h ber/cie_BerTriple.h digest.cpp digest.h sod.cpp sod.h asn/ASNParser.cpp asn/ASNParser.h util/array.cpp  util/array.h  util/utilexception.cpp  util/utilexception.h
+libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h ber/cie_BerReader.cpp ber/cie_BerReader.h ber/cie_BerTriple.h digest.cpp digest.h sod.cpp sod.h asn/ASNParser.cpp asn/ASNParser.h util/array.cpp  util/array.h  util/exception.cpp  util/exception.h util/util.h util/util.cpp
 libcienis_la_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS) $(CRYPTO_LIBS) $(SSL_LIBS)
 pkginclude_HEADERS = nis.h nis_types.h token.h
 testnisc_SOURCES = test/example-nis-c.c
 nodist_EXTRA_testnisc_SOURCES = dummy.cpp
 testnisc_LDADD = libcienis.la
-testnisc_CPPFLAGS = $(PCSC_CFLAGS)
+testnisc_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 testnisc_LDFLAGS = -static
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
-testniscpp_CPPFLAGS = $(PCSC_CFLAGS)
+testniscpp_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 testniscpp_LDFLAGS = -static
 testnissod_SOURCES = test/example-nis-sod.cpp
 testnissod_LDADD = libcienis.la
-testnissod_CPPFLAGS = $(PCSC_CFLAGS)
+testnissod_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 testnissod_LDFLAGS = -static
 all: all-am
 
@@ -495,7 +498,9 @@ util/$(DEPDIR)/$(am__dirstamp):
 	@: > util/$(DEPDIR)/$(am__dirstamp)
 util/libcienis_la-array.lo: util/$(am__dirstamp) \
 	util/$(DEPDIR)/$(am__dirstamp)
-util/libcienis_la-utilexception.lo: util/$(am__dirstamp) \
+util/libcienis_la-exception.lo: util/$(am__dirstamp) \
+	util/$(DEPDIR)/$(am__dirstamp)
+util/libcienis_la-util.lo: util/$(am__dirstamp) \
 	util/$(DEPDIR)/$(am__dirstamp)
 
 libcienis.la: $(libcienis_la_OBJECTS) $(libcienis_la_DEPENDENCIES) $(EXTRA_libcienis_la_DEPENDENCIES) 
@@ -603,7 +608,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testniscpp-example-nis-cpp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testnissod-example-nis-sod.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-array.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-utilexception.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-exception.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-util.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -751,12 +757,19 @@ util/libcienis_la-array.lo: util/array.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-array.lo `test -f 'util/array.cpp' || echo '$(srcdir)/'`util/array.cpp
 
-util/libcienis_la-utilexception.lo: util/utilexception.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-utilexception.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-utilexception.Tpo -c -o util/libcienis_la-utilexception.lo `test -f 'util/utilexception.cpp' || echo '$(srcdir)/'`util/utilexception.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-utilexception.Tpo util/$(DEPDIR)/libcienis_la-utilexception.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/utilexception.cpp' object='util/libcienis_la-utilexception.lo' libtool=yes @AMDEPBACKSLASH@
+util/libcienis_la-exception.lo: util/exception.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-exception.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-exception.Tpo -c -o util/libcienis_la-exception.lo `test -f 'util/exception.cpp' || echo '$(srcdir)/'`util/exception.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-exception.Tpo util/$(DEPDIR)/libcienis_la-exception.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/exception.cpp' object='util/libcienis_la-exception.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-utilexception.lo `test -f 'util/utilexception.cpp' || echo '$(srcdir)/'`util/utilexception.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-exception.lo `test -f 'util/exception.cpp' || echo '$(srcdir)/'`util/exception.cpp
+
+util/libcienis_la-util.lo: util/util.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-util.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-util.Tpo -c -o util/libcienis_la-util.lo `test -f 'util/util.cpp' || echo '$(srcdir)/'`util/util.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-util.Tpo util/$(DEPDIR)/libcienis_la-util.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/util.cpp' object='util/libcienis_la-util.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-util.lo `test -f 'util/util.cpp' || echo '$(srcdir)/'`util/util.cpp
 
 testnisc-dummy.o: dummy.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnisc_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT testnisc-dummy.o -MD -MP -MF $(DEPDIR)/testnisc-dummy.Tpo -c -o testnisc-dummy.o `test -f 'dummy.cpp' || echo '$(srcdir)/'`dummy.cpp

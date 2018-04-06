@@ -42,12 +42,20 @@ bool select_df_ias(const Token &card, std::vector<BYTE> &response);
 bool select_df_cie(const Token &card, std::vector<BYTE> &response);
 
 /**
- * Sends a request to read NIS from the specified SCARDHANDLE.
+ * Sends a request to read NIS from the specified card handle.
  * @param[in] card a reference to token involved in the transaction
  * @param[out] response coming from the card
  * @return in case of a successful reply, true is returned, false otherwise.
  */
 bool read_nis(const Token &card, std::vector<BYTE> &response);
+
+/**
+ * Sends a request to read EF.SOD content from the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[out] response coming from the card
+ * @return true if SOD has been read, false otehrwise
+ */
+bool read_sod(const Token &card, std::vector<BYTE> &response);
 
 /**
  * Prompts the user for single APDU values and stores the newly

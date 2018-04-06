@@ -14,6 +14,7 @@
 #include <winscard.h>
 #include "nis_types.h"
 #include "sod.h"
+#include "util/array.h"
 #include "ber/cie_BerTriple.h"
 
 namespace cie {
@@ -24,7 +25,7 @@ namespace cie {
 			virtual ~Token() = 0;
 			int readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid, AuthType auth);
 			std::string readNis(AuthType auth);
-			int parseSod(cieBerTripleCallbackFunc callback, Sod *sod);
+			bool verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &hashSet);
 			int configure(uint32_t config);
 			int reset();
 		public:	//this should really be private

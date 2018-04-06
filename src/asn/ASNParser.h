@@ -22,7 +22,7 @@ public:
 	size_t tagInt();
 
 	CASNTag &Child(std::size_t num, uint8_t tag);
-	void Verify(ByteArray &content);
+	void Verify(const ByteArray &content);
 	CASNTag &CheckTag(uint8_t tag);
 
 	size_t startPos, endPos;
@@ -36,8 +36,8 @@ public:
 	CASNParser(void);
 	void Encode(ByteArray &data, CASNTagArray &tags);
 	void Encode(ByteDynArray &data);
-	void Parse(ByteArray &data);
-	void Parse(ByteArray &data, CASNTagArray &tags, size_t  startseq);
+	void Parse(const ByteArray &data);
+	void Parse(const ByteArray &data, CASNTagArray &tags, size_t  startseq);
 	CASNTagArray tags;
 
 	size_t CalcLen();

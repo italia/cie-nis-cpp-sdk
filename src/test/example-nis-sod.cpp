@@ -221,12 +221,5 @@ int main(int argc, _TCHAR* argv[])
 	//read the NIS
 	std::cout << "NIS: " << token->readNis(AUTH_PASSIVE) << std::endl;
 
-	//read the EF.SOD
-	cie::nis::Sod sod;
-	if(token->parseSod(printTriple, &sod)) {
-		std::cerr << "Could not read the SOD" << std::endl;
-		exit(-5);
-	}
-
 	return 0;
 }

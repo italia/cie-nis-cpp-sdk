@@ -13,6 +13,7 @@
 #include <functional>
 #include <cstring>
 #include <algorithm>
+#include <openssl/ssl.h>
 #include "reader.h"
 #include "reader_pcsc.h"
 #include "token.h"
@@ -37,6 +38,9 @@ namespace cie {
 		  int init(uint32_t backendBitfield)
 		  {	
 			int ret = 0;
+
+			//SSL_load_error_strings();	/* readable error messages */
+			//SSL_library_init();		/* initialize library */
 
 			if(backendBitfield & NIS_BACKEND_PCSC) {
 				shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};

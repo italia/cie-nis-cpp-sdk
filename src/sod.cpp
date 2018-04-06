@@ -41,3 +41,4 @@ bool cie::nis::sodParser(cie_BerTriple *triple, void *data)
 
 	return true;
 }
+
