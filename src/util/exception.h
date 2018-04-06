@@ -10,6 +10,8 @@
 //#define UTILEX_SCARD		4
 
 
+std::string stdPrintf(const char *format, ...);
+
 class logged_error : public std::runtime_error {
 public:
 	logged_error(std::string &&message) : logged_error(message.c_str()) {}

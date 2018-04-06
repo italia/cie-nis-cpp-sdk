@@ -667,6 +667,8 @@ CXXCPP
 HAVE_DOXYGEN_FALSE
 HAVE_DOXYGEN_TRUE
 DOXYGEN
+CRYPTO_LIBS
+CRYPTO_CFLAGS
 SSL_LIBS
 SSL_CFLAGS
 PCSC_LIBS
@@ -797,6 +799,8 @@ PCSC_CFLAGS
 PCSC_LIBS
 SSL_CFLAGS
 SSL_LIBS
+CRYPTO_CFLAGS
+CRYPTO_LIBS
 CXXCPP
 LT_SYS_LIBRARY_PATH'
 
@@ -1471,6 +1475,9 @@ Some influential environment variables:
   PCSC_LIBS   linker flags for PCSC, overriding pkg-config
   SSL_CFLAGS  C compiler flags for SSL, overriding pkg-config
   SSL_LIBS    linker flags for SSL, overriding pkg-config
+  CRYPTO_CFLAGS
+              C compiler flags for CRYPTO, overriding pkg-config
+  CRYPTO_LIBS linker flags for CRYPTO, overriding pkg-config
   CXXCPP      C++ preprocessor
   LT_SYS_LIBRARY_PATH
               User-defined run-time library search path.
@@ -5581,6 +5588,208 @@ if test "$ac_res" != no; then :
 
 fi
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for RAND_bytes in -lcrypto" >&5
+$as_echo_n "checking for RAND_bytes in -lcrypto... " >&6; }
+if ${ac_cv_lib_crypto_RAND_bytes+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcrypto  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char RAND_bytes ();
+int
+main ()
+{
+return RAND_bytes ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_crypto_RAND_bytes=yes
+else
+  ac_cv_lib_crypto_RAND_bytes=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_RAND_bytes" >&5
+$as_echo "$ac_cv_lib_crypto_RAND_bytes" >&6; }
+if test "x$ac_cv_lib_crypto_RAND_bytes" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBCRYPTO 1
+_ACEOF
+
+  LIBS="-lcrypto $LIBS"
+
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing RAND_bytes" >&5
+$as_echo_n "checking for library containing RAND_bytes... " >&6; }
+if ${ac_cv_search_RAND_bytes+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char RAND_bytes ();
+int
+main ()
+{
+return RAND_bytes ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' crypto; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_RAND_bytes=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_RAND_bytes+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_RAND_bytes+:} false; then :
+
+else
+  ac_cv_search_RAND_bytes=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_RAND_bytes" >&5
+$as_echo "$ac_cv_search_RAND_bytes" >&6; }
+ac_res=$ac_cv_search_RAND_bytes
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for d2i_X509 in -lssl" >&5
+$as_echo_n "checking for d2i_X509 in -lssl... " >&6; }
+if ${ac_cv_lib_ssl_d2i_X509+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lssl  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char d2i_X509 ();
+int
+main ()
+{
+return d2i_X509 ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_ssl_d2i_X509=yes
+else
+  ac_cv_lib_ssl_d2i_X509=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_d2i_X509" >&5
+$as_echo "$ac_cv_lib_ssl_d2i_X509" >&6; }
+if test "x$ac_cv_lib_ssl_d2i_X509" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBSSL 1
+_ACEOF
+
+  LIBS="-lssl $LIBS"
+
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing d2i_X509" >&5
+$as_echo_n "checking for library containing d2i_X509... " >&6; }
+if ${ac_cv_search_d2i_X509+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char d2i_X509 ();
+int
+main ()
+{
+return d2i_X509 ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' ssl; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_d2i_X509=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_d2i_X509+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_d2i_X509+:} false; then :
+
+else
+  ac_cv_search_d2i_X509=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_d2i_X509" >&5
+$as_echo "$ac_cv_search_d2i_X509" >&6; }
+ac_res=$ac_cv_search_d2i_X509
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
 #AC_CHECK_HEADERS([winscard.h PCSC/winscard.h],[],[AC_MSG_ERROR([Couldn't find or include winscard.h (consider installing pcsclite-dev package)])])
 
 
@@ -5880,6 +6089,97 @@ See \`config.log' for more details" "$LINENO" 5; }
 else
 	SSL_CFLAGS=$pkg_cv_SSL_CFLAGS
 	SSL_LIBS=$pkg_cv_SSL_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CRYPTO" >&5
+$as_echo_n "checking for CRYPTO... " >&6; }
+
+if test -n "$CRYPTO_CFLAGS"; then
+    pkg_cv_CRYPTO_CFLAGS="$CRYPTO_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libcrypto > 1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libcrypto > 1.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_CRYPTO_CFLAGS=`$PKG_CONFIG --cflags "libcrypto > 1.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$CRYPTO_LIBS"; then
+    pkg_cv_CRYPTO_LIBS="$CRYPTO_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libcrypto > 1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libcrypto > 1.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_CRYPTO_LIBS=`$PKG_CONFIG --libs "libcrypto > 1.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        CRYPTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libcrypto > 1.0" 2>&1`
+        else
+	        CRYPTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libcrypto > 1.0" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$CRYPTO_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (libcrypto > 1.0) were not met:
+
+$CRYPTO_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables CRYPTO_CFLAGS
+and CRYPTO_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables CRYPTO_CFLAGS
+and CRYPTO_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	CRYPTO_CFLAGS=$pkg_cv_CRYPTO_CFLAGS
+	CRYPTO_LIBS=$pkg_cv_CRYPTO_LIBS
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 

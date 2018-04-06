@@ -73,10 +73,7 @@ void CASNTag::Reparse() {
 	//attenzione in encode! non memorizzo il numero di bit non usati, quindi non posso
 	//ricostruirl'array originale! quindi lancio un'eccezione
 	if (tag.size()==1 && tag[0]==3)
-	{
-		ByteDynArray bda(content.mid(1));
-		parser.Parse(bda);
-	}
+		parser.Parse(content.mid(1));
 	else
 		parser.Parse(content);
 	if (parser.tags.size() > 0) {
@@ -102,9 +99,7 @@ void CASNTag::Encode(ByteArray &data, size_t &len) {
 	data.copy(ByteArray(&tag[0], tlen));
 	size_t  clen = ContentLen();
 	size_t  llen = ASN1LLength(clen);
-
-	ByteArray ba(data.mid(tlen));
-	putASN1Length(clen, ba);
+	putASN1Length(clen, data.mid(tlen));
 
 	if (!isSequence()) {
 		data.mid(tlen + llen).copy(content);
@@ -114,7 +109,7 @@ void CASNTag::Encode(ByteArray &data, size_t &len) {
 		size_t  ptrPos = tlen+llen;
 		for (CASNTagArray::iterator i = tags.begin(); i != tags.end(); i++) {
 			size_t taglen;
-			ByteArray ba(data.mid(ptrPos));
+			ByteArray ba = data.mid(ptrPos);
 			(*i)->Encode(ba, taglen);
 			ptrPos += taglen;
 		}
@@ -135,7 +130,7 @@ CASNTag &CASNTag::CheckTag(uint8_t checkTag) {
 		throw logged_error("Errore nella verifica del tag ASN1");
 	return *this;
 }
-void CASNTag::Verify(ByteArray &checkContent) {
+void CASNTag::Verify(const ByteArray &checkContent) {
 	if (content!=checkContent)
 		throw logged_error("Errore nella verifica del tag ASN1");
 }
@@ -173,13 +168,13 @@ void CASNParser::Encode(ByteDynArray &data) {
 	Encode(data, tags);
 }
 
-void CASNParser::Parse(ByteArray &data) {
+void CASNParser::Parse(const ByteArray &data) {
 	//init_func
 	tags.clear();
 	Parse(data,tags,0);
 }
 
-void CASNParser::Parse(ByteArray &data, CASNTagArray &tags, size_t  startseq)
+void CASNParser::Parse(const ByteArray &data, CASNTagArray &tags, size_t  startseq)
 {
 	//init_func
 	size_t l=0;
@@ -234,8 +229,7 @@ void CASNParser::Parse(ByteArray &data, CASNTagArray &tags, size_t  startseq)
 		tag->startPos = startseq + l;
 		tag->tag = tagv;
 		if (tag->isSequence()) {
-			ByteArray ba(&cur[llen + 1], len);
-			Parse(ba, tag->tags, startseq + l + llen + 1);
+			Parse(ByteArray(&cur[llen + 1], len), tag->tags, startseq + l + llen + 1);
 		}
 		else {
 			// è un valore singolo

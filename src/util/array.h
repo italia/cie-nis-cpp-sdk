@@ -1,5 +1,5 @@
 #pragma once
-#include "utilexception.h"
+#include "exception.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -18,9 +18,8 @@
 class ByteArray;
 class ByteDynArray;
 
-std::string stdPrintf(const char *format, ...); 
 void putASN1Tag(unsigned int tag, ByteArray &data);
-void putASN1Length(size_t len, ByteArray &data);
+void putASN1Length(size_t len, const ByteArray &data);
 size_t ASN1TLength(unsigned int tag);
 size_t ASN1LLength(size_t len);
 

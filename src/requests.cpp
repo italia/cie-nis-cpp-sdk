@@ -67,6 +67,45 @@ bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 	return true;
 }
 
+bool Requests::read_sod(const Token &card, std::vector<BYTE> &response)
+{
+	//TODO: make sure IAS->DF_CIE is selected
+ 	//Requests::select_df_ias(card, response);
+ 	//Requests::select_df_cie(card, response);
+
+	const uint16_t fileId = 0x1006;
+	std::vector<BYTE> selectSOD = {0x00, // CLA
+		0xa4, // INS = SELECT FILE
+		0x02, // P1 = select bu EFID under current DF
+		0x0c, // P2 = return no data
+		0x02, // LE = length of following data
+		fileId >> 8,	//high byte of EFID
+		fileId & 0xFF	//low byte of EFID
+	};
+	// invia l'APDU
+	if (!Requests::send_apdu(card, selectSOD, response)) {
+		std::cerr << "Errore nella lettura dell'Id_Servizi\n";
+		return false;
+	}
+
+	/*std::vector<BYTE> readSOD = {0x00, // CLA
+		0xb0, // INS = READ BINARY
+		0x00, // P1 = high byte of the offset
+		0x00, // P2 = low byte of the offset
+		0x00, // LE = read till the end of file
+		0x00  // LE = read till the end of file
+	};
+	// invia l'APDU
+	if (!Requests::send_apdu(card, readSOD, response)) {
+		std::cerr << "Errore nella lettura dell'Id_Servizi\n";
+		return false;
+	}*/
+
+	const_cast<Token&>(card).readBinaryContent(0x06/*SFI for EF.SOD*/, response.data(), 0, response.size());	//TODO: this cast is ugly
+
+	return true;
+}
+
 bool Requests::create_apdu(std::vector<BYTE> &apdu)
 {
 	std::string apdu_string {};
