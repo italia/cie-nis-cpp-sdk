@@ -67,41 +67,112 @@ bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 	return true;
 }
 
-bool Requests::read_sod(const Token &card, std::vector<BYTE> &response)
+bool Requests::read_sod(const Token &card, std::vector<BYTE> &ret)
 {
-	//TODO: make sure IAS->DF_CIE is selected
- 	//Requests::select_df_ias(card, response);
- 	//Requests::select_df_cie(card, response);
+	std::vector<BYTE> response(2);
+ 	if(Requests::select_df_ias(card, response))
+	{
+ 		if(Requests::select_df_cie(card, response))
+		{
+			const uint16_t fileId = 0x1006;
+		//////////////////////////////////////	
+		/*	std::vector<BYTE> s = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x00, // P2 = returnFCI
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, s, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
 
-	const uint16_t fileId = 0x1006;
-	std::vector<BYTE> selectSOD = {0x00, // CLA
-		0xa4, // INS = SELECT FILE
-		0x02, // P1 = select bu EFID under current DF
-		0x0c, // P2 = return no data
-		0x02, // LE = length of following data
-		fileId >> 8,	//high byte of EFID
-		fileId & 0xFF	//low byte of EFID
-	};
-	// invia l'APDU
-	if (!Requests::send_apdu(card, selectSOD, response)) {
-		std::cerr << "Errore nella lettura dell'Id_Servizi\n";
-		return false;
+			std::vector<BYTE> sS = {0x00, // CLA
+				0xC0, // INS = GET RESPONSE
+				0x00, // P1 = select bu EFID under current DF
+				0x00, // P2 = return no data
+				0x19, // LE = length of following data
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, sS, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
+		*/
+		//////////////////////////////////////	
+			std::vector<BYTE> selectSOD = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x0c, // P2 = return no data
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, selectSOD, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+				return false;
+			}
+
+			const_cast<Token&>(card).readBinaryContent(0x00, ret, 0, -1);	//TODO: this cast is ugly
+		}
 	}
 
-	/*std::vector<BYTE> readSOD = {0x00, // CLA
-		0xb0, // INS = READ BINARY
-		0x00, // P1 = high byte of the offset
-		0x00, // P2 = low byte of the offset
-		0x00, // LE = read till the end of file
-		0x00  // LE = read till the end of file
-	};
-	// invia l'APDU
-	if (!Requests::send_apdu(card, readSOD, response)) {
-		std::cerr << "Errore nella lettura dell'Id_Servizi\n";
-		return false;
-	}*/
+	return true;
+}
 
-	const_cast<Token&>(card).readBinaryContent(0x06/*SFI for EF.SOD*/, response.data(), 0, response.size());	//TODO: this cast is ugly
+bool Requests::read_service_int_kpub(const Token &card, std::vector<BYTE> &ret)
+{
+	std::vector<BYTE> response(2);
+ 	if(Requests::select_df_ias(card, response))
+	{
+ 		if(Requests::select_df_cie(card, response))
+		{
+			const uint16_t fileId = 0x1005;
+		//////////////////////////////////////	
+			/*std::vector<BYTE> s = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x00, // P2 = returnFCI
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, s, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
+
+			std::vector<BYTE> sS = {0x00, // CLA
+				0xC0, // INS = GET RESPONSE
+				0x00, // P1 = select bu EFID under current DF
+				0x00, // P2 = return no data
+				0x19, // LE = length of following data
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, sS, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
+			*/
+		//////////////////////////////////////	
+			std::vector<BYTE> selectIntKpub = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x0c, // P2 = return no data
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, selectIntKpub, response)) {
+				std::cerr << "Errore nella lettura di Service_Int.Kpub\n";
+				return false;
+			}
+
+			const_cast<Token&>(card).readBinaryContent(0x00, ret, 0, -1);	//TODO: this cast is ugly
+		}
+	}
 
 	return true;
 }

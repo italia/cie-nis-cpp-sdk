@@ -58,6 +58,14 @@ bool read_nis(const Token &card, std::vector<BYTE> &response);
 bool read_sod(const Token &card, std::vector<BYTE> &response);
 
 /**
+ * Sends a request to read EF.Servizi_Int.Kpub content from the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[out] ret coming from the card
+ * @return true if the file has been read, false otehrwise
+ */
+bool read_service_int_kpub(const Token &card, std::vector<BYTE> &response);
+
+/**
  * Prompts the user for single APDU values and stores the newly
  * created APDU in the apdu vector. Fields must be separated
  * by a '-'.

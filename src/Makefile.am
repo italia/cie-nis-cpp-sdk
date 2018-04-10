@@ -1,7 +1,7 @@
 AM_CXXFLAGS=$(CXXFLAGS) -std=c++11
 
 lib_LTLIBRARIES = libcienis.la
-libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h ber/cie_BerReader.cpp ber/cie_BerReader.h ber/cie_BerTriple.h digest.cpp digest.h sod.cpp sod.h asn/ASNParser.cpp asn/ASNParser.h util/array.cpp  util/array.h  util/exception.cpp  util/exception.h util/util.h util/util.cpp
+libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h digest.cpp digest.h asn/ASNParser.cpp asn/ASNParser.h util/array.cpp  util/array.h  util/exception.cpp  util/exception.h util/util.h util/util.cpp
 libcienis_la_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS) $(CRYPTO_LIBS) $(SSL_LIBS)
 pkginclude_HEADERS = nis.h nis_types.h token.h

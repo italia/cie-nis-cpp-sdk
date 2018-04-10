@@ -24,8 +24,11 @@ typedef void (*nis_callback_t)(char *const nisData, size_t lenData);
  */
 enum TokResult { 
 	TOK_RESULT_OK, /*!< Success */
+	TOK_RESULT_EOF, /*!< End Of File reached */
 	TOK_RESULT_NOT_CONNECTED, /*!< No card connected */
 	TOK_RESULT_READ_ERROR, /*!< Cannot read from the card */
+	TOK_RESULT_WRONG_LENGTH, /*!< Length is wrong */
+	TOK_RESULT_OFFSET_OOB, /*!< Wrong parameter */
 	TOK_RESULT_GENERIC_ERROR /*!< Some error has occurred */
 };
 
