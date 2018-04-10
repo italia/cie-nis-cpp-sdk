@@ -8,7 +8,7 @@
 #include "uid.h"
 #include "nis_manager.h"
 #include "digest.h"
-#include "ber/cie_BerReader.h"
+#include "util/array.h"
 #include "asn/ASNParser.h"
 
 using namespace std;
@@ -40,26 +40,10 @@ int cie::nis::Token::reset()
 	return 0;
 }
 
-/*
-int cie::nis::Token::parseSod(cieBerTripleCallbackFunc callback, Sod *sod)
-{
-	unsigned int lenData = 4096;
-
-	std::vector<BYTE> response(lenData);
-
-	if(Requests::select_df_ias(*this, response)) {
-		if(Requests::select_df_cie(*this, response)) {
-			cie_BerReader ber{this, sod};
-			return ber.readTriples(0x06, callback, &lenData, 30) ? 0 : -1;
-		}
-	}
-
-	return -2;	
-}
-*/
-
 /** 
- * Verify if the SOD fiel is authentic and the elementary files have the correct digest
+ * Parse the SOD file and verify its authenticity and that the elementary files have the correct digests
+ * @param[in] SOD the array containing the SOD data file
+ * @param[in] hashSet a map containing the digest for each public file to be verified
  * @return true if valid, false otherwise. Throws and exception in case of error.
  */
 bool cie::nis::Token::verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &hashSet)
@@ -167,7 +151,7 @@ bool cie::nis::Token::verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &ha
 	ByteArray toSign = SOD.mid((int)signerInfo.tags[0]->startPos, (int)(signerInfo.tags[signerInfo.tags.size()- 1]->endPos - signerInfo.tags[0]->startPos));
 	ByteDynArray digestSignature;
 	if (isSHA1) {
-		digestSignature = cie::nis::utils::digest_SHA1(toSign.getASN1Tag(0x31));	//TODO: implement SHA1
+		digestSignature = cie::nis::utils::digest_SHA1(toSign.getASN1Tag(0x31));
 	}
 	if (isSHA256) {
 		digestSignature = cie::nis::utils::digest_SHA256(toSign.getASN1Tag(0x31));
@@ -305,13 +289,13 @@ int cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint3
  */
 string cie::nis::Token::readNis(AuthType auth)
 {
-	const size_t lenData = NIS_LENGTH;
+	const size_t lenData = NIS_LENGTH+2;
 
 	std::vector<BYTE> response(lenData);
 
-	if(Requests::select_df_ias(*this, response)) {
-		if(Requests::select_df_cie(*this, response)) {
-			if(Requests::read_nis(*this, response)) {
+	if (Requests::select_df_ias(*this, response)) {
+		if (Requests::select_df_cie(*this, response)) {
+			if (Requests::read_nis(*this, response)) {
 				//check the validity with the SOD
 				bool authPassed = true;
 				switch(auth)
@@ -320,21 +304,39 @@ string cie::nis::Token::readNis(AuthType auth)
 					case AUTH_INTERNAL:
 						ByteDynArray md(CryptoPP::SHA256::DIGESTSIZE);
 						std::map<BYTE, ByteDynArray> hashSet;
-						if(!cie::nis::utils::digest_SHA256(response.data(), lenData, md.data()))
+
+						if (!cie::nis::utils::digest_SHA256(response.data(), NIS_LENGTH, md.data()))
 						{
 							authPassed = false;
-							cerr << "Error calculating the digest of the file content" << endl;
+							cerr << "Error calculating the digest of the file content (IdServizi)" << endl;
 						}
 						else hashSet[0xA1] = md;
 
-						#if true
+						if (auth == AUTH_INTERNAL) {
+							std::vector<BYTE> intKpub;
+							if (Requests::read_service_int_kpub(*this, intKpub)) {
+								ByteArray intKpubArray{intKpub.data(), intKpub.size()};
+								
+								if (!cie::nis::utils::digest_SHA256(intKpub.data(), GetASN1DataLenght(intKpubArray), md.data()))
+								{
+									authPassed = false;
+									cerr << "Error calculating the digest of the file content (Servizi_Int.Kpub)" << endl;
+								}
+								else hashSet[0xA5] = md;
+							}
+							else {
+								authPassed = false;
+								cerr << "Error reading EF.Servizi_Int.Kpub" << endl;
+							}
+						}
+
 						ByteDynArray SOD;
-						vector<BYTE> sodTmp(1972);	//TODO: hardcoded length is not good
-						if(Requests::read_sod(*this, sodTmp)) {
+						vector<BYTE> sodTmp;
+						if (Requests::read_sod(*this, sodTmp)) {
 							SOD = ByteArray(sodTmp.data(), sodTmp.size());
 							try {
 								verifySod(SOD, hashSet);
-								//SOD has been verified succeissfully
+								//SOD has been verified successfully
 							} catch (...) {
 								authPassed = false;
 								cerr << "Error parsing EF.SOD" << endl;
@@ -345,24 +347,13 @@ string cie::nis::Token::readNis(AuthType auth)
 							cerr << "Error reading EF.SOD" << endl;
 
 						}
-						#else
-						Sod sod;
-						if(parseSod(cie::nis::sodParser, &sod))
-						{
-							authPassed = false;
-							cerr << "Error parsing EF.SOD" << endl;
-
-						}
-						if(memcmp(md.data(), sod.idServiceHash, CryptoPP::SHA256::DIGESTSIZE))
-							authPassed = false;
-						#endif
 
 						break;
 				}	
 				//----end auth phase-------------
 				
-				if(authPassed)
-					return string{response.begin(), response.end()};
+				if( authPassed)
+					return string{response.begin(), response.begin() + NIS_LENGTH};
 			}
 		}
 	} 
@@ -370,7 +361,7 @@ string cie::nis::Token::readNis(AuthType auth)
 	return string("");
 }
 
-word clamp(const word value, const byte maxValue) {
+size_t clamp(const size_t value, const byte maxValue) {
 	if (value > maxValue) {
 		return maxValue;
 	} else {
@@ -378,10 +369,10 @@ word clamp(const word value, const byte maxValue) {
 	}
 }
 
-bool cie::nis::Token::readBinaryContent(const cie_EFPath filePath, byte *contentBuffer, word startingOffset, const word contentLength)
+bool cie::nis::Token::readBinaryContent(const uint16_t filePath, std::vector<BYTE> &contentBuffer, size_t startingOffset, size_t contentLength)
 {
   #define STATUS_WORD_LENGTH                    (0x02)
-  #define PAGE_LENGTH                           (0xE4)
+  #define PAGE_LENGTH                           (128)
   byte fileId;
   fileId = (byte) (filePath & 0b11111);
   /*switch (filePath.selectionMode) {
@@ -403,10 +394,14 @@ bool cie::nis::Token::readBinaryContent(const cie_EFPath filePath, byte *content
       PN532DEBUGPRINT.println(F("The selection mode must be either SELECT_BY_EFID or SELECT_BY_SFI"));
       return false;
   }*/
-  bool success = false;
-  word offset = startingOffset;
+  bool success = true;
+  size_t offset = startingOffset;
+  contentBuffer.clear();
   do {
-    word contentPageLength = ::clamp(contentLength+startingOffset-offset, PAGE_LENGTH);
+    size_t contentPageLength = PAGE_LENGTH;//::clamp(contentLength+startingOffset-offset, PAGE_LENGTH);
+    size_t readLen;
+
+#if false
     byte preambleOctets = contentPageLength > 0x80 ? 3 : 2; //Discretionary data: three bytes for responses of length > 0x80
     std::vector<BYTE> readCommand = {
       0x00, //CLA
@@ -418,20 +413,60 @@ bool cie::nis::Token::readBinaryContent(const cie_EFPath filePath, byte *content
       (byte) (offset >> 8), (byte) (offset & 0b11111111), //the offset
       (byte) (contentPageLength + preambleOctets) //Le: bytes to be returned in the response
     };
-    word responseLength = ((byte) contentPageLength) + preambleOctets + STATUS_WORD_LENGTH;
+    size_t responseLength = ((byte) contentPageLength) + preambleOctets + STATUS_WORD_LENGTH;
     std::vector<BYTE> responseBuffer(responseLength);
-    success = transmit(readCommand, responseBuffer) == TOK_RESULT_OK;
-    //Copy data over to the buffer
-    if (success) {
-      //The read binary command with ODD INS incapsulated the response with two or three preamble octets. Don't include them, they're not part of the content.
-      //See page 147 in the Gixel manual http://www.unsads.com/specs/IASECC/IAS_ECC_v1.0.1_UK.pdf
-      for (word i = preambleOctets; i < contentPageLength + preambleOctets; i++) {
-        contentBuffer[offset - startingOffset + i - preambleOctets] = responseBuffer[i];
-      }
+    TokResult tokRet = transmit(readCommand, responseBuffer, &readLen);
+
+    if(tokRet != TOK_RESULT_OK && tokRet != TOK_RESULT_EOF) {
+        success = false;
+	break;
     }
+
+    //Copy data over to the buffer
+    //The read binary command with ODD INS incapsulated the response with two or three preamble octets. Don't include them, they're not part of the content.
+    //See page 147 in the Gixel manual http://www.unsads.com/specs/IASECC/IAS_ECC_v1.0.1_UK.pdf
+    for (size_t i = 0; i < readLen - preambleOctets - STATUS_WORD_LENGTH; i++)
+        contentBuffer.push_back(responseBuffer[i+preambleOctets]);
+    
+    if(tokRet == TOK_RESULT_EOF)
+	break;
+#else
+    size_t responseLength = ((byte) contentPageLength) + STATUS_WORD_LENGTH;
+    std::vector<BYTE> readFile = {0x00, // CLA
+                   0xb0, // INS = READ BINARY
+                   (BYTE)(offset >> 8), // P1 = Read by SFI & SFI = 1 //to read public key
+                   (BYTE)(offset & 0xFF), // P2 = Offset = 0
+                   (BYTE)(contentPageLength & 0xFF)  // LE = length of NIS
+    }; 
+    std::vector<BYTE> responseBuffer(responseLength);
+    TokResult tokRet = transmit(readFile, responseBuffer, &readLen);
+
+    if(tokRet == TOK_RESULT_OK) {
+       	contentBuffer.insert(contentBuffer.end(), responseBuffer.begin(), responseBuffer.begin() + readLen - STATUS_WORD_LENGTH);
+    }
+    else if(tokRet == TOK_RESULT_EOF) {
+       	contentBuffer.insert(contentBuffer.end(), responseBuffer.begin(), responseBuffer.begin() + readLen - STATUS_WORD_LENGTH);
+	break;
+    }
+    else if(tokRet == TOK_RESULT_WRONG_LENGTH) {
+	readFile[4] = readLen;
+    	TokResult tokRet = transmit(readFile, responseBuffer, &readLen);
+       	contentBuffer.insert(contentBuffer.end(), responseBuffer.begin(), responseBuffer.begin() + readLen - STATUS_WORD_LENGTH);
+	break;
+    }
+    else if(tokRet == TOK_RESULT_OFFSET_OOB) {
+	break;
+    }
+    else {
+	success = false;
+	break;
+    }
+#endif
+
     offset += contentPageLength;
     
-  } while(success && (offset < contentLength));
+  } while(contentLength == -1 || offset < contentLength);
+  
   if (!success) {
 	  std::cout << "Couldn't fetch the elementary file content" << endl;
   }  

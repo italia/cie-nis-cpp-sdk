@@ -11,11 +11,10 @@
 
 #include <vector>
 #include <memory>
+#include <map>
 #include <winscard.h>
 #include "nis_types.h"
-#include "sod.h"
 #include "util/array.h"
-#include "ber/cie_BerTriple.h"
 
 namespace cie {
 	namespace nis {
@@ -43,13 +42,21 @@ namespace cie {
 			virtual TokResult disconnect() = 0;
 			/** 
 			 * Transmit a specific apdu to a card and obtain its response
-			 * @param[in] array containing the apdu to be sent to the token
-			 * @param[out] the response sent from the token
+			 * @param[in] apdu array containing the apdu to be sent to the token
+			 * @param[out] response the response sent from the token
+			 * @param[out] retLen filled with the number of bytes read back
 			 * @return ::TokResult representing the success or error condition
 			 */
-			virtual TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response) const = 0;
-
-			bool readBinaryContent(const cie_EFPath filePath, byte *contentBuffer, word startingOffset, const word contentLength);
+			virtual TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response, size_t *retlen=nullptr) const = 0;
+			/** 
+			 * Read the binary content of the speficied file
+			 * @param[in] filePath SFI of the file to be read or 0 if it's already been selected through EFID
+			 * @param[out] contentBuffer the content of the file
+			 * @param[in] startingOffset the offset from which to start reading
+			 * @param[in] contentLength the length to be read back, or -1 to read all
+			 * @return true on success, false on error
+			 */
+			bool readBinaryContent(const uint16_t filePath, std::vector<BYTE> &contentBuffer, size_t startingOffset, size_t contentLength);
 		};
 	}
 }

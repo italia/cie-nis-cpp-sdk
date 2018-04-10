@@ -46,18 +46,22 @@ TokResult TokenPCSC::disconnect()
 	else return TOK_RESULT_NOT_CONNECTED;
 }
 
-TokResult TokenPCSC::transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response) const
+TokResult TokenPCSC::transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response, size_t *retlen) const
 {
-	DWORD resp_len {RESPONSE_SIZE};
+	size_t resp_len = response.size();
 	SCardTransmit(card, SCARD_PCI_T1, apdu.data(), apdu.size(), NULL, response.data(), &resp_len);
-	// verifica che la Status Word sia 9000 (OK)
-	/*std::cout << "Il byte di verifica della risposta della carta e': 0x";
-	std::cout << std::hex
-		<< (unsigned int) (unsigned char) response[resp_len -2]
-		<< std::endl;*/
-	if (response[resp_len - 2] != 0x90 || response[resp_len - 1] != 0x00) {
-		//std::cerr << "Error reading the response" << std::endl;
-		return TOK_RESULT_READ_ERROR;
+	if(retlen)
+		*retlen = resp_len;
+	
+	if (response[resp_len - 2] == 0x90 && response[resp_len - 1] == 0x00) 
+		return TOK_RESULT_OK;
+	else if (response[resp_len - 2] == 0x62 && response[resp_len - 1] == 0x82)
+		return TOK_RESULT_EOF;
+	else if (response[resp_len - 2] == 0x6C) {
+		*retlen = response[resp_len - 1];
+		return TOK_RESULT_WRONG_LENGTH;
 	}
-	return TOK_RESULT_OK;
+	else if (response[resp_len - 2] == 0x6B && response[resp_len - 1] == 0x00)
+		return TOK_RESULT_OFFSET_OOB;
+	else return TOK_RESULT_READ_ERROR;
 }
