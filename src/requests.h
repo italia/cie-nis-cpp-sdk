@@ -74,6 +74,23 @@ bool read_service_int_kpub(const Token &card, std::vector<BYTE> &response);
  */
 bool create_apdu(std::vector<BYTE> &apdu);
 
+/**
+ * Sends the MSE SET command to the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[out] response is the answer coming from from the card
+ * @return true if the command was successful, false otherwise
+ */
+bool mse_set(const Token &card, std::vector<BYTE> &response);
+
+/**
+ * Sends the INTERNAL AUTHENTICATE command and the relative challenge to the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[in] challenge contains the array against which the card is challenged. Must be less than or equal to 256 bytes in size.
+ * @param[out] response is the asnwer (response to the challenge) coming from from the card
+ * @return true if the command was successful, false otherwise
+ */
+bool internal_authenticate(const Token &card, const std::vector<BYTE> &challenge, std::vector<BYTE> &response);
+
 bool start_interactive_session(const Token &card);
 }
 #endif

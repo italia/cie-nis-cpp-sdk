@@ -316,13 +316,42 @@ string cie::nis::Token::readNis(AuthType auth)
 							std::vector<BYTE> intKpub;
 							if (Requests::read_service_int_kpub(*this, intKpub)) {
 								ByteArray intKpubArray{intKpub.data(), intKpub.size()};
+								size_t intKpubLen = GetASN1DataLenght(intKpubArray);
 								
-								if (!cie::nis::utils::digest_SHA256(intKpub.data(), GetASN1DataLenght(intKpubArray), md.data()))
+								if (!cie::nis::utils::digest_SHA256(intKpub.data(), intKpubLen, md.data()))
 								{
 									authPassed = false;
 									cerr << "Error calculating the digest of the file content (Servizi_Int.Kpub)" << endl;
 								}
-								else hashSet[0xA5] = md;
+								else {
+									hashSet[0xA5] = md;
+
+									const unsigned char* p = intKpub.data();
+									unique_ptr<RSA,std::function<void(RSA*)>> rsa_pubkey{d2i_RSAPublicKey(nullptr, &p, intKpubLen), [](RSA* val){ RSA_free(val);}};
+									if(rsa_pubkey.get() == nullptr) {
+										authPassed = false;
+										cerr << "Error extracting the public key (Servizi_Int.Kpub)" << endl;
+									}
+									else {
+										std::vector<BYTE> challenge;
+										for(int i = 0; i < 32; ++i)
+											challenge.push_back(((float)rand() / RAND_MAX) * 0xFF);	//TODO: should be replaced with a Mersenne Twister
+										const size_t challengePaddedLen = ((size_t)(challenge.size()/256) + 1)*256; 
+										std::vector<BYTE> response(challengePaddedLen + 2);
+
+										if (Requests::mse_set(*this, response)) {
+											if (Requests::internal_authenticate(*this, challenge, response)) {
+												BYTE decrypt[challengePaddedLen];
+												size_t responseLen = RSA_public_decrypt(challengePaddedLen, response.data(), decrypt, rsa_pubkey.get(), RSA_PKCS1_PADDING);
+
+												if(memcmp(decrypt, challenge.data(), min(responseLen, challenge.size()))) {
+													authPassed = false;
+													cerr << "Error challenge/response not matching" << endl;
+												}
+											}
+										}									
+									}
+								}
 							}
 							else {
 								authPassed = false;
