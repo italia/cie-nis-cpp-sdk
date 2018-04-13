@@ -51,6 +51,41 @@ bool Requests::select_df_cie(const Token &card, std::vector<BYTE> &response)
 	return true;
 }
 
+bool Requests::mse_set(const Token &card, std::vector<BYTE> &response)
+{
+	std::vector<BYTE> setMSE {0x00, // CLA
+		0x22, // INS = MSE SET 
+		0x41, // P1
+		0xA4, // P2 
+		0x06, // LC = length of payload
+		0x80, 0x01, 0x02, 0x84, 0x01, 0x83 // select RSA algorithm and key no. 3
+	};
+	// invia la seconda APDU
+	if (!Requests::send_apdu(card, setMSE, response)) {
+		std::cerr << "Errore nell'impostazione di algoritmo e chiave per il challenge/response\n";
+		return false;
+	} 
+	return true;
+}
+
+bool Requests::internal_authenticate(const Token &card, const std::vector<BYTE> &challenge, std::vector<BYTE> &response)
+{
+	std::vector<BYTE> setMSE {0x00, // CLA
+		0x88, // INS = INTERNAL AUTHENTICATE
+		0x00, // P1 = no info given for the algorithm, 
+		0x00, // P2 = no info given for the secret
+		(BYTE)challenge.size() // LC = length of payload
+	};
+	setMSE.insert(setMSE.end(), challenge.begin(), challenge.end());
+	setMSE.push_back(0);	//Le = read all you can
+	// invia la seconda APDU
+	if (!Requests::send_apdu(card, setMSE, response)) {
+		std::cerr << "Errore nell'impostazione di algoritmo e chiave per il challenge/response\n";
+		return false;
+	} 
+	return true;
+}
+
 bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> readNIS = {0x00, // CLA
