@@ -42,28 +42,13 @@ bool select_df_ias(const Token &card, std::vector<BYTE> &response);
 bool select_df_cie(const Token &card, std::vector<BYTE> &response);
 
 /**
- * Sends a request to read NIS from the specified card handle.
+ * Sends a request to read Elementary File content from the specified card handle.
  * @param[in] card a reference to token involved in the transaction
- * @param[out] response coming from the card
- * @return in case of a successful reply, true is returned, false otherwise.
- */
-bool read_nis(const Token &card, std::vector<BYTE> &response);
-
-/**
- * Sends a request to read EF.SOD content from the specified card handle.
- * @param[in] card a reference to token involved in the transaction
+ * @param[in] efid the file identifier of the EF to be read, chosen from ::Efid
  * @param[out] response coming from the card
  * @return true if SOD has been read, false otehrwise
  */
-bool read_sod(const Token &card, std::vector<BYTE> &response);
-
-/**
- * Sends a request to read EF.Servizi_Int.Kpub content from the specified card handle.
- * @param[in] card a reference to token involved in the transaction
- * @param[out] ret coming from the card
- * @return true if the file has been read, false otehrwise
- */
-bool read_service_int_kpub(const Token &card, std::vector<BYTE> &response);
+bool read_EF_file(const Token &card, const Efid efid, std::vector<BYTE> &response);
 
 /**
  * Prompts the user for single APDU values and stores the newly
