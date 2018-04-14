@@ -236,7 +236,7 @@ bool cie::nis::Token::verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &ha
  * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
  * @param[in] interval time in ms between polls
  * @param[out] the UID associated to the newly created context of execution
- * @param[in] auth Request this transaction to be verified though one of teh auteyntication method supported by ::AuthType
+ * @param[in] auth Request this transaction to be verified though one of the authentication method supported by ::AuthType
  * @return 0 on success, negative on error
  * @see stopPoll()
  */
@@ -282,6 +282,108 @@ int cie::nis::Token::readNis(char *const nisData, nis_callback_t callback, uint3
 	return -1;
 }
 
+
+/** 
+ * Verify if the token is valid and has not been cloned.
+ * @param[in] auth the validation method required to check the token, chosen from ::AuthType
+ * @return true if the token is valid, false otherwise
+ */
+bool cie::nis::Token::authenticate(AuthType auth)
+{
+	//check the validity with the SOD
+	bool authPassed = true;
+
+	switch(auth)
+	{
+		case AUTH_PASSIVE:
+		case AUTH_INTERNAL:
+			ByteDynArray md(CryptoPP::SHA256::DIGESTSIZE);
+			std::map<BYTE, ByteDynArray> hashSet;
+			std::vector<BYTE> idService;
+
+			if (Requests::read_EF_file(*this, EFID_ID_SERVIZI, idService)) {
+				if (!cie::nis::utils::digest_SHA256(idService.data(), NIS_LENGTH, md.data()))
+				{
+					authPassed = false;
+					cerr << "Error calculating the digest of the file content (IdServizi)" << endl;
+				}
+				else hashSet[0xA1] = md;
+
+				if (auth == AUTH_INTERNAL) {
+					std::vector<BYTE> intKpub;
+					if (Requests::read_EF_file(*this, EFID_SERVIZI_INT_KPUB, intKpub)) {
+						ByteArray intKpubArray{intKpub.data(), intKpub.size()};
+						size_t intKpubLen = GetASN1DataLenght(intKpubArray);
+						
+						if (!cie::nis::utils::digest_SHA256(intKpub.data(), intKpubLen, md.data()))
+						{
+							authPassed = false;
+							cerr << "Error calculating the digest of the file content (Servizi_Int.Kpub)" << endl;
+						}
+						else {
+							hashSet[0xA5] = md;
+
+							const unsigned char* p = intKpub.data();
+							unique_ptr<RSA,std::function<void(RSA*)>> rsa_pubkey{d2i_RSAPublicKey(nullptr, &p, intKpubLen), [](RSA* val){ RSA_free(val);}};
+							if(rsa_pubkey.get() == nullptr) {
+								authPassed = false;
+								cerr << "Error extracting the public key (Servizi_Int.Kpub)" << endl;
+							}
+							else {
+								std::vector<BYTE> challenge;
+								for(int i = 0; i < 32; ++i)
+									challenge.push_back(((float)rand() / RAND_MAX) * 0xFF);	//TODO: should be replaced by a Mersenne Twister
+								const size_t challengePaddedLen = ((size_t)(challenge.size()/256) + 1)*256; 
+								std::vector<BYTE> response(challengePaddedLen + 2);
+
+								if (Requests::mse_set(*this, response)) {
+									if (Requests::internal_authenticate(*this, challenge, response)) {
+										BYTE decrypt[challengePaddedLen];
+										size_t responseLen = RSA_public_decrypt(challengePaddedLen, response.data(), decrypt, rsa_pubkey.get(), RSA_PKCS1_PADDING);
+
+										if(memcmp(decrypt, challenge.data(), min(responseLen, challenge.size()))) {
+											authPassed = false;
+											cerr << "Error challenge/response not matching" << endl;
+										}
+									}
+								}									
+							}
+						}
+					}
+					else {
+						authPassed = false;
+						cerr << "Error reading EF.Servizi_Int.Kpub" << endl;
+					}
+				}
+
+				ByteDynArray SOD;
+				vector<BYTE> sodTmp;
+				if (Requests::read_EF_file(*this, EFID_SOD, sodTmp)) {
+					SOD = ByteArray(sodTmp.data(), sodTmp.size());
+					try {
+						verifySod(SOD, hashSet);
+						//SOD has been verified successfully
+					} catch (...) {
+						authPassed = false;
+						cerr << "Error parsing EF.SOD" << endl;
+					}
+				}
+				else {
+					authPassed = false;
+					cerr << "Error reading EF.SOD" << endl;
+
+				}
+			}
+			else {
+				authPassed = false;
+				cerr << "Error reading EF.ID_Servizi" << endl;
+			}
+		break;
+	}
+
+	return authPassed;	
+}
+
 /** 
  * Read the NIS contained in this token. This method is blocking.
  * @param[in] auth Request this transaction to be verified though one of teh auteyntication method supported by ::AuthType
@@ -293,96 +395,12 @@ string cie::nis::Token::readNis(AuthType auth)
 
 	std::vector<BYTE> response(lenData);
 
-	if (Requests::select_df_ias(*this, response)) {
-		if (Requests::select_df_cie(*this, response)) {
-			if (Requests::read_nis(*this, response)) {
-				//check the validity with the SOD
-				bool authPassed = true;
-				switch(auth)
-				{
-					case AUTH_PASSIVE:
-					case AUTH_INTERNAL:
-						ByteDynArray md(CryptoPP::SHA256::DIGESTSIZE);
-						std::map<BYTE, ByteDynArray> hashSet;
-
-						if (!cie::nis::utils::digest_SHA256(response.data(), NIS_LENGTH, md.data()))
-						{
-							authPassed = false;
-							cerr << "Error calculating the digest of the file content (IdServizi)" << endl;
-						}
-						else hashSet[0xA1] = md;
-
-						if (auth == AUTH_INTERNAL) {
-							std::vector<BYTE> intKpub;
-							if (Requests::read_service_int_kpub(*this, intKpub)) {
-								ByteArray intKpubArray{intKpub.data(), intKpub.size()};
-								size_t intKpubLen = GetASN1DataLenght(intKpubArray);
-								
-								if (!cie::nis::utils::digest_SHA256(intKpub.data(), intKpubLen, md.data()))
-								{
-									authPassed = false;
-									cerr << "Error calculating the digest of the file content (Servizi_Int.Kpub)" << endl;
-								}
-								else {
-									hashSet[0xA5] = md;
-
-									const unsigned char* p = intKpub.data();
-									unique_ptr<RSA,std::function<void(RSA*)>> rsa_pubkey{d2i_RSAPublicKey(nullptr, &p, intKpubLen), [](RSA* val){ RSA_free(val);}};
-									if(rsa_pubkey.get() == nullptr) {
-										authPassed = false;
-										cerr << "Error extracting the public key (Servizi_Int.Kpub)" << endl;
-									}
-									else {
-										std::vector<BYTE> challenge;
-										for(int i = 0; i < 32; ++i)
-											challenge.push_back(((float)rand() / RAND_MAX) * 0xFF);	//TODO: should be replaced with a Mersenne Twister
-										const size_t challengePaddedLen = ((size_t)(challenge.size()/256) + 1)*256; 
-										std::vector<BYTE> response(challengePaddedLen + 2);
-
-										if (Requests::mse_set(*this, response)) {
-											if (Requests::internal_authenticate(*this, challenge, response)) {
-												BYTE decrypt[challengePaddedLen];
-												size_t responseLen = RSA_public_decrypt(challengePaddedLen, response.data(), decrypt, rsa_pubkey.get(), RSA_PKCS1_PADDING);
-
-												if(memcmp(decrypt, challenge.data(), min(responseLen, challenge.size()))) {
-													authPassed = false;
-													cerr << "Error challenge/response not matching" << endl;
-												}
-											}
-										}									
-									}
-								}
-							}
-							else {
-								authPassed = false;
-								cerr << "Error reading EF.Servizi_Int.Kpub" << endl;
-							}
-						}
-
-						ByteDynArray SOD;
-						vector<BYTE> sodTmp;
-						if (Requests::read_sod(*this, sodTmp)) {
-							SOD = ByteArray(sodTmp.data(), sodTmp.size());
-							try {
-								verifySod(SOD, hashSet);
-								//SOD has been verified successfully
-							} catch (...) {
-								authPassed = false;
-								cerr << "Error parsing EF.SOD" << endl;
-							}
-						}
-						else {
-							authPassed = false;
-							cerr << "Error reading EF.SOD" << endl;
-
-						}
-
-						break;
-				}	
-				//----end auth phase-------------
-				
-				if( authPassed)
+	if(authenticate(auth)) {
+		if (Requests::select_df_ias(*this, response)) {
+			if (Requests::select_df_cie(*this, response)) {
+				if (Requests::read_EF_file(*this, EFID_ID_SERVIZI, response)) {
 					return string{response.begin(), response.begin() + NIS_LENGTH};
+				}
 			}
 		}
 	} 

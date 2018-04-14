@@ -86,7 +86,7 @@ bool Requests::internal_authenticate(const Token &card, const std::vector<BYTE> 
 	return true;
 }
 
-bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
+/*bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> readNIS = {0x00, // CLA
 		0xb0, // INS = READ BINARY
@@ -110,32 +110,6 @@ bool Requests::read_sod(const Token &card, std::vector<BYTE> &ret)
  		if(Requests::select_df_cie(card, response))
 		{
 			const uint16_t fileId = 0x1006;
-		//////////////////////////////////////	
-		/*	std::vector<BYTE> s = {0x00, // CLA
-				0xa4, // INS = SELECT FILE
-				0x02, // P1 = select bu EFID under current DF
-				0x00, // P2 = returnFCI
-				0x02, // LE = length of following data
-				fileId >> 8,	//high byte of EFID
-				fileId & 0xFF	//low byte of EFID
-			};
-			// invia l'APDU
-			if (!Requests::send_apdu(card, s, response)) {
-				std::cerr << "Errore nella lettura del SOD\n";
-			}
-
-			std::vector<BYTE> sS = {0x00, // CLA
-				0xC0, // INS = GET RESPONSE
-				0x00, // P1 = select bu EFID under current DF
-				0x00, // P2 = return no data
-				0x19, // LE = length of following data
-			};
-			// invia l'APDU
-			if (!Requests::send_apdu(card, sS, response)) {
-				std::cerr << "Errore nella lettura del SOD\n";
-			}
-		*/
-		//////////////////////////////////////	
 			std::vector<BYTE> selectSOD = {0x00, // CLA
 				0xa4, // INS = SELECT FILE
 				0x02, // P1 = select bu EFID under current DF
@@ -155,17 +129,18 @@ bool Requests::read_sod(const Token &card, std::vector<BYTE> &ret)
 	}
 
 	return true;
-}
+}*/
 
-bool Requests::read_service_int_kpub(const Token &card, std::vector<BYTE> &ret)
+bool Requests::read_EF_file(const Token &card, const Efid efid, std::vector<BYTE> &ret)
 {
 	std::vector<BYTE> response(2);
  	if(Requests::select_df_ias(card, response))
 	{
  		if(Requests::select_df_cie(card, response))
 		{
-			const uint16_t fileId = 0x1005;
-		//////////////////////////////////////	
+			const uint16_t fileId = efid;
+			//////////////////////////////////////	
+			//TODO: this should be the correct way to obtain the file size, in order not to read out of the bound of teh file
 			/*std::vector<BYTE> s = {0x00, // CLA
 				0xa4, // INS = SELECT FILE
 				0x02, // P1 = select bu EFID under current DF
@@ -190,14 +165,14 @@ bool Requests::read_service_int_kpub(const Token &card, std::vector<BYTE> &ret)
 				std::cerr << "Errore nella lettura del SOD\n";
 			}
 			*/
-		//////////////////////////////////////	
+			//////////////////////////////////////	
 			std::vector<BYTE> selectIntKpub = {0x00, // CLA
 				0xa4, // INS = SELECT FILE
 				0x02, // P1 = select bu EFID under current DF
 				0x0c, // P2 = return no data
 				0x02, // LE = length of following data
-				fileId >> 8,	//high byte of EFID
-				fileId & 0xFF	//low byte of EFID
+				(BYTE)(fileId >> 8),	//high byte of EFID
+				(BYTE)(fileId & 0xFF)	//low byte of EFID
 			};
 			// invia l'APDU
 			if (!Requests::send_apdu(card, selectIntKpub, response)) {

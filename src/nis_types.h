@@ -50,9 +50,17 @@ enum BackendType {
 /** \enum Represents the supported methods of authentication
  */
 enum AuthType {
-	AUTH_NONE,
-	AUTH_PASSIVE,
-	AUTH_INTERNAL
+	AUTH_NONE,	/*!< Do not check */
+	AUTH_PASSIVE,	/*!< Check whether the digest of the public files matches with the one in the SOD. Does not guarantee about cloning */
+	AUTH_INTERNAL	/*!< Internal Authentication checks SOD digests and whether the card has been cloned */
+};
+
+/** \enum EFID of teh Elementary File in the CIE
+ */
+enum Efid {
+	EFID_ID_SERVIZI = 0x1001,	/*!< EF.ID_Servizi, a.k.a. NIS */
+	EFID_SERVIZI_INT_KPUB = 0x1005,	/*!< EF.Servizi_Int.Kpub */
+	EFID_SOD = 0x1006		/*!< EF.SOD */
 };
 
 #endif

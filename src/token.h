@@ -24,10 +24,10 @@ namespace cie {
 			virtual ~Token() = 0;
 			int readNis(char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid, AuthType auth);
 			std::string readNis(AuthType auth);
-			bool verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &hashSet);
+			bool authenticate(AuthType auth);
 			int configure(uint32_t config);
 			int reset();
-		public:	//this should really be private
+		public:	//TODO: this should really be private
 			/** 
 			 * Connect to this instance of a token 
 			 * @return ::TokResult representing the success or error conditiona
@@ -57,6 +57,7 @@ namespace cie {
 			 * @return true on success, false on error
 			 */
 			bool readBinaryContent(const uint16_t filePath, std::vector<BYTE> &contentBuffer, size_t startingOffset, size_t contentLength);
+			bool verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &hashSet);
 		};
 	}
 }
