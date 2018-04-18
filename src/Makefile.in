@@ -90,7 +90,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = testnisc$(EXEEXT) testniscpp$(EXEEXT)
+bin_PROGRAMS = testnisc$(EXEEXT) testniscpp$(EXEEXT) \
+	testnissod$(EXEEXT)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -136,10 +137,14 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(pkgincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libcienis_la_LIBADD =
+am__dirstamp = $(am__leading_dot)dirstamp
 am_libcienis_la_OBJECTS = libcienis_la-nis.lo \
 	libcienis_la-nis_manager.lo libcienis_la-reader.lo \
 	libcienis_la-reader_pcsc.lo libcienis_la-requests.lo \
-	libcienis_la-token.lo libcienis_la-token_pcsc.lo
+	libcienis_la-token.lo libcienis_la-token_pcsc.lo \
+	libcienis_la-digest.lo asn/libcienis_la-ASNParser.lo \
+	util/libcienis_la-array.lo util/libcienis_la-exception.lo \
+	util/libcienis_la-util.lo
 libcienis_la_OBJECTS = $(am_libcienis_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -149,7 +154,6 @@ libcienis_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(libcienis_la_LDFLAGS) $(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
-am__dirstamp = $(am__leading_dot)dirstamp
 am_testnisc_OBJECTS = test/testnisc-example-nis-c.$(OBJEXT)
 testnisc_OBJECTS = $(am_testnisc_OBJECTS)
 testnisc_DEPENDENCIES = libcienis.la
@@ -162,6 +166,12 @@ testniscpp_DEPENDENCIES = libcienis.la
 testniscpp_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(testniscpp_LDFLAGS) $(LDFLAGS) -o $@
+am_testnissod_OBJECTS = test/testnissod-example-nis-sod.$(OBJEXT)
+testnissod_OBJECTS = $(am_testnissod_OBJECTS)
+testnissod_DEPENDENCIES = libcienis.la
+testnissod_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(testnissod_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -215,9 +225,10 @@ am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = $(libcienis_la_SOURCES) $(testnisc_SOURCES) \
-	$(nodist_EXTRA_testnisc_SOURCES) $(testniscpp_SOURCES)
+	$(nodist_EXTRA_testnisc_SOURCES) $(testniscpp_SOURCES) \
+	$(testnissod_SOURCES)
 DIST_SOURCES = $(libcienis_la_SOURCES) $(testnisc_SOURCES) \
-	$(testniscpp_SOURCES)
+	$(testniscpp_SOURCES) $(testnissod_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -256,8 +267,9 @@ AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
-CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CRYPTO_CFLAGS = @CRYPTO_CFLAGS@
+CRYPTO_LIBS = @CRYPTO_LIBS@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -316,6 +328,8 @@ RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SSL_CFLAGS = @SSL_CFLAGS@
+SSL_LIBS = @SSL_LIBS@
 STRIP = @STRIP@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
@@ -374,19 +388,23 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = $(CXXFLAGS) -std=c++11
 lib_LTLIBRARIES = libcienis.la
-libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h
-libcienis_la_CPPFLAGS = $(PCSC_CFLAGS)
-libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS)
+libcienis_la_SOURCES = nis.cpp nis_manager.cpp reader.cpp reader_pcsc.cpp requests.cpp token.cpp token_pcsc.cpp executor.h nis_manager.h reader.h reader_pcsc.h requests.h token_pcsc.h uid.h digest.cpp digest.h asn/ASNParser.cpp asn/ASNParser.h util/array.cpp  util/array.h  util/exception.cpp  util/exception.h util/util.h util/util.cpp
+libcienis_la_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
+libcienis_la_LDFLAGS = -version.info 1:0:0 $(PCSC_LIBS) $(CRYPTO_LIBS) $(SSL_LIBS)
 pkginclude_HEADERS = nis.h nis_types.h token.h
 testnisc_SOURCES = test/example-nis-c.c
 nodist_EXTRA_testnisc_SOURCES = dummy.cpp
 testnisc_LDADD = libcienis.la
-testnisc_CPPFLAGS = $(PCSC_CFLAGS)
+testnisc_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 testnisc_LDFLAGS = -static
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
-testniscpp_CPPFLAGS = $(PCSC_CFLAGS)
+testniscpp_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
 testniscpp_LDFLAGS = -static
+testnissod_SOURCES = test/example-nis-sod.cpp
+testnissod_LDADD = libcienis.la
+testnissod_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
+testnissod_LDFLAGS = -static
 all: all-am
 
 .SUFFIXES:
@@ -455,6 +473,26 @@ clean-libLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+asn/$(am__dirstamp):
+	@$(MKDIR_P) asn
+	@: > asn/$(am__dirstamp)
+asn/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) asn/$(DEPDIR)
+	@: > asn/$(DEPDIR)/$(am__dirstamp)
+asn/libcienis_la-ASNParser.lo: asn/$(am__dirstamp) \
+	asn/$(DEPDIR)/$(am__dirstamp)
+util/$(am__dirstamp):
+	@$(MKDIR_P) util
+	@: > util/$(am__dirstamp)
+util/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) util/$(DEPDIR)
+	@: > util/$(DEPDIR)/$(am__dirstamp)
+util/libcienis_la-array.lo: util/$(am__dirstamp) \
+	util/$(DEPDIR)/$(am__dirstamp)
+util/libcienis_la-exception.lo: util/$(am__dirstamp) \
+	util/$(DEPDIR)/$(am__dirstamp)
+util/libcienis_la-util.lo: util/$(am__dirstamp) \
+	util/$(DEPDIR)/$(am__dirstamp)
 
 libcienis.la: $(libcienis_la_OBJECTS) $(libcienis_la_DEPENDENCIES) $(EXTRA_libcienis_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libcienis_la_LINK) -rpath $(libdir) $(libcienis_la_OBJECTS) $(libcienis_la_LIBADD) $(LIBS)
@@ -525,14 +563,25 @@ test/testniscpp-example-nis-cpp.$(OBJEXT): test/$(am__dirstamp) \
 testniscpp$(EXEEXT): $(testniscpp_OBJECTS) $(testniscpp_DEPENDENCIES) $(EXTRA_testniscpp_DEPENDENCIES) 
 	@rm -f testniscpp$(EXEEXT)
 	$(AM_V_CXXLD)$(testniscpp_LINK) $(testniscpp_OBJECTS) $(testniscpp_LDADD) $(LIBS)
+test/testnissod-example-nis-sod.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+
+testnissod$(EXEEXT): $(testnissod_OBJECTS) $(testnissod_DEPENDENCIES) $(EXTRA_testnissod_DEPENDENCIES) 
+	@rm -f testnissod$(EXEEXT)
+	$(AM_V_CXXLD)$(testnissod_LINK) $(testnissod_OBJECTS) $(testnissod_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f asn/*.$(OBJEXT)
+	-rm -f asn/*.lo
 	-rm -f test/*.$(OBJEXT)
+	-rm -f util/*.$(OBJEXT)
+	-rm -f util/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-digest.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-nis.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-nis_manager.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-reader.Plo@am__quote@
@@ -541,8 +590,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-token.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcienis_la-token_pcsc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testnisc-dummy.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@asn/$(DEPDIR)/libcienis_la-ASNParser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testnisc-example-nis-c.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testniscpp-example-nis-cpp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/testnissod-example-nis-sod.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-array.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-exception.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@util/$(DEPDIR)/libcienis_la-util.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -655,6 +709,41 @@ libcienis_la-token_pcsc.lo: token_pcsc.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libcienis_la-token_pcsc.lo `test -f 'token_pcsc.cpp' || echo '$(srcdir)/'`token_pcsc.cpp
 
+libcienis_la-digest.lo: digest.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libcienis_la-digest.lo -MD -MP -MF $(DEPDIR)/libcienis_la-digest.Tpo -c -o libcienis_la-digest.lo `test -f 'digest.cpp' || echo '$(srcdir)/'`digest.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcienis_la-digest.Tpo $(DEPDIR)/libcienis_la-digest.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='digest.cpp' object='libcienis_la-digest.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libcienis_la-digest.lo `test -f 'digest.cpp' || echo '$(srcdir)/'`digest.cpp
+
+asn/libcienis_la-ASNParser.lo: asn/ASNParser.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT asn/libcienis_la-ASNParser.lo -MD -MP -MF asn/$(DEPDIR)/libcienis_la-ASNParser.Tpo -c -o asn/libcienis_la-ASNParser.lo `test -f 'asn/ASNParser.cpp' || echo '$(srcdir)/'`asn/ASNParser.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) asn/$(DEPDIR)/libcienis_la-ASNParser.Tpo asn/$(DEPDIR)/libcienis_la-ASNParser.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='asn/ASNParser.cpp' object='asn/libcienis_la-ASNParser.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o asn/libcienis_la-ASNParser.lo `test -f 'asn/ASNParser.cpp' || echo '$(srcdir)/'`asn/ASNParser.cpp
+
+util/libcienis_la-array.lo: util/array.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-array.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-array.Tpo -c -o util/libcienis_la-array.lo `test -f 'util/array.cpp' || echo '$(srcdir)/'`util/array.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-array.Tpo util/$(DEPDIR)/libcienis_la-array.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/array.cpp' object='util/libcienis_la-array.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-array.lo `test -f 'util/array.cpp' || echo '$(srcdir)/'`util/array.cpp
+
+util/libcienis_la-exception.lo: util/exception.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-exception.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-exception.Tpo -c -o util/libcienis_la-exception.lo `test -f 'util/exception.cpp' || echo '$(srcdir)/'`util/exception.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-exception.Tpo util/$(DEPDIR)/libcienis_la-exception.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/exception.cpp' object='util/libcienis_la-exception.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-exception.lo `test -f 'util/exception.cpp' || echo '$(srcdir)/'`util/exception.cpp
+
+util/libcienis_la-util.lo: util/util.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT util/libcienis_la-util.lo -MD -MP -MF util/$(DEPDIR)/libcienis_la-util.Tpo -c -o util/libcienis_la-util.lo `test -f 'util/util.cpp' || echo '$(srcdir)/'`util/util.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) util/$(DEPDIR)/libcienis_la-util.Tpo util/$(DEPDIR)/libcienis_la-util.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='util/util.cpp' object='util/libcienis_la-util.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcienis_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o util/libcienis_la-util.lo `test -f 'util/util.cpp' || echo '$(srcdir)/'`util/util.cpp
+
 testnisc-dummy.o: dummy.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnisc_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT testnisc-dummy.o -MD -MP -MF $(DEPDIR)/testnisc-dummy.Tpo -c -o testnisc-dummy.o `test -f 'dummy.cpp' || echo '$(srcdir)/'`dummy.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/testnisc-dummy.Tpo $(DEPDIR)/testnisc-dummy.Po
@@ -683,11 +772,27 @@ test/testniscpp-example-nis-cpp.obj: test/example-nis-cpp.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testniscpp_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testniscpp-example-nis-cpp.obj `if test -f 'test/example-nis-cpp.cpp'; then $(CYGPATH_W) 'test/example-nis-cpp.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-cpp.cpp'; fi`
 
+test/testnissod-example-nis-sod.o: test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/testnissod-example-nis-sod.o -MD -MP -MF test/$(DEPDIR)/testnissod-example-nis-sod.Tpo -c -o test/testnissod-example-nis-sod.o `test -f 'test/example-nis-sod.cpp' || echo '$(srcdir)/'`test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/testnissod-example-nis-sod.Tpo test/$(DEPDIR)/testnissod-example-nis-sod.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/example-nis-sod.cpp' object='test/testnissod-example-nis-sod.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testnissod-example-nis-sod.o `test -f 'test/example-nis-sod.cpp' || echo '$(srcdir)/'`test/example-nis-sod.cpp
+
+test/testnissod-example-nis-sod.obj: test/example-nis-sod.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/testnissod-example-nis-sod.obj -MD -MP -MF test/$(DEPDIR)/testnissod-example-nis-sod.Tpo -c -o test/testnissod-example-nis-sod.obj `if test -f 'test/example-nis-sod.cpp'; then $(CYGPATH_W) 'test/example-nis-sod.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-sod.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/testnissod-example-nis-sod.Tpo test/$(DEPDIR)/testnissod-example-nis-sod.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/example-nis-sod.cpp' object='test/testnissod-example-nis-sod.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(testnissod_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/testnissod-example-nis-sod.obj `if test -f 'test/example-nis-sod.cpp'; then $(CYGPATH_W) 'test/example-nis-sod.cpp'; else $(CYGPATH_W) '$(srcdir)/test/example-nis-sod.cpp'; fi`
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf asn/.libs asn/_libs
+	-rm -rf util/.libs util/_libs
 install-pkgincludeHEADERS: $(pkginclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
@@ -827,8 +932,12 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f asn/$(DEPDIR)/$(am__dirstamp)
+	-rm -f asn/$(am__dirstamp)
 	-rm -f test/$(DEPDIR)/$(am__dirstamp)
 	-rm -f test/$(am__dirstamp)
+	-rm -f util/$(DEPDIR)/$(am__dirstamp)
+	-rm -f util/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -839,7 +948,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) test/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) asn/$(DEPDIR) test/$(DEPDIR) util/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -885,7 +994,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) test/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) asn/$(DEPDIR) test/$(DEPDIR) util/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

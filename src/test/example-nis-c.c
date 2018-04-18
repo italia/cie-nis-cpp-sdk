@@ -89,11 +89,11 @@ int main(int argc, _TCHAR* argv[])
 	char nisData1[NIS_LENGTH+1];	//to take into account for the termination character
 	char nisData2[NIS_LENGTH+1];	//to take into account for the termination character
 	uint32_t uid1, uid2;
-	if(NIS_ReadNis(handle, nisData1, callback1, 1000/*ms*/, &uid1)) {
+	if(NIS_ReadNis(handle, nisData1, callback1, 1000/*ms*/, &uid1, AUTH_NONE)) {
 		printf("Could not start the 1st NIS reading thread\n");
 		exit(-5);
 	}
-	if(NIS_ReadNis(handle, nisData2, callback2, 1000/*ms*/, &uid2)) {
+	if(NIS_ReadNis(handle, nisData2, callback2, 1000/*ms*/, &uid2, AUTH_NONE)) {
 		printf("Could not start the 2nd NIS reading thread\n");
 		exit(-6);
 	}

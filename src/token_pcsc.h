@@ -23,7 +23,7 @@ namespace cie {
 			~TokenPCSC();
 			TokResult connect();
 			TokResult disconnect();
-			TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response) const;
+			TokResult transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response, size_t *retlen) const;
 		};
 	}
 }

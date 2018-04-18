@@ -13,6 +13,9 @@
 #include <functional>
 #include <cstring>
 #include <algorithm>
+#include <openssl/ssl.h>
+#include <time.h>
+#include <cstdlib>
 #include "reader.h"
 #include "reader_pcsc.h"
 #include "token.h"
@@ -37,6 +40,11 @@ namespace cie {
 		  int init(uint32_t backendBitfield)
 		  {	
 			int ret = 0;
+
+			//SSL_load_error_strings();	/* readable error messages */
+			//SSL_library_init();		/* initialize library */
+
+			srand(time(nullptr));
 
 			if(backendBitfield & NIS_BACKEND_PCSC) {
 				shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
@@ -193,12 +201,13 @@ NISHandle NIS_GetHandle(char *readerName)
  * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
  * @param[in] interval time in ms between polls
  * @param[out] the UID associated to the newly created context of execution 
+ * @param[in] auth Request this transaction to be verified though one of teh auteyntication method supported by ::AuthType
  * @return 0 on success, negative on error
  * @see NIS_StopPoll()
  */
-int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid)
+int NIS_ReadNis(NISHandle handle, char *const nisData, nis_callback_t callback, uint32_t interval, uint32_t *uid, enum AuthType auth)
 {
-	return ((Token*)handle)->readNis(nisData, callback, interval, uid);
+	return ((Token*)handle)->readNis(nisData, callback, interval, uid, auth);
 }
 
 /** 

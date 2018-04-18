@@ -50,7 +50,43 @@ bool Requests::select_df_cie(const Token &card, std::vector<BYTE> &response)
 	} 
 	return true;
 }
-bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
+
+bool Requests::mse_set(const Token &card, std::vector<BYTE> &response)
+{
+	std::vector<BYTE> setMSE {0x00, // CLA
+		0x22, // INS = MSE SET 
+		0x41, // P1
+		0xA4, // P2 
+		0x06, // LC = length of payload
+		0x80, 0x01, 0x02, 0x84, 0x01, 0x83 // select RSA algorithm and key no. 3
+	};
+	// invia la seconda APDU
+	if (!Requests::send_apdu(card, setMSE, response)) {
+		std::cerr << "Errore nell'impostazione di algoritmo e chiave per il challenge/response\n";
+		return false;
+	} 
+	return true;
+}
+
+bool Requests::internal_authenticate(const Token &card, const std::vector<BYTE> &challenge, std::vector<BYTE> &response)
+{
+	std::vector<BYTE> setMSE {0x00, // CLA
+		0x88, // INS = INTERNAL AUTHENTICATE
+		0x00, // P1 = no info given for the algorithm, 
+		0x00, // P2 = no info given for the secret
+		(BYTE)challenge.size() // LC = length of payload
+	};
+	setMSE.insert(setMSE.end(), challenge.begin(), challenge.end());
+	setMSE.push_back(0);	//Le = read all you can
+	// invia la seconda APDU
+	if (!Requests::send_apdu(card, setMSE, response)) {
+		std::cerr << "Errore nell'impostazione di algoritmo e chiave per il challenge/response\n";
+		return false;
+	} 
+	return true;
+}
+
+/*bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 {
 	std::vector<BYTE> readNIS = {0x00, // CLA
 		0xb0, // INS = READ BINARY
@@ -63,6 +99,91 @@ bool Requests::read_nis(const Token &card, std::vector<BYTE> &response)
 		std::cerr << "Errore nella lettura dell'Id_Servizi\n";
 		return false;
 	} 
+	return true;
+}
+
+bool Requests::read_sod(const Token &card, std::vector<BYTE> &ret)
+{
+	std::vector<BYTE> response(2);
+ 	if(Requests::select_df_ias(card, response))
+	{
+ 		if(Requests::select_df_cie(card, response))
+		{
+			const uint16_t fileId = 0x1006;
+			std::vector<BYTE> selectSOD = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x0c, // P2 = return no data
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, selectSOD, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+				return false;
+			}
+
+			const_cast<Token&>(card).readBinaryContent(0x00, ret, 0, -1);	//TODO: this cast is ugly
+		}
+	}
+
+	return true;
+}*/
+
+bool Requests::read_EF_file(const Token &card, const Efid efid, std::vector<BYTE> &ret)
+{
+	std::vector<BYTE> response(2);
+ 	if(Requests::select_df_ias(card, response))
+	{
+ 		if(Requests::select_df_cie(card, response))
+		{
+			const uint16_t fileId = efid;
+			//////////////////////////////////////	
+			//TODO: this should be the correct way to obtain the file size, in order not to read out of the bound of teh file
+			/*std::vector<BYTE> s = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x00, // P2 = returnFCI
+				0x02, // LE = length of following data
+				fileId >> 8,	//high byte of EFID
+				fileId & 0xFF	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, s, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
+
+			std::vector<BYTE> sS = {0x00, // CLA
+				0xC0, // INS = GET RESPONSE
+				0x00, // P1 = select bu EFID under current DF
+				0x00, // P2 = return no data
+				0x19, // LE = length of following data
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, sS, response)) {
+				std::cerr << "Errore nella lettura del SOD\n";
+			}
+			*/
+			//////////////////////////////////////	
+			std::vector<BYTE> selectIntKpub = {0x00, // CLA
+				0xa4, // INS = SELECT FILE
+				0x02, // P1 = select bu EFID under current DF
+				0x0c, // P2 = return no data
+				0x02, // LE = length of following data
+				(BYTE)(fileId >> 8),	//high byte of EFID
+				(BYTE)(fileId & 0xFF)	//low byte of EFID
+			};
+			// invia l'APDU
+			if (!Requests::send_apdu(card, selectIntKpub, response)) {
+				std::cerr << "Errore nella lettura di Service_Int.Kpub\n";
+				return false;
+			}
+
+			const_cast<Token&>(card).readBinaryContent(0x00, ret, 0, -1);	//TODO: this cast is ugly
+		}
+	}
+
 	return true;
 }
 
