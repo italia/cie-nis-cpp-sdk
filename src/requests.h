@@ -42,12 +42,13 @@ bool select_df_ias(const Token &card, std::vector<BYTE> &response);
 bool select_df_cie(const Token &card, std::vector<BYTE> &response);
 
 /**
- * Sends a request to read NIS from the specified SCARDHANDLE.
+ * Sends a request to read Elementary File content from the specified card handle.
  * @param[in] card a reference to token involved in the transaction
+ * @param[in] efid the file identifier of the EF to be read, chosen from ::Efid
  * @param[out] response coming from the card
- * @return in case of a successful reply, true is returned, false otherwise.
+ * @return true if SOD has been read, false otehrwise
  */
-bool read_nis(const Token &card, std::vector<BYTE> &response);
+bool read_EF_file(const Token &card, const Efid efid, std::vector<BYTE> &response);
 
 /**
  * Prompts the user for single APDU values and stores the newly
@@ -57,6 +58,23 @@ bool read_nis(const Token &card, std::vector<BYTE> &response);
  * @return on success, true is returned, false otherwise.
  */
 bool create_apdu(std::vector<BYTE> &apdu);
+
+/**
+ * Sends the MSE SET command to the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[out] response is the answer coming from from the card
+ * @return true if the command was successful, false otherwise
+ */
+bool mse_set(const Token &card, std::vector<BYTE> &response);
+
+/**
+ * Sends the INTERNAL AUTHENTICATE command and the relative challenge to the specified card handle.
+ * @param[in] card a reference to token involved in the transaction
+ * @param[in] challenge contains the array against which the card is challenged. Must be less than or equal to 256 bytes in size.
+ * @param[out] response is the asnwer (response to the challenge) coming from from the card
+ * @return true if the command was successful, false otherwise
+ */
+bool internal_authenticate(const Token &card, const std::vector<BYTE> &challenge, std::vector<BYTE> &response);
 
 bool start_interactive_session(const Token &card);
 }

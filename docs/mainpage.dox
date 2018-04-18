@@ -7,14 +7,14 @@ This SDK exports an API to read the NIS from a CIE, in the form of a shared obje
 
 Just type:
 
-<em>make && make doc</em>
+<em>./configure && make && sudo make install</em>
 
-This results in @e libcienis.so in @e ./lib, some test executables in @e ./bin and documented API in ./doc.
+This results in the library, test examples and man pages to be installed in your system.
 
 \section sec-usage Usage
 
 Just include @e nis.h in your source and link against @e -lcienis.
-You can see an example here: example-nis.cpp.
+You can see an example here: example-nis-c.c for plain-C, or example-nis-cpp.cpp for C++.
 
 \section sec-api API
 

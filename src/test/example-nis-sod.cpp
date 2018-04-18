@@ -15,22 +15,11 @@
 
 using namespace std;
 
+
 void deinit(void)
 {
 	//deinit all subsystems
 	cie::nis::deinit(NIS_BACKEND_ALL);
-}
-
-void callback1(char *const nisData, size_t lenData)
-{
-	nisData[NIS_LENGTH] = '\0';
-	std::cout << "NIS thA: " << std::string{nisData} << std::endl;
-}
-
-void callback2(char *const nisData, size_t lenData)
-{
-	nisData[NIS_LENGTH] = '\0';
-	std::cout << "NIS thB: " << std::string{nisData} << std::endl;
 }
 
 int main(int argc, _TCHAR* argv[])
@@ -68,24 +57,7 @@ int main(int argc, _TCHAR* argv[])
 	}
 
 	//read the NIS
-	char nisData1[NIS_LENGTH+1];	//to take into account for the termination character
-	char nisData2[NIS_LENGTH+1];	//to take into account for the termination character
-	uint32_t uid1, uid2;
-	if(token->readNis(nisData1, callback1, 1000/*ms*/, &uid1, AUTH_NONE)) {
-		std::cerr << "Could not start the 1st NIS reading thread" << std::endl;
-		exit(-5);
-	}
-	if(token->readNis(nisData2, callback2, 1000/*ms*/, &uid2, AUTH_NONE)) {
-		std::cerr << "Could not start the 2nd NIS reading thread" << std::endl;
-		exit(-6);
-	}
-		
-	//wait while the callback read the NIS at regular interval
-	for(int i = 0; i < 10; ++i)
-			std::this_thread::sleep_for(std::chrono::milliseconds {1000});
-
-	cie::nis::stopPoll(uid1);
-	cie::nis::stopPoll(uid2);
+	std::cout << "NIS: " << token->readNis(AUTH_INTERNAL) << std::endl;
 
 	return 0;
 }
