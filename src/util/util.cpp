@@ -1,3 +1,4 @@
+#include <cctype>
 #include <vector>
 #include <iomanip>
 #include <sstream>
