@@ -11,13 +11,6 @@ BYTE hex2byte(char h) {
 	return(0);
 }
 
-bool ishexdigit(char c) {
-	if (c>='0' && c<='9') return true;
-	if (c>='a' && c<='f') return true;
-	if (c>='A' && c<='F') return true;
-	return false;
-}
-
 size_t countHexData(const char *data)
 {
 	size_t cnt = 0;
