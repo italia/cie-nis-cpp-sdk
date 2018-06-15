@@ -3,8 +3,16 @@
 [![CIE on forum.italia.it](https://img.shields.io/badge/Forum-CIE-blue.svg)](https://forum.italia.it/c/cie) [![Build Status](https://travis-ci.org/italia/cie-nis-cpp-sdk.svg?branch=master)](https://travis-ci.org/italia/cie-nis-cpp-sdk)
 
 # cie-nis-cpp-sdk 
+
 SDK for reading the NIS code from an Italian Electronic Identity Card (CIE) using C++
 
-## Prerequisites:
+## Prerequisites (source)
 
 * `libpcsclite-dev`
+* `libssl-dev`
+* `libcrypto++-dev`
+
+## Prerequisites (documentation)
+
+* `doxygen`
+* `graphviz`
