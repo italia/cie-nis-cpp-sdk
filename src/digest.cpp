@@ -3,7 +3,6 @@
 bool cie::nis::utils::digest_SHA256(void* data, size_t length, uint8_t* md)
 {
 	//TODO: check the return code
-	byte digest[CryptoPP::SHA256::DIGESTSIZE];
 	CryptoPP::SHA256().CalculateDigest(md, (byte*)data, length);
 
 	return true;
