@@ -44,6 +44,10 @@ int main(int argc, _TCHAR* argv[])
 
 	//obtain the flat list of all readers from all backends
 	vector<string> readers = cie::nis::readersList();
+	if(readers.empty()) {
+		std::cerr << "No readers found" << std::endl;
+		exit(-1);
+	}
 	
 	int readerNum = 1;
 	//ask the user to select a reader, if more than one is present
