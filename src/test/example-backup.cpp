@@ -15,17 +15,17 @@ int main(int argc, _TCHAR* argv[])
 
 	// stibilisco la connessione al sottosistema di gestione delle smart card
 	SCARDCONTEXT Context;
-	SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &Context);
+	SCardEstablishContext(SCARD_SCOPE_SYSTEM, nullptr, nullptr, &Context);
 
 	// ottiengo la lista dei lettori installati
 	char *ReaderList;
 	DWORD ReaderListLen = SCARD_AUTOALLOCATE;
-	SCardListReaders(Context, NULL, (char*)&ReaderList, &ReaderListLen);
+	SCardListReaders(Context, nullptr, (char*)&ReaderList, &ReaderListLen);
 	
 	// inserisco i lettori in un vettore
 	char* Reader = ReaderList;
 	std::vector<char*> Readers;
-	while (Reader[0] != NULL) {
+	while (Reader[0] != nullptr) {
 		Readers.push_back(Reader);
 		Reader += strlen(Reader) + 1;
 	}
@@ -67,7 +67,7 @@ int main(int argc, _TCHAR* argv[])
 	// invia la prima APDU
 	BYTE response[300];
 	DWORD responseLen = 300;
-	SCardTransmit(Card, SCARD_PCI_T1, selectIAS, sizeof(selectIAS), NULL, response, &responseLen);
+	SCardTransmit(Card, SCARD_PCI_T1, selectIAS, sizeof(selectIAS), nullptr, response, &responseLen);
 
 	// verifica che la Status Word sia 9000 (OK)
 	if (response[responseLen - 2] != 0x90 || response[responseLen - 1] != 0x00) {
@@ -88,7 +88,7 @@ int main(int argc, _TCHAR* argv[])
 
 		// invia la seconda APDU
 		responseLen = 300;
-		SCardTransmit(Card, SCARD_PCI_T1, selectCIE, sizeof(selectCIE), NULL, response, &responseLen);
+		SCardTransmit(Card, SCARD_PCI_T1, selectCIE, sizeof(selectCIE), nullptr, response, &responseLen);
 		if (response[responseLen - 2] != 0x90 || response[responseLen - 1] != 0x00) {
 			std::cout << "Errore nella selezione del DF_CIE\n";
 		}
@@ -105,7 +105,7 @@ int main(int argc, _TCHAR* argv[])
 
 			// invia la terza APDU
 			responseLen = 300;
-			SCardTransmit(Card, SCARD_PCI_T1, readNIS, sizeof(readNIS), NULL, response, &responseLen);
+			SCardTransmit(Card, SCARD_PCI_T1, readNIS, sizeof(readNIS), nullptr, response, &responseLen);
 			if (response[responseLen - 2] != 0x90 || response[responseLen - 1] != 0x00) {
 				std::cout << "Errore nella lettura dell'Id_Servizi\n";
 			}

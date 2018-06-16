@@ -39,8 +39,6 @@ namespace cie {
 		  */
 		  int init(uint32_t backendBitfield)
 		  {	
-			int ret = 0;
-
 			//SSL_load_error_strings();	/* readable error messages */
 			//SSL_library_init();		/* initialize library */
 
@@ -48,15 +46,14 @@ namespace cie {
 
 			if(backendBitfield & NIS_BACKEND_PCSC) {
 				shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
-				if(backend->hasContext())
-					NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
-				else {
-					ret = -1;
-				}
+				if(!backend->hasContext)
+					return -1;
+
+				NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
 			}
-			//else ... //add backends here
-				
-			return ret;
+			//add backends here
+
+			return 0;
 		  }
 
 		  /** 
@@ -198,7 +195,7 @@ NISHandle NIS_GetHandle(char *readerName)
  * Read the NIS from the specified token.
  * @param[in] handle the handler of the reader previously obtained calling ::NIS_GetHandle()
  * @param[out] nisData array in which to store the NIS read back from the token. Should be long enough to contains the entire nis as a C-style sring, i.e. 12 (NIS) + 1 (null terminator) = 13 chars
- * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
+ * @param[in] callback if @e nullptr the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
  * @param[in] interval time in ms between polls
  * @param[out] the UID associated to the newly created context of execution 
  * @param[in] auth Request this transaction to be verified though one of teh auteyntication method supported by ::AuthType

@@ -1,6 +1,14 @@
 # cie-nis-cpp-sdk 
+
 SDK for reading the NIS code from an Italian Electronic Identity Card (CIE) using C++
 
-## Prerequisites:
+## Prerequisites (source)
 
 * `libpcsclite-dev`
+* `libssl-dev`
+* `libcrypto++-dev`
+
+## Prerequisites (documentation)
+
+* `doxygen`
+* `graphviz`

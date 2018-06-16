@@ -1,3 +1,4 @@
+#include <cctype>
 #include <vector>
 #include <iomanip>
 #include <sstream>
@@ -9,13 +10,6 @@ BYTE hex2byte(char h) {
 	if (h>='A' && h<='F') return(h+10-'A');
 	if (h>='a' && h<='f') return(h+10-'a');
 	return(0);
-}
-
-bool ishexdigit(char c) {
-	if (c>='0' && c<='9') return true;
-	if (c>='a' && c<='f') return true;
-	if (c>='A' && c<='F') return true;
-	return false;
 }
 
 size_t countHexData(const char *data)

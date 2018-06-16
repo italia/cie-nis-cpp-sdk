@@ -126,7 +126,7 @@ class init_rnd {
 public:
 	void initRand() {
 		struct timeval now;
-		gettimeofday(&now, NULL);
+		gettimeofday(&now, nullptr);
 		RAND_seed(&now, sizeof(timeval));
 	}
 } _initRand;

@@ -1,56 +1,39 @@
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <ios>
-#include "token_pcsc.h"
 #include "reader_pcsc.h"
 #include <cstring>
+#include "token_pcsc.h"
 
-using namespace cie::nis;
+ReaderPCSC::ReaderPCSC()
+    : hasContext{SCardEstablishContext(SCARD_SCOPE_SYSTEM, nullptr, nullptr,
+                                       &context) == SCARD_S_SUCCESS} {}
 
-ReaderPCSC::ReaderPCSC() : readerList{nullptr}
-{
-	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS);
+ReaderPCSC::~ReaderPCSC() {
+  if (hasContext) SCardReleaseContext(context);
 }
 
-ReaderPCSC::~ReaderPCSC()
-{
-	if(readerList) 
-		SCardFreeMemory(context, readerList); 
+std::vector<std::string> ReaderPCSC::getReaderList() { return readerList; }
 
-	if(hasContextFlag)
-		SCardReleaseContext(context);
-}
+ReaderResult ReaderPCSC::enumerateReaderList() {
+  readerList.clear();
+  tokenList.clear();
 
-vector<string> ReaderPCSC::getReaderList()
-{
-	vector<string> v;
+  DWORD dwReaders;
+  if (SCardListReaders(context, nullptr, nullptr, &dwReaders) !=
+      SCARD_S_SUCCESS)
+    return READER_RESULT_GENERIC_ERROR;
 
-	char* reader = readerList;
-	while (reader[0]) {
-		string name{reader};
-		v.push_back(name);
-		reader += strlen(reader) + 1;
-	}
+  char mszReaders[dwReaders] = {'\0'};
+  if (SCardListReaders(context, nullptr, mszReaders, &dwReaders) !=
+      SCARD_S_SUCCESS)
+    return READER_RESULT_GENERIC_ERROR;
 
-	return v;
-}
+  char* reader = mszReaders;
+  while (*reader) {
+    std::string name{reader};
+    reader += strlen(reader) + 1;
 
-ReaderResult ReaderPCSC::enumerateReaderList()
-{
-	tokenList.clear();
+    readerList.emplace_back(name);
+    tokenList.emplace(name, std::make_shared<TokenPCSC>(name, context));
+  }
 
-	DWORD ReaderListLen = SCARD_AUTOALLOCATE;
-	if(readerList)
-		SCardFreeMemory(context, readerList);
-	SCardListReaders(context, NULL, (char*) &readerList, &ReaderListLen);
-
-	char* reader = readerList;
-	while (reader[0]) {
-		string name{reader};
-		tokenList[name] = shared_ptr<TokenPCSC>{new TokenPCSC{name, context}};
-		reader += strlen(reader) + 1;
-	}
-
-	return READER_RESULT_OK;
+  return READER_RESULT_OK;
 }

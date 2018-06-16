@@ -49,7 +49,7 @@ TokResult TokenPCSC::disconnect()
 TokResult TokenPCSC::transmit(const std::vector<BYTE> &apdu, std::vector<BYTE> &response, size_t *retlen) const
 {
 	size_t resp_len = response.size();
-	SCardTransmit(card, SCARD_PCI_T1, apdu.data(), apdu.size(), NULL, response.data(), &resp_len);
+	SCardTransmit(card, SCARD_PCI_T1, apdu.data(), apdu.size(), nullptr, response.data(), &resp_len);
 	if(retlen)
 		*retlen = resp_len;
 	

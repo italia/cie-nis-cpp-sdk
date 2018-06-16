@@ -37,7 +37,7 @@
 	if (IsBadWritePtr((size),sizeof(*(size)))) { \
 		return CKR_ARGUMENTS_BAD; \
 		} \
-	if ((ptr)!=NULL && IsBadWritePtr((ptr),(*(size))*sizeof(*(ptr)))) { \
+	if ((ptr)!=nullptr && IsBadWritePtr((ptr),(*(size))*sizeof(*(ptr)))) { \
 		return CKR_ARGUMENTS_BAD; \
 		}
 

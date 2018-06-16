@@ -3,6 +3,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
+#include "requests.h"
 #include "token.h"
 #include "executor.h"
 #include "uid.h"
@@ -233,7 +234,7 @@ bool cie::nis::Token::verifySod(ByteArray &SOD, std::map<BYTE, ByteDynArray> &ha
 /** 
  * Read the NIS contained in this token.
  * @param[out] nisData array in which to store the NIS read back from the token. Should be long enough to contains the entire nis as a C-style sring, i.e. 12 (NIS) + 1 (null terminator) = 13 chars
- * @param[in] callback if @e NULL the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
+ * @param[in] callback if @e nullptr the call is blocking and the NIS is copied inside @e nisData upon return, otherwise the function spawns a background thread and returns immediately. The thread will invoke the callback funcion passing to it the read NIS
  * @param[in] interval time in ms between polls
  * @param[out] the UID associated to the newly created context of execution
  * @param[in] auth Request this transaction to be verified though one of the authentication method supported by ::AuthType
