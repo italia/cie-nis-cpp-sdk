@@ -48,7 +48,7 @@ namespace cie {
 
 			if(backendBitfield & NIS_BACKEND_PCSC) {
 				shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
-				if(backend->hasContext())
+				if(backend->hasContext)
 					NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
 				else {
 					ret = -1;
