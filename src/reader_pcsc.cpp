@@ -21,12 +21,12 @@ ReaderResult ReaderPCSC::enumerateReaderList() {
       SCARD_S_SUCCESS)
     return READER_RESULT_GENERIC_ERROR;
 
-  char mszReaders[dwReaders] = {'\0'};
-  if (SCardListReaders(context, nullptr, mszReaders, &dwReaders) !=
+  std::vector<char> mszReaders(dwReaders);
+  if (SCardListReaders(context, nullptr, mszReaders.data(), &dwReaders) !=
       SCARD_S_SUCCESS)
     return READER_RESULT_GENERIC_ERROR;
 
-  char* reader = mszReaders;
+  char* reader = mszReaders.data();
   while (*reader) {
     std::string name{reader};
     reader += strlen(reader) + 1;
