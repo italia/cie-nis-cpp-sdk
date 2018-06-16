@@ -3,6 +3,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
+#include "requests.h"
 #include "token.h"
 #include "executor.h"
 #include "uid.h"
