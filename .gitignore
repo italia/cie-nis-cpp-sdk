@@ -3,6 +3,10 @@ bin/
 autom4te.cache/
 aclocal.m4
 
+# editors
+*.swp
+/tags
+
 # Prerequisites
 *.d
 
@@ -41,6 +45,9 @@ aclocal.m4
 
 # http://www.gnu.org/software/automake
 
+.deps
+.dirstamp
+Makefile
 Makefile.in
 /ar-lib
 /mdate-sh
@@ -58,6 +65,8 @@ Makefile.in
 /config.guess
 /config.h.in
 /config.h.in~
+/config.log
+/config.status
 /config.sub
 /configure
 /configure.in
@@ -66,10 +75,12 @@ Makefile.in
 /install-sh
 /missing
 /stamp-h1
+/config.h
 /config.h.in~
 
 # https://www.gnu.org/software/libtool/
 
+/libtool
 /ltmain.sh
 
 # http://www.gnu.org/software/texinfo
