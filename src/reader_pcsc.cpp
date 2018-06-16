@@ -8,9 +8,10 @@
 
 using namespace cie::nis;
 
-ReaderPCSC::ReaderPCSC() : readerList{nullptr}
+ReaderPCSC::ReaderPCSC()
+	: readerList{nullptr},
+	  hasContext{SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS}
 {
-	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS);
 }
 
 ReaderPCSC::~ReaderPCSC()
@@ -18,7 +19,7 @@ ReaderPCSC::~ReaderPCSC()
 	if(readerList) 
 		SCardFreeMemory(context, readerList); 
 
-	if(hasContextFlag)
+	if(hasContext)
 		SCardReleaseContext(context);
 }
 
