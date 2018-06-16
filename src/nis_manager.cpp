@@ -36,6 +36,7 @@ void NISManager::removeBackend(BackendType backtype) {
 }
 
 void NISManager::addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) {
+  lock_guard<mutex> lock(execMutex);
   executors[uid] = ex;
 }
 
