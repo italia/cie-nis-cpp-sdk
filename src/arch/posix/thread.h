@@ -9,8 +9,8 @@ namespace cie {
 namespace nis {
 namespace helper {
 
-typedef pthread_t NISThread;
-typedef void *(*NISThFunc)(void *);
+using NISThread = pthread_t;
+using NISThFunc = void* (*)(void*);
 
 int NIS_CreateThread(NISThread &th, NISThFunc fnc, std::weak_ptr<PollExecutor>);
 int NIS_JoinThread(NISThread &th);
