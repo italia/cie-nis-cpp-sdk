@@ -40,6 +40,19 @@ void NISManager::addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) {
   executors[uid] = ex;
 }
 
+namespace {
+
+void removeSingleExecutor(PollExecutor *pe) {
+  pe->exitPoll = true;
+#ifdef USE_EXT_THREAD
+  NIS_JoinThread(pe->th);
+#else
+  pe->th.join();
+#endif
+}
+
+}  // namespace
+
 shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid,
                                                     bool mustLock) {
   auto optionalLock =
@@ -48,22 +61,16 @@ shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid,
   auto it = executors.find(uid);
   if (it == executors.end()) return nullptr;
 
+  auto pe = it->second;
+  removeSingleExecutor(pe.get());
   executors.erase(it);
-  shared_ptr<PollExecutor> pe = it->second;
-  pe->exitPoll = true;
-#ifdef USE_EXT_THREAD
-  NIS_JoinThread(pe->th);
-#else
-  pe->th.join();
-#endif
   return pe;
 }
 
 void NISManager::removeAllExecutors() {
-  vector<uint32_t> keys;
   lock_guard<mutex> lock(execMutex);
-  for (auto it : executors) keys.push_back(it.first);
-  for (auto it : keys) removeExecutor(it, false);
+  for (auto it : executors) removeSingleExecutor(it.second.get());
+  executors.clear();
 }
 
 void NISManager::lockExecutors() { execMutex.lock(); }
