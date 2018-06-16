@@ -55,7 +55,7 @@ class NISManager {
 
   /** Multi-string representation of the list of reader names. This reflect the
    * pcsc-lite's way to represent the list of available readers */
-  char *idList;
+  vector<char> idList;
 
   /** Mutex that allows operations on executors list to be thread-safe */
   mutex execMutex;
