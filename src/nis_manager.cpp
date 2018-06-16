@@ -77,14 +77,14 @@ void NISManager::lockExecutors() { execMutex.lock(); }
 
 void NISManager::unlockExecutors() { execMutex.unlock(); }
 
-char *NISManager::getIdentifiersList() { return idList; }
+char *NISManager::getIdentifiersList() { return idList.data(); }
 
 void NISManager::deleteIdentifiersList() {
-  if (idList) delete[] idList;
+  idList.clear();
 }
 
 char *NISManager::allocateIdentifiersList(size_t len) {
-  deleteIdentifiersList();
-  idList = new char[len];
-  return idList;
+  idList.clear();
+  idList.reserve(len);
+  return idList.data();
 }
