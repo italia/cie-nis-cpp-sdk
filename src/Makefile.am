@@ -12,14 +12,14 @@ testnisc_SOURCES = test/example-nis-c.c
 nodist_EXTRA_testnisc_SOURCES = dummy.cpp
 testnisc_LDADD = libcienis.la
 testnisc_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
-testnisc_LDFLAGS = -static
+testnisc_LDFLAGS = -static -pthread
 
 testniscpp_SOURCES = test/example-nis-cpp.cpp
 testniscpp_LDADD = libcienis.la
 testniscpp_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
-testniscpp_LDFLAGS = -static
+testniscpp_LDFLAGS = -static -pthread
 
 testnissod_SOURCES = test/example-nis-sod.cpp
 testnissod_LDADD = libcienis.la
 testnissod_CPPFLAGS = $(PCSC_CFLAGS) $(SSL_CFLAGS)
-testnissod_LDFLAGS = -static
+testnissod_LDFLAGS = -static -pthread
