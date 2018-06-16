@@ -11,7 +11,7 @@ int NIS_CreateThread(NISThread &th, NISThFunc fnc,
   if (pe.expired()) return -2;
 
   std::shared_ptr<PollExecutor> cntr{pe};
-  if (pthread_create(&th, NULL, fnc, pe.lock().get())) {
+  if (pthread_create(&th, nullptr, fnc, pe.lock().get())) {
     std::cerr << "Error creating thread" << std::endl;
     return -1;
   }
@@ -20,7 +20,7 @@ int NIS_CreateThread(NISThread &th, NISThFunc fnc,
 }
 
 int NIS_JoinThread(NISThread &th) {
-  if (pthread_join(th, NULL)) {
+  if (pthread_join(th, nullptr)) {
     std::cerr << "Error joining thread" << std::endl;
     return -1;
   }

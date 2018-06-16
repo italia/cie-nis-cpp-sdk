@@ -16,12 +16,12 @@ int main(int argc, _TCHAR* argv[])
 	for (int x = 0; x < 6; ++x) {
 		// stibilisco la connessione al sottosistema di gestione delle smart card
 		SCARDCONTEXT Context;
-		SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &Context);
+		SCardEstablishContext(SCARD_SCOPE_SYSTEM, nullptr, nullptr, &Context);
 
 		// ottiengo la lista dei lettori installati
 		char *ReaderList;
 		DWORD ReaderListLen = SCARD_AUTOALLOCATE;
-		SCardListReaders(Context, NULL, (char *) &ReaderList, &ReaderListLen);
+		SCardListReaders(Context, nullptr, (char *) &ReaderList, &ReaderListLen);
 		
 		// inserisco i lettori in un vettore
 		char* Reader = ReaderList;
