@@ -21,8 +21,10 @@ namespace cie {
 		private:
 			/** hold the pscs-lite context */
 			SCARDCONTEXT context;
+
 			/** multi-string containing the connected Reader's names */
-			char *readerList;
+			vector<string> readerList;
+
 		public:
 			/** flag to indicate whether the pcsc context has been obtained (succesfully) */
 			const bool hasContext = false;
