@@ -39,8 +39,6 @@ namespace cie {
 		  */
 		  int init(uint32_t backendBitfield)
 		  {	
-			int ret = 0;
-
 			//SSL_load_error_strings();	/* readable error messages */
 			//SSL_library_init();		/* initialize library */
 
@@ -48,15 +46,14 @@ namespace cie {
 
 			if(backendBitfield & NIS_BACKEND_PCSC) {
 				shared_ptr<ReaderPCSC> backend{new ReaderPCSC()};
-				if(backend->hasContext)
-					NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
-				else {
-					ret = -1;
-				}
+				if(!backend->hasContext)
+					return -1;
+
+				NISManager::getInstance().addBackend(NIS_BACKEND_PCSC, backend);
 			}
-			//else ... //add backends here
-				
-			return ret;
+			//add backends here
+
+			return 0;
 		  }
 
 		  /** 
