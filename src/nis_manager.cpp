@@ -7,9 +7,10 @@
 #include "nis_manager.h"
 
 shared_ptr<PollExecutor> NISManager::removeExecutor(uint32_t uid, bool mustLock) { 
-	if(mustLock)
-		lock_guard<mutex> lock{execMutex}; 
-	
+	auto optionalLock = mustLock
+		? unique_lock<mutex>{execMutex}
+		: unique_lock<mutex>{};
+
 	auto it = executors.find(uid); 
 	if(it != executors.end()) 
 	{ 
