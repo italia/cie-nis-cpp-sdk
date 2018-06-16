@@ -10,7 +10,7 @@ using namespace cie::nis;
 
 ReaderPCSC::ReaderPCSC() : readerList{nullptr}
 {
-	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS);
+	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, nullptr, nullptr, &context) == SCARD_S_SUCCESS);
 }
 
 ReaderPCSC::~ReaderPCSC()
@@ -43,7 +43,7 @@ ReaderResult ReaderPCSC::enumerateReaderList()
 	DWORD ReaderListLen = SCARD_AUTOALLOCATE;
 	if(readerList)
 		SCardFreeMemory(context, readerList);
-	SCardListReaders(context, NULL, (char*) &readerList, &ReaderListLen);
+	SCardListReaders(context, nullptr, (char*) &readerList, &ReaderListLen);
 
 	char* reader = readerList;
 	while (reader[0]) {
