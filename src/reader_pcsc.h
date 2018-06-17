@@ -9,6 +9,8 @@
 #define READER_PCSC_GUARD
 
 #include <winscard.h>
+#include <vector>
+#include <string>
 #include "reader.h"
 
 using namespace cie::nis;
@@ -22,15 +24,15 @@ namespace cie {
 			/** hold the pscs-lite context */
 			SCARDCONTEXT context;
 			/** multi-string containing the connected Reader's names */
-			char *readerList;
-			/** flag to indicate whether the pcsc context has been obtained (succesfully) */
-			bool hasContextFlag;
+			vector<string> readerList;
 		public:
+			/** flag to indicate whether the pcsc context has been obtained succesfully */
+			const bool hasContext = false;
+
 			ReaderPCSC();
 			~ReaderPCSC();
 			ReaderResult enumerateReaderList();
 			vector<string> getReaderList();
-			bool hasContext() {return hasContextFlag;}
 		};
 	}
 }

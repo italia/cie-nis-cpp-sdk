@@ -100,7 +100,11 @@ public:
 	 * @see lockExecutors()
 	 * @see unlockExecutors()
 	 */
-	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) { executors[uid] = ex; }
+	void addExecutor(uint32_t uid, shared_ptr<PollExecutor> ex) {
+		lock_guard<mutex> lock(execMutex);
+		executors[uid] = ex;
+	}
+
 	shared_ptr<PollExecutor> removeExecutor(uint32_t uid, bool mustLock=true);
 	void removeAllExecutors() { vector<uint32_t> keys; lock_guard<mutex> lock{execMutex}; for(auto it : executors) keys.push_back(it.first); for(auto it : keys) removeExecutor(it, false); }
 	void lockExecutors() { execMutex.lock(); }

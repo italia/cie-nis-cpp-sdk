@@ -8,48 +8,42 @@
 
 using namespace cie::nis;
 
-ReaderPCSC::ReaderPCSC() : readerList{nullptr}
+ReaderPCSC::ReaderPCSC()
+	: hasContext{SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS}
 {
-	hasContextFlag = (SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &context) == SCARD_S_SUCCESS);
 }
 
 ReaderPCSC::~ReaderPCSC()
 {
-	if(readerList) 
-		SCardFreeMemory(context, readerList); 
-
-	if(hasContextFlag)
+	if(hasContext)
 		SCardReleaseContext(context);
 }
 
 vector<string> ReaderPCSC::getReaderList()
 {
-	vector<string> v;
-
-	char* reader = readerList;
-	while (reader[0]) {
-		string name{reader};
-		v.push_back(name);
-		reader += strlen(reader) + 1;
-	}
-
-	return v;
+	return readerList;
 }
 
 ReaderResult ReaderPCSC::enumerateReaderList()
 {
+	readerList.clear();
 	tokenList.clear();
 
-	DWORD ReaderListLen = SCARD_AUTOALLOCATE;
-	if(readerList)
-		SCardFreeMemory(context, readerList);
-	SCardListReaders(context, NULL, (char*) &readerList, &ReaderListLen);
+	DWORD ReaderListLen = 0;
+	if (SCardListReaders(context, NULL, NULL, &ReaderListLen) != SCARD_S_SUCCESS)
+		return READER_RESULT_GENERIC_ERROR;
 
-	char* reader = readerList;
-	while (reader[0]) {
+	vector<char> buffer(ReaderListLen);
+	if (SCardListReaders(context, NULL, buffer.data(), &ReaderListLen) != SCARD_S_SUCCESS)
+		return READER_RESULT_GENERIC_ERROR;
+
+	char* reader = buffer.data();
+	while (*reader) {
 		string name{reader};
-		tokenList[name] = shared_ptr<TokenPCSC>{new TokenPCSC{name, context}};
-		reader += strlen(reader) + 1;
+		reader += name.length() + 1;
+
+		readerList.emplace_back(name);
+		tokenList.emplace(name, make_shared<TokenPCSC>(name, context));
 	}
 
 	return READER_RESULT_OK;
