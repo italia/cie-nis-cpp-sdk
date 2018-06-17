@@ -11,7 +11,7 @@ pkg_check_modules(CRYPTOPP REQUIRED libcrypto++)
 pkg_check_modules(PCSCLITE REQUIRED libpcsclite)
 pkg_check_modules(SSL REQUIRED libssl)
 
-find_package(Doxygen REQUIRED)
+find_package(Doxygen)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
