@@ -15,6 +15,10 @@ find_package(Doxygen)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
+option(BUILD_SHARED_LIBS
+  "Create shared libraries for the exported targets"
+  OFF)
+
 option(BUILD_DOCUMENTATION
   "Create and install the HTML based API documentation (requires Doxygen)"
   ${DOXYGEN_FOUND})
