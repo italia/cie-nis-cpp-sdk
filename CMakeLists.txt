@@ -6,6 +6,7 @@ project(cienis
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(GNUInstallDirs)
 include(FindPkgConfig)
 pkg_check_modules(CRYPTOPP REQUIRED libcrypto++)
 pkg_check_modules(PCSCLITE REQUIRED libpcsclite)

@@ -13,10 +13,15 @@ if(BUILD_DOCUMENTATION)
     COMMENT "Generating API documentation with Doxygen"
     VERBATIM)
 
-  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc)
+  install(
+    DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
+    DESTINATION ${CMAKE_INSTALL_DOCDIR})
+
   # Doxygen creates "Directory Reference" files as part of building the man
   # pages. Those are unwanted and are named after the local file path, so we
   # exclude them from the install step.
-  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/man DESTINATION share
-          PATTERN "man/man3/_*" EXCLUDE)
+  install(
+    DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/man/man3
+    DESTINATION ${CMAKE_INSTALL_MANDIR}
+    PATTERN "man/man3/_*" EXCLUDE)
 endif()
