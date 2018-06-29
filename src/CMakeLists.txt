@@ -1,6 +1,4 @@
-add_subdirectory(test)
-
-add_library(cienis
+set(CIE_NIS_SOURCES
   nis.cpp
   nis.h
   digest.cpp
@@ -18,17 +16,15 @@ add_library(cienis
   reader_pcsc.cpp
   reader_pcsc.h
   requests.cpp
-  requests.h
-  asn/ASNParser.cpp
-  asn/ASNParser.h
-  arch/posix/thread.cpp
-  arch/posix/thread.h
-  util/array.cpp
-  util/array.h
-  util/exception.cpp
-  util/exception.h
-  util/util.cpp
-  util/util.h)
+  requests.h)
+
+add_subdirectory(arch/posix)
+add_subdirectory(asn)
+add_subdirectory(test)
+add_subdirectory(util)
+
+add_library(cienis
+  ${CIE_NIS_SOURCES})
 
 target_include_directories(cienis
   PUBLIC
