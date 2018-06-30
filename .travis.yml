@@ -39,10 +39,17 @@ addons:
     - doxygen-gui
     - graphviz
 
-script: autoreconf -f -i && ./configure && make
+before_script:
+  - mkdir "${TRAVIS_BUILD_DIR}/build"
+  - cd "${TRAVIS_BUILD_DIR}/build"
+  - cmake "${TRAVIS_BUILD_DIR}" -DCMAKE_BUILD_TYPE=Debug -DBUILD_DOCUMENTATION=ON
+
+script:
+  - cd "${TRAVIS_BUILD_DIR}/build"
+  - make all
 
 # Generate and deploy documentation
 after_success:
-  - cd $TRAVIS_BUILD_DIR/docs
+  - cd "$TRAVIS_BUILD_DIR/docs"
   - chmod +x generateDocumentationAndDeploy.sh
   - ./generateDocumentationAndDeploy.sh
